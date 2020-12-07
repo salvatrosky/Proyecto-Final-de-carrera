@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.20)  21 NOV 2020 09:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.20)  7 DEC 2020 20:45
 entering extended mode
 **"d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex"
 ("d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex"
@@ -172,6 +172,10 @@ LaTeX Info: Redefining \. on input line 9.
 LaTeX Info: Redefining \% on input line 9.
 LaTeX Info: Redefining \. on input line 10.
 LaTeX Info: Redefining \% on input line 10.
+
+
+LaTeX Warning: Label `capImp' multiply defined.
+
 )
 \openout1 = `Main.aux'.
 
@@ -227,13 +231,11 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
  ("D:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [3])
 \tf@toc=\write4
 \openout4 = `Main.toc'.
 
- [3] [4
-
-]
+ [4]
 Cap\'{\i }tulo 1.
 (introduccion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 27--34
@@ -243,15 +245,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--34
 File: uni.bmp Graphic file (type bmp)
 <uni.bmp>) [1
 
+
 ]
-LaTeX Info: Redefining \. on input line 83.
-LaTeX Info: Redefining \% on input line 83.
+LaTeX Info: Redefining \. on input line 84.
+LaTeX Info: Redefining \% on input line 84.
  [2
 Non-PDF special ignored!
 <special> em: graph uni.bmp,85.03915bp,85.03915bp
 ]
 Cap\'{\i }tulo 2.
-(desc.tex) [1
+(traficoRedInterna.tex) [1
 
 ]
 LaTeX Info: Redefining \. on input line 88.
@@ -260,16 +263,28 @@ LaTeX Info: Redefining \% on input line 88.
 
 ]
 Cap\'{\i }tulo 3.
-(implemen.tex) [1]
-LaTeX Info: Redefining \. on input line 96.
-LaTeX Info: Redefining \% on input line 96.
+(desc.tex) [1]
+LaTeX Info: Redefining \. on input line 92.
+LaTeX Info: Redefining \% on input line 92.
  [2
 
 ]
 Cap\'{\i }tulo 4.
-(conclusiones.tex) [3]
-LaTeX Info: Redefining \. on input line 104.
-LaTeX Info: Redefining \% on input line 104.
+(implemen.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1]
+Overfull \vbox (47.89291pt too high) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 102.
+LaTeX Info: Redefining \% on input line 102.
+ [2]
+Cap\'{\i }tulo 5.
+(conclusiones.tex) [3
+
+]
+LaTeX Info: Redefining \. on input line 110.
+LaTeX Info: Redefining \% on input line 110.
  [4
 
 ]
@@ -292,19 +307,23 @@ LaTeX Info: Redefining \. on input line 9.
 LaTeX Info: Redefining \% on input line 9.
 LaTeX Info: Redefining \. on input line 10.
 LaTeX Info: Redefining \% on input line 10.
-) ) 
+)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3378 strings out of 479799
- 45176 string characters out of 2879528
+ 3382 strings out of 479799
+ 45321 string characters out of 2879528
  334443 words of memory out of 3000000
- 20310 multiletter control sequences out of 15000+200000
+ 20311 multiletter control sequences out of 15000+200000
  546288 words of font info for 71 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,8n,72p,647b,386s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 66i,8n,72p,647b,408s stack positions out of 5000i,500n,10000p,200000b,50000s
 <D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.pdf" (18 pages, 162162 bytes).
+Output written on "d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.pdf" (20 pages, 171520 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
+ 119 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
