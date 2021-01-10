@@ -1,17 +1,17 @@
 # Fdb version 3
-["bibtex Main"] 0 "Main.aux" "Main.bbl" "Main" 1610312445
+["bibtex Main"] 0 "Main.aux" "Main.bbl" "Main" 1610318739
   "D:/Program Files/MiKTeX/bibtex/bst/bibtex/acm.bst" 1291864147 21064 c61a48664f3c347ce7f73c1a6a530506 ""
   "Main.aux" 1381504865 2564 78e765f017c7ac4ecd1e2ac8e678c437 ""
   "tesis.bib" 1241796063 3268 815a3d22d070430f5825c383f030f214 ""
   (generated)
   "Main.blg"
   "Main.bbl"
-["makeindex build/Main.idx"] 1605961039 "build/Main.idx" "build/Main.ind" "build/Main" 1610312445
-  "build/Main.idx" 1610309915 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex build/Main.idx"] 1610318238 "build/Main.idx" "build/Main.ind" "build/Main" 1610318739
+  "build/Main.idx" 1610318738 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
-  "build/Main.ilg"
   "build/Main.ind"
-["pdflatex"] 1610309914 "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex" "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/build/Main.pdf" "Main" 1610312445
+  "build/Main.ilg"
+["pdflatex"] 1610318737 "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex" "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/build/Main.pdf" "Main" 1610318739
   "C:/Users/scatalfamo/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1605872212 10284555 e97beba24597cc7fbca7964c10e26194 ""
   "C:/Users/scatalfamo/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1605872220 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/scatalfamo/AppData/Roaming/MiKTeX/tex/latex/babel-spanish/spanish.ldf" 1457532593 27077 0286ca123141cff8dd4956c4576d2ef4 ""
@@ -46,6 +46,7 @@
   "D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1247596666 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
+  "D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1247596667 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1247596667 32762 7fee39e011c23b3589931effd97b9702 ""
   "D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1247596667 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb" 1247596666 34586 5a65dc15601f9c74fe3fb3f37b3b8b6f ""
@@ -79,27 +80,28 @@
   "D:/Program Files/MiKTeX/tex/latex/tools/longtable.sty" 1580644884 12133 b1e3e65b69714dbfcc5e6c0b19d66b50 ""
   "Main.bbl" 1381504865 1932 3eff0ef2b98433c0f01c240ebbbc6e2c "bibtex Main"
   "Main.tex" 1610309864 2722 c472502a77d797463ef80c12b13c4df4 ""
-  "build/Main.aux" 1610309915 7515 6fa7dbaf96d7274886c936a63c85c41c "pdflatex"
-  "build/Main.ind" 1605961039 0 d41d8cd98f00b204e9800998ecf8427e "makeindex build/Main.idx"
-  "build/Main.toc" 1610309915 4048 85b88c307cb72df94cfd499abf1f37ce "pdflatex"
+  "build/Main.aux" 1610318739 9816 4c65d96f1d2724d74a54850baac1653a "pdflatex"
+  "build/Main.ind" 1610318238 0 d41d8cd98f00b204e9800998ecf8427e "makeindex build/Main.idx"
+  "build/Main.toc" 1610318739 5529 4460a9dfc29ef45480b9c1a63f9010fd "pdflatex"
   "commands.tex" 1212591887 2292 1a4a74fdfa5769dc90059172f5364331 ""
   "conclusiones.tex" 1212591910 199 ef76b0a99db58f0c5f5b1e5516480057 ""
   "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex" 1610309864 2722 c472502a77d797463ef80c12b13c4df4 ""
-  "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/build/Main.aux" 1610309915 7515 6fa7dbaf96d7274886c936a63c85c41c ""
+  "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/build/Main.aux" 1610318739 9816 4c65d96f1d2724d74a54850baac1653a ""
   "desc.tex" 1607506558 796 ad4923aeca58c8dc881364a620f96385 ""
   "glosario.tex" 1212592855 712 bda6dad5be152bc94ac30323c728ed8d ""
+  "http.tex" 1610318735 42007 d729ec83e031c2897e26d7c793714d75 ""
   "implemen.tex" 1609802643 890 0cdca43542920831c4b98b36ab3609cb ""
   "introduccion.tex" 1607507652 1054 c110311df0ac663aeea9ae832fadef92 ""
   "resumen.tex" 1605961356 818 e2b78d78bb75cff02b7543932608c810 ""
   "setbmp.tex" 743997600 191 f3da27dc05f313d160e70870f9f0d473 ""
   "titulo.tex" 1605961643 584 900049c88ece3aa6000e7f8812a4584f ""
-  "traficoRedInterna.tex" 1610312445 646 ed50fca698776e35d356767ca85d2ab7 ""
+  "traficoRedInterna.tex" 1610314419 542 d0ee203ab3c66d73b16119617e468fb5 ""
   "uni.bmp" 801938978 64646 84c6cc175d5f5045980069598ebc4d0f ""
   (generated)
-  "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/build/Main.pdf"
-  "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/build/Main.log"
-  "build/Main.pdf"
   "build/Main.log"
-  "build/Main.aux"
   "build/Main.idx"
+  "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/build/Main.log"
   "build/Main.toc"
+  "build/Main.aux"
+  "build/Main.pdf"
+  "d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/build/Main.pdf"

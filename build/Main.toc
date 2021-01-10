@@ -5,19 +5,39 @@
 \contentsline {section}{\numberline {1.2}Plan de tesis y principales contribuciones}{1}{}%
 \contentsline {section}{\numberline {1.3}Trabajos previos relacionados}{1}{}%
 \contentsline {chapter}{\numberline {2}(Ajustar) ¿Qué circula por una red interna? }{1}{}%
-\contentsline {section}{\numberline {2.1}Introducción}{2}{}%
-\contentsline {section}{\numberline {2.2}Proocolos asociados a la web}{2}{}%
-\contentsline {subsection}{\numberline {2.2.1}¿Que es el protocolo HTTP?}{2}{}%
-\contentsline {subsection}{\numberline {2.2.2}Métodos del protocolo HTTP}{2}{}%
-\contentsline {subsection}{\numberline {2.2.3}HTTPS con SSL}{2}{}%
-\contentsline {section}{\numberline {2.3}Protocolos asociados al Correo electrónico (explicacion de todo lo que hace un servidor de correo, y sus protocolos)}{2}{}%
-\contentsline {subsection}{\numberline {2.3.1}¿Que es el protocolo SMTP?}{2}{}%
-\contentsline {subsection}{\numberline {2.3.2}Recorrido completo de un mail}{2}{}%
-\contentsline {subsection}{\numberline {2.3.3}SMTP con SSL}{2}{}%
-\contentsline {section}{\numberline {2.4}Protocolos asociados a la consulta de un sitio (DNS)}{2}{}%
-\contentsline {subsection}{\numberline {2.4.1}¿Que es el protocolo DNS?}{2}{}%
-\contentsline {subsection}{\numberline {2.4.2}Recorrido completo de un mail}{2}{}%
-\contentsline {subsection}{\numberline {2.4.3}SMTP con SSL}{2}{}%
+\contentsline {section}{\numberline {2.1}Introducción}{1}{}%
+\contentsline {section}{\numberline {2.2}Proocolos asociados a la web}{1}{}%
+\contentsline {subsection}{\numberline {2.2.1}¿Que es el protocolo HTTP?}{1}{}%
+\contentsline {subsection}{\numberline {2.2.2}Arquitectura}{2}{}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}Client/Server Messaging}{2}{}%
+\contentsline {subsubsection}{\numberline {2.2.2.2}Ejemplo}{3}{}%
+\contentsline {subsection}{\numberline {2.2.3}Formato del mensaje}{3}{}%
+\contentsline {subsubsection}{\numberline {2.2.3.1}Start Line}{5}{}%
+\contentsline {paragraph}{\numberline {2.2.3.1.1}Request Line}{5}{}%
+\contentsline {paragraph}{\numberline {2.2.3.1.2}Status Line}{6}{}%
+\contentsline {subsubsection}{\numberline {2.2.3.2}Header Fields}{6}{}%
+\contentsline {paragraph}{\numberline {2.2.3.2.1}Field Extensibility}{7}{}%
+\contentsline {paragraph}{\numberline {2.2.3.2.2}Field Order}{7}{}%
+\contentsline {paragraph}{\numberline {2.2.3.2.3}Whitespace}{8}{}%
+\contentsline {paragraph}{\numberline {2.2.3.2.4}Field Parsing}{9}{}%
+\contentsline {paragraph}{\numberline {2.2.3.2.5}Field Limits }{10}{}%
+\contentsline {paragraph}{\numberline {2.2.3.2.6}Field Value Components}{10}{}%
+\contentsline {subsubsection}{\numberline {2.2.3.3}Message Body }{11}{}%
+\contentsline {paragraph}{\numberline {2.2.3.3.1}Transfer-Encoding }{12}{}%
+\contentsline {paragraph}{\numberline {2.2.3.3.2}Content-Length }{13}{}%
+\contentsline {paragraph}{\numberline {2.2.3.3.3}Message Body Length }{15}{}%
+\contentsline {subsubsection}{\numberline {2.2.3.4}Handling Incomplete Messages}{17}{}%
+\contentsline {subsubsection}{\numberline {2.2.3.5}Message Parsing Robustness}{18}{}%
+\contentsline {subsection}{\numberline {2.2.4}Métodos del protocolo HTTP}{19}{}%
+\contentsline {subsection}{\numberline {2.2.5}HTTPS con SSL}{19}{}%
+\contentsline {section}{\numberline {2.3}Protocolos asociados al Correo electrónico (explicacion de todo lo que hace un servidor de correo, y sus protocolos)}{19}{}%
+\contentsline {subsection}{\numberline {2.3.1}¿Que es el protocolo SMTP?}{19}{}%
+\contentsline {subsection}{\numberline {2.3.2}Recorrido completo de un mail}{19}{}%
+\contentsline {subsection}{\numberline {2.3.3}SMTP con SSL}{19}{}%
+\contentsline {section}{\numberline {2.4}Protocolos asociados a la consulta de un sitio (DNS)}{19}{}%
+\contentsline {subsection}{\numberline {2.4.1}¿Que es el protocolo DNS?}{19}{}%
+\contentsline {subsection}{\numberline {2.4.2}Recorrido completo de un mail}{19}{}%
+\contentsline {subsection}{\numberline {2.4.3}SMTP con SSL}{19}{}%
 \contentsline {chapter}{\numberline {3}(Nuevo) Herramientas a Utilizar}{1}{}%
 \contentsline {section}{\numberline {3.1}El problema de los protocolos http y smtp}{2}{}%
 \contentsline {section}{\numberline {3.2}Conceptos básicos}{2}{}%

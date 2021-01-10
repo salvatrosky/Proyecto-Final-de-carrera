@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.20)  10 JAN 2021 17:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.20)  10 JAN 2021 19:45
 entering extended mode
 **"d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex"
 ("d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex"
@@ -231,11 +231,13 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
  ("D:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [3])
+) [3] [4])
 \tf@toc=\write4
 \openout4 = `Main.toc'.
 
- [4]
+ [5] [6
+
+]
 Cap\'{\i }tulo 1.
 (introduccion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 27--34
@@ -245,7 +247,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--34
 File: uni.bmp Graphic file (type bmp)
 <uni.bmp>) [1
 
-
 ]
 LaTeX Info: Redefining \. on input line 84.
 LaTeX Info: Redefining \% on input line 84.
@@ -254,29 +255,103 @@ Non-PDF special ignored!
 <special> em: graph uni.bmp,85.03915bp,85.03915bp
 ]
 Cap\'{\i }tulo 2.
-(traficoRedInterna.tex
-Overfull \hbox (11.26245pt too wide) in paragraph at lines 8--8
+(traficoRedInterna.tex (http.tex [1
+
+]
+Overfull \hbox (52.79118pt too wide) in paragraph at lines 49--52
+[]\OT1/cmr/m/n/12 request ->UserAgent =======================================
+ []
+
+LaTeX Info: Redefining \. on input line 68.
+LaTeX Info: Redefining \% on input line 68.
+[2]
+Overfull \hbox (2.37213pt too wide) in paragraph at lines 75--79
+[]\OT1/cmr/m/n/12 GET /he-llo.txt HTTP/1.1 User-Agent: curl/7.16.3 lib-curl/7.16.3 OpenSSL/0.9.7l
+ []
+
+LaTeX Info: Redefining \. on input line 116.
+LaTeX Info: Redefining \% on input line 116.
+[3]
+Underfull \vbox (badness 7468) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 166.
+LaTeX Info: Redefining \% on input line 166.
+ [4]
+LaTeX Info: Redefining \. on input line 201.
+LaTeX Info: Redefining \% on input line 201.
+ [5]
+LaTeX Info: Redefining \. on input line 251.
+LaTeX Info: Redefining \% on input line 251.
+ [6]
+LaTeX Info: Redefining \. on input line 297.
+LaTeX Info: Redefining \% on input line 297.
+ [7]
+Underfull \vbox (badness 5302) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 352.
+LaTeX Info: Redefining \% on input line 352.
+ [8]
+LaTeX Info: Redefining \. on input line 391.
+LaTeX Info: Redefining \% on input line 391.
+ [9]
+LaTeX Info: Redefining \. on input line 438.
+LaTeX Info: Redefining \% on input line 438.
+ [10]
+LaTeX Info: Redefining \. on input line 490.
+LaTeX Info: Redefining \% on input line 490.
+ [11]
+LaTeX Info: Redefining \. on input line 535.
+LaTeX Info: Redefining \% on input line 535.
+ [12]
+Overfull \hbox (6.05446pt too wide) in paragraph at lines 565--573
+ \OT1/cmr/bx/n/12 2.2.3.3.2. Content-Length [] \OT1/cmr/m/n/12 When a mes-sa-ge does not ha-ve a Transfer-Encoding
+ []
+
+LaTeX Info: Redefining \. on input line 573.
+LaTeX Info: Redefining \% on input line 573.
+[13]
+LaTeX Info: Redefining \. on input line 623.
+LaTeX Info: Redefining \% on input line 623.
+ [14]
+LaTeX Info: Redefining \. on input line 669.
+LaTeX Info: Redefining \% on input line 669.
+ [15]
+Overfull \hbox (1.19173pt too wide) in paragraph at lines 706--711
+\OT1/cmr/m/n/12 close-delimiting fea-tu-re exists pri-ma-rily for back-wards com-pa-ti-bi-lity with HTTP/1.0. 
+ []
+
+LaTeX Info: Redefining \. on input line 715.
+LaTeX Info: Redefining \% on input line 715.
+[16]
+LaTeX Info: Redefining \. on input line 757.
+LaTeX Info: Redefining \% on input line 757.
+ [17]
+LaTeX Info: Redefining \. on input line 799.
+LaTeX Info: Redefining \% on input line 799.
+ [18])
+Overfull \hbox (11.26245pt too wide) in paragraph at lines 7--7
 []\OT1/cmr/bx/n/17.28 Protocolos aso-cia-dos al Co-rreo electroni-co (ex-
  []
 
 )
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1
-
-]
-Overfull \vbox (149.65984pt too high) has occurred while \output is active []
-
 LaTeX Info: Redefining \. on input line 88.
 LaTeX Info: Redefining \% on input line 88.
- [2]
+
+Overfull \hbox (452.16325pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 2.3.  PROTOCOLOS ASOCIADOS AL CORREO ELECTR[]ONICO (EXPLICACION DE TODO LO QUE HACE UN SERVIDOR DE CORREO, Y SUS PROTOCOLOS) \OT1/cmr/m/n/12 19
+ []
+
+[19]
+LaTeX Info: Redefining \. on input line 88.
+LaTeX Info: Redefining \% on input line 88.
+ [20
+
+]
 Cap\'{\i }tulo 3.
 (desc.tex)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [1
-
-]
+ [1]
 LaTeX Info: Redefining \. on input line 92.
 LaTeX Info: Redefining \% on input line 92.
  [2]
@@ -331,17 +406,17 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3382 strings out of 479799
- 45321 string characters out of 2879528
- 335443 words of memory out of 3000000
- 20311 multiletter control sequences out of 15000+200000
+ 3420 strings out of 479799
+ 45867 string characters out of 2879528
+ 336443 words of memory out of 3000000
+ 20346 multiletter control sequences out of 15000+200000
  546288 words of font info for 71 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,8n,72p,647b,424s stack positions out of 5000i,500n,10000p,200000b,50000s
-<D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.pdf" (20 pages, 174572 bytes).
+<D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on "d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.pdf" (40 pages, 230424 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
+ 188 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

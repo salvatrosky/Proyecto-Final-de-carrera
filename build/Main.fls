@@ -333,6 +333,17 @@ INPUT .\traficoRedInterna.tex
 INPUT .\traficoRedInterna.tex
 INPUT .\traficoRedInterna.tex
 INPUT traficoRedInterna.tex
+INPUT .\http.tex
+INPUT .\http.tex
+INPUT .\http.tex
+INPUT .\http.tex
+INPUT .\http.tex
+INPUT http.tex
+INPUT .\http.tex
+INPUT .\http.tex
+INPUT .\http.tex
+INPUT .\http.tex
+INPUT http.tex
 INPUT D:\Program Files\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT D:\Program Files\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT .\desc.tex
@@ -396,6 +407,8 @@ INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr17.pfb
 INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr17.pfb
+INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
+INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
 INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT D:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
