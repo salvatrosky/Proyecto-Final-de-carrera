@@ -318,8 +318,6 @@ INPUT D:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT D:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT D:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT D:\Program Files\MiKTeX\fonts\tfm\public\cm\cmss12.tfm
-INPUT D:\Program Files\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
-INPUT D:\Program Files\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT .\uni.bmp
 INPUT .\uni.bmp
 INPUT uni.bmp
@@ -335,6 +333,8 @@ INPUT .\traficoRedInterna.tex
 INPUT .\traficoRedInterna.tex
 INPUT .\traficoRedInterna.tex
 INPUT traficoRedInterna.tex
+INPUT D:\Program Files\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
+INPUT D:\Program Files\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT .\desc.tex
 INPUT .\desc.tex
 INPUT .\desc.tex
