@@ -21,6 +21,7 @@ The Hypertext Transfer Protocol (HTTP) is a stateless application-level request/
    interface provided by servers.  However, since multiple clients might
    act in parallel and perhaps at cross-purposes, we cannot require that
    such changes be observable beyond the scope of a single response.
+   
 \subsection{Arquitectura}
 HTTP was created for the World Wide Web (WWW) architecture and has
 evolved over time to support the scalability needs of a worldwide
@@ -886,14 +887,7 @@ The status-code element is a three-digit integer code giving the
    section).  Since HTTP/1.0 did not define any 1xx status codes, a
    server MUST NOT send a 1xx response to an HTTP/1.0 client.
 
-   A client MUST be able to parse one or more 1xx responses received
-   prior to a final response, even if the client does not expect one.  A
-   user agent MAY ignore unexpected 1xx responses.
-
-   A proxy MUST forward 1xx responses unless the proxy itself requested
-   the generation of the 1xx response.  For example, if a proxy adds an
-   "Expect: 100-continue" field when it forwards a request, then it need
-   not forward the corresponding 100 (Continue) response(s).
+  
 
 
    \subsubsection{Successful 2xx}
@@ -959,3 +953,403 @@ The status-code element is a three-digit integer code giving the
   
 
 \subsection{HTTPS con SSL} 
+
+With an understanding of some of the key concepts of cryptography,
+we can now look closely at the operation of the Secure Sockets Layer
+(ssl) protocol. Although ssl is not an extremely complicated protocol, it does offer several options and variations. This chapter explains
+ssl by starting with the simplest case: establishing an encrypted
+communications channel. It then considers successively more complex options, including authenticating the communicating parties,
+separating encryption from authentication, and resuming a previously
+established session. Within these sections, you will discover the full
+power of ssl.
+The ssl protocol consists of a set of messages and rules about when
+to send (and not to send) each one. In this chapter, we consider what
+those messages are, the general information they contain, and how
+systems use the different messages in a communications session. We
+do not, however, explore the detailed message formats: the bits and
+bytes that make up ssl messages as they transit across a network.
+That detail is the subject of chapter 4. Neither do we spend time here
+on the detailed cryptographic computations ssl requires; those, too,
+are a topic for the next chapter. This chapter concentrates on the big
+picture. The details will be much easier to understand once you have
+an appreciation of the overall operation of the Secure Sockets Layer.
+
+\subsubsection{SSL Roles}
+The Secure Sockets Layer protocol defines two different roles for the
+communicating parties. One system is always a client, while the other
+is a server. The distinction is very important, because ssl requires the
+two systems to behave very differently. The client is the system that
+initiates the secure communications; the server responds to the client’s request. In the most common use of ssl, secure Web browsing,
+the Web browser is the ssl client and the Web site is the ssl server.
+These same two roles apply to all applications that use ssl, and the
+examples in this chapter (indeed, throughout the book) will clearly
+distinguish them.
+For ssl itself, the most important distinctions between clients and
+servers are their actions during the negotiation of security parameters. Since the client initiates a communication, it has the
+responsibility of proposing a set of ssl options to use for the
+exchange. The server selects from the client’s proposed options,
+deciding what the two systems will actually use. Although the final
+decision rests with the server, the server can only choose from among
+those options that the client originally proposed.
+
+\subsubsection{SSL Messages}
+When ssl clients and servers communicate, they do so by exchanging ssl messages. Technically, ssl defines different levels of messages,
+but that topic is best left for Chapter 4. Since this chapter concentrates strictly on functionality, distinguishing between the various ssl
+levels is not critical. Table 3-1 lists the ssl messages at all levels of the
+protocol, in alphabetical order. The remaining sections in this chapter
+show how systems use these messages in their communications.
+Table 3-1 SSL Messages
+Message Description
+Alert Informs the other party of a possible security
+breach or communication failure.
+ApplicationData Actual information that the two parties exchange, which is encrypted, authenticated,
+and/or verified by SSL.
+Certificate A message that carries the sender’s public key
+certificate.
+CertificateRequest A request by the server that the client provide
+its public key certificate.
+CertificateVerify A message from the client that verifies that it
+knows the private key corresponding to its public key certificate.
+ChangeCipherSpec An indication to begin using agreed-upon security services (such as encryption).
+ClientHello A message from the client indicating the security services it desires and is capable of supporting.
+ClientKeyExchange A message from the client carrying cryptographic keys for the communications.
+Finished An indication that all initial negotiations are
+complete and secure communications have
+been established.
+HelloRequest A request by the server that the client start (or
+restart) the SSL negotiation process.
+ServerHello A message from the server indicating the security services that will be used for the communications.
+ServerHelloDone An indication from the server that it has completed all its requests of the client for establishing communications.
+ServerKeyExchange A message from the server carrying cryptographic keys for the communications.
+
+\subsubsection{Establishing Encrypted Communications}
+The most basic function that an ssl client and server can perform is
+establishing a channel for encrypted communications. Figure 3-1
+shows the ssl message exchange this operation requires, and table 3-2
+summarizes the steps in the figure. This section looks at these steps
+in more detail by considering each message in the exchange.
+
+GRAFIQUITO
+
+\paragraph{ClientHello}
+The ClientHello message starts the ssl communication between the
+two parties. The client uses this message to ask the server to begin
+negotiating security services by using ssl. Table 3-3 lists the important components of a ClientHello message.
+Table 3-3 ClientHello Components
+Field Use
+Version Identifies the highest version of the SSL protocol that the client can support.
+RandomNumber A 32-byte random number used to seed the
+cryptographic calculations.
+SessionID Identifies a specific SSL session.
+CipherSuites A list of cryptographic parameters that the client can support.
+CompressionMethods
+Identifies data compression methods that the
+client can support.
+The Version field of the ClientHello message contains the highest
+version number of ssl that the client can support. The current ssl
+version is 3.0, and it is by far the most widely deployed on the Internet. (But see the sidebar for information on t ls.) Note that a server
+may assume that the client can support all ssl versions up to and including the value of this field. If, for example, a client sends a version
+3.0 ClientHello to a server that only supports version 2.0 of ssl, the
+server may respond with version 2.0 messages that it expects the client to understand. In such cases, that client can decide to continue
+with the ssl session using version 2.0 functionality, or it can abandon
+
+the communication attempt. Section 5.1 includes additional information about compatibility with previous versions.
+The RandomNumber field, as you might expect, contains a random
+number. This random value, along with a similar random value that
+the server creates, provides the seed for critical cryptographic calculations. Chapter 4 has the details. The ssl specification suggests that
+four of this field’s 32 bytes consist of the time and date. The ssl protocol does not require a particular level of accuracy for this value, as it
+is not intended to provide an accurate time indication. Instead, the
+specification suggests using the date and time as a way to ensure that
+the client never uses the same random value twice. This precaution
+protects against an impostor copying old ssl messages from a legitimate client and reusing them to establish a counterfeit session.
+The remaining 28 bytes of this value should be a “cryptographically
+secure” random number. Security is not something we ordinarily associate with randomness, but it is important in this case. Most computer programs use a technique known as pseudorandom number
+generation to create random numbers. When used correctly, this approach does yield numbers that have the appearance of randomness.
+However, the technique does have a serious flaw when used in a security context: if an attacker knows the exact algorithm and one random value, that attacker can correctly predict all future random
+values. This knowledge might allow the attacker to anticipate a particular future value and prepare an attack against it. To prevent this
+type of attack, ssl implementations should use a different technique
+for generating random numbers; typically, they use one based on
+cryptographic algorithms.
+The next field in the ClientHello message is SessionID. Although all
+ClientHello messages may include this field, in this example, the
+field is meaningless and would be empty. Section 3.8 presents an example of how the SessionID field may be used.
+The CipherSuites field allows a client to list the various cryptographic
+services that the client can support, including exact algorithms and
+key sizes. The server actually makes the final decision as to which
+cryptographic services will be used for the communication, but it is
+
+limited to choosing from this list. Chapter 4 describes the format of
+this field in detail, including the various algorithms and key size options that ssl defines.
+The CompressionMethods field is, in theory, similar to the CipherSuites field. In it, the client may list all of the various data compression methods that it can support. Compression methods are an
+important part of ssl because encryption has significant consequences on the effectiveness of any data compression techniques. Encryption changes the mathematical properties of information in a
+way that makes data compression virtually impossible. In fact, if it
+were possible to compress encrypted data, that would likely indicate a
+security weakness in the encryption algorithm. For this reason, if two
+parties are going to employ data compression for a communication, it
+is important that they compress their data before encrypting it. The
+ssl protocol accommodates this behavior by including the capacity
+for data compression, and by making sure that the compression occurs before encryption. In the current version of ssl, however, no actual compression methods have been defined. This field, therefore,
+currently is of limited use. In the future, additional compression
+methods may be defined and added to the t ls (but not ssl) specifications.
+\subsubsection{ServerHello}
+When the server receives the ClientHello message, it responds with a
+ServerHello. As table 3-4 shows, the contents of a ServerHello are
+much the same as a ClientHello. There are a few important differences, though, which we’ll examine in this subsection. In general,
+where the client makes suggestions in its ClientHello message, the
+server makes the final decision in its ServerHello.
+The Version field is the first example of a server making a final decision for the communications. The ClientHello’s version simply identifies which ssl versions the client can support. The ServerHello’s
+version, on the other hand, determines the ssl version that the communication will use. A server is not completely free to choose any ssl
+version, however; it cannot pick a version newer than the latest that
+the client can support. If the client does not like the server’s choice, it
+may abandon the communication. As of this writing, nearly all ssl
+clients and servers support version 3.0 of the ssl protocol.
+The RandomNumber field of the ServerHello is essentially the same
+as in the ClientHello, though this random value is chosen by the
+server. Along with the client’s value, this number seeds important
+cryptographic calculations. The server’s value does share the same
+properties as in the ClientHello. Four of the 32 bytes are the date and
+time (to avoid repeating random values); the remaining bytes should
+be created by a cryptographically secure random number generator.
+The SessionID field of a ServerHello may contain a value, unlike the
+ClientHello’s field just discussed. The value in this case uniquely
+identifies this particular ssl communication, or session. The main reason for explicitly identifying a particular ssl session is to refer to it
+again later. Section 3.8 shows an example of how a client can use this
+facility to speed up the ssl negotiation process. If the server does not
+intend the session to ever be reused, it can omit the SessionID field
+from its ServerHello message.
+The CipherSuite field (note that the name is singular, not plural, as in
+the case of a ClientHello) determines the exact cryptographic parameters, specifically algorithms and key sizes, to be used for the session. The server must select a single cipher suite from among those
+listed by the client in its ClientHello message.
+
+The CompressionMethod field is also singular for a ServerHello. In
+theory, the server uses this field to identify the data compression to
+be used for the session. Again, the server must pick from among
+those listed in the ClientHello. Current ssl versions have not defined
+any compression methods, however, so this field has no practical utility.
+\subsubsection{ServerKeyExchange}
+In this example, the server follows its ServerHello message with a
+ServerKeyExchange message. This message complements the CipherSuite field of the ServerHello. While the CipherSuite field indicates
+the cryptographic algorithms and key sizes, this message contains the
+public key information itself. The exact format of the key information depends on the particular public key algorithm used. For the rsa
+algorithm, for example, the server includes the modulus and public
+exponent of the server’s rsa public key.
+Note that the ServerKeyExchange message is transmitted without
+encryption, so that only public key information can be safely included within it. The client will use the server’s public key to encrypt
+a session key, which the parties will use to actually encrypt the application data for the session.
+3.3.4 ServerHelloDone
+The ServerHelloDone message tells the client that the server has finished with its initial negotiation messages. The message itself contains no other information, but it is important to the client, because
+once the client receives a ServerHelloDone, it can move to the next
+phase of establishing the secure communications.
+3.3.5 ClientKeyExchange
+When the server has finished its part of the initial ssl negotiation,
+the client responds with a ClientKeyExchange message. Just as the
+ServerKeyExchange provides the key information for the server, the
+ClientKeyExchange tells the server the client’s key information. In
+
+this case, however, the key information is for the symmetric encryption algorithm both parties will use for the session. Furthermore, the
+information in the client’s message is encrypted using the public key
+of the server. This encryption protects the key information as it traverses the network, and it allows the client to verify that the server
+truly possesses the private key corresponding to its public key. Otherwise, the server won’t be able to decrypt this message. This operation is an important protection against an attacker that intercepts
+messages from a legitimate server and pretends to be that server by
+forwarding the messages to an unsuspecting client. Since a fake
+server won’t know the real server’s private key, it won’t be able to decrypt the ClientKeyExchange message. Without the information in
+that message, communication between the two parties cannot succeed.
+3.3.6 ChangeCipherSpec
+After the client sends key information in a ClientKeyExchange message, the preliminary ssl negotiation is complete. At that point, the
+parties are ready to begin using the security services they have negotiated. The ssl protocol defines a special message—
+ChangeCipherSpec—to explicitly indicate that the security services
+should now be invoked.
+Since the transition to secured communication is critical, and both
+parties have to get it exactly right, the ssl specification is very precise
+in describing the process. First, it identifies the set of information
+that defines security services. That information includes a specific
+symmetric encryption algorithm, a specific message integrity algorithm, and specific key material for those algorithms. The ssl specification also recognizes that some of that information (in particular,
+the key material) will be different for each direction of communication. In other words, one set of keys will secure data the client sends
+to the server, and a different set of keys will secure data the server
+sends to the client. (In principle, the actual algorithms could differ as
+well, but ssl does not define a way to negotiate such an option.) For
+any given system, whether it is a client or a server, ssl defines a write
+state and a read state. The write state defines the security information
+
+for data that the system sends, and the read state defines the security
+information for data that the system receives.
+The ChangeCipherSpec message serves as the cue for a system to
+begin using its security information. Before a client or server sends a
+ChangeCipherSpec message, it must know the complete security information it is about to activate. As soon as the system sends this
+message, it activates its write state. Similarly, as soon as a system receives a ChangeCipherSpec from its peer, the system activates its
+read state. Figures 3-2 and 3-3 illustrate this process in more detail.
+The first shows how the client views the process, while the second
+takes the server’s perspective.
+In both figures, the matrices on the side show the systems’ read and
+write states. The events shown in black (as opposed to gray) cause
+the systems to update their states. As the figures indicate, ssl actually
+defines two separate read and write states for each system. One of
+the states is active and the second is pending. Both the client and the
+server, therefore, maintain a total of four different states: the active
+write state, the pending write state, the active read state, and the
+pending read state. (The figures use the abbreviations “Act” and
+“Pnd” for active and pending, respectively.)
+The figures also show the key elements of a state. They are the encryption algorithm (abbreviated “Encr”), the message integrity algorithm (abbreviated “mac” for Message Authentication Code), and
+the key material. In figures 3-2 and 3-3, the systems agree to use the
+Data Encryption Standard (des) for symmetric encryption and Message Digest 5 (md5) for message integrity.
+As the figures show, all systems start out in active states with no security services whatsoever. This initial condition is necessary for the
+systems to begin any communication; until they have negotiated security services and parameters, secure communication is not possible.
+As the systems exchange ssl messages, they begin building the pending state. First they agree on encryption and message integrity algorithms, then they exchange key information. Only then, when both
+the client and the server have full pending states, can the systems activate those pending states with ChangeCipherSpec messages.
+Table 3-5 details the client processing that figure 3-2 illustrates. It describes the steps in the figure that are shown in solid black; those are
+the steps that result in a change of the client’s states.
+Notice from the figures that one system’s active write state is the
+same as the other system’s active read state—with one exception. The
+exception occurs during the transmission of a ChangeCipherSpec
+message. As soon as one system sends this message, it updates its active states. The other system, however, does not change its active
+states until it receives the message. In the interim, the two systems
+are temporarily out of synchronization.
+\subsubsection{Finished}
+Immediately after sending their ChangeCipherSpec messages, each
+system also sends a Finished message. The Finished messages allow
+both systems to verify that the negotiation has been successful and
+that security has not been compromised. Two aspects of the Finished
+message contribute to this security. First, as the previous subsection
+explained, the Finished message itself is subject to the negotiated cipher suite. That means that it is encrypted and authenticated according to that suite. If the receiving party cannot successfully decrypt
+and verify the message, then clearly something has gone awry with
+the security negotiation.
+The contents of the Finished message also serve to protect the security of the ssl negotiation. Each Finished message contains a cryptographic hash of important information about the just-finished
+negotiation. Table 3-7 details the information that is secured by the
+hash. Notice that protected data includes the exact content of all
+handshake messages used in the exchange (though ChangeCipherSpec messages are not considered “handshake” messages in the strict
+sense of the word, and thus are not included). This protects against
+an attacker who manages to insert fictitious messages or remove legitimate messages from the communication. If an attacker were able
+to do so, the client’s and server’s hash calculations would not match,
+and they would detect the compromise. Chapter 4 describes the details of the hash calculation.
+
+\subsubsection{Ending Secure Communications}
+Although as a practical matter it is rarely used (primarily due to the
+nature of Web sessions), ssl does have a defined procedure for ending a secure communication between two parties. As figure 3-4
+shows, the two systems each send a special ClosureAlert to the other.
+Explicitly closing a session protects against a truncation attack, in
+which an attacker is able to compromise security by prematurely terminating a communication. Imagine, for example, that an attacker
+was able to delete just the second phrase of the following sentence:
+“Please destroy all the documents, unless you hear from me tomorrow.” The ClosureAlert message helps systems detect such attacks. If
+a system received the message “Please destroy all documents” but did
+not receive a ClosureAlert, it would recognize that the complete
+message may not have arrived. As mentioned, it is not always possible to receive ClosureAlert messages reliably for Web transactions.
+Appendix b describes other steps Web servers and clients can take to
+protect against these truncation attacks.
+\subsubsection{Authenticating the Server’s Identity}
+Although section 3.4 explained how ssl can establish encrypted
+communications between two parties, that may not really add that
+much security to the communication. With encryption alone neither
+
+party can really be sure of the other’s identity. The typical reason for
+using encryption in the first place is to keep information secret from
+some third party. But if that third party were able to successfully
+masquerade as the intended recipient of the information, then encryption would serve no purpose. The data would be encrypted, but
+the attacker would have all the data necessary to decrypt it.
+To avoid this type of attack, ssl includes mechanisms that allow each
+party to authenticate the identity of the other. With these mechanisms, each party can be sure that the other is genuine, and not a
+masquerading attacker. In this section, we’ll look at how ssl enables a
+server to authenticate itself.
+A natural question is, of course, if authenticating identities is so important, why don’t we always authenticate both parties? The answer
+lies in the nature of Web commerce. When you want to purchase
+something using your Web browser, it’s very important that the Web
+site you’re browsing is authentic. You wouldn’t want to send your
+credit card number to some imposter posing as your favorite merchant. The merchant, on the other hand, has other means for
+authenticating your identity. Once it receives a credit card number,
+for example, it can validate that number. Since the server doesn’t
+need ssl to authenticate your identity, the ssl protocol allows for
+server authentication only. (The protocol does define a process for
+authenticating clients. Section 3.7. discusses that process.)
+Table 3-8 summarizes the actions each system takes to authenticate a
+server. The same steps are shown graphically in figure 3-5. The process isn’t all that different from simple encryption. (Compare figure
+3-5 with figure 3-1.) The two messages in black are different when authenticating a server. Those messages, the Certificate message and
+the ClientKeyExchange message, are discussed next. All other messages are the same as described in section 3.3
+
+\paragraph{Certificate}
+When authenticating its identity, the server sends a Certificate message instead of the ServerKeyExchange message section 3.3.3 described. The Certificate message simply contains a certificate chain
+that begins with the server’s public key certificate and ends with the
+certificate authority’s root certificate.
+The client has the responsibility to make sure it can trust the certificate it receives from the server. That responsibility includes verifying
+the certificate signatures, validity times, and revocation status. It also
+means ensuring that the certificate authority is one that the client
+trusts. Typically, clients make this determination by knowing the
+public key of trusted certificate authorities in advance, through some
+trusted means. Netscape and Microsoft, for example, preload their
+browser software with public keys for well-known certificate authorities. Web servers that want to rely on this trust mechanism can only
+obtain their certificates (at least indirectly) from one of these wellknown authorities.
+One additional detail in the certificate verification process can sometimes seem subtle, but is nonetheless crucial for real security: The client must ensure not only that the certificate is issued by a trusted
+authority, but that the certificate also unambiguously identifies the
+party with whom it wants to communicate. Consider, for example, a
+malicious company that receives a legitimate certificate from a
+trusted certificate authority under its own name, but then turns
+around and uses that certificate illegitimately to masquerade as a
+competitor. The unsuspecting client that communicates with this
+malicious company (believing that it is communicating with the
+competitor) will receive a legitimate certificate as part of the ssl exchange. The client, however, must be intelligent enough to detect
+that the certificate does not belong to the real competitor. For Web
+commerce, the key to solving this problem normally relies on the
+domain name of the server. Respected certificate authorities include
+the Internet domain name of the Web server in the certificates they
+issue. And Web browsers check the domain name in certificates they
+receive against the domain name their users attempt to contact. If,
+for example, a browser tries to connect to www.goodcompany.com
+and receives a certificate for www.badcompany.com, the browser
+knows something is amiss no matter how valid the certificate otherwise appears. Appendix b contains additional information on verifying certificates.
+\paragraph{ClientKeyExchange}
+The client’s ClientKeyExchange message also differs in server authentication, though the difference is not major. When encryption
+only is to be used, the client encrypts the information in the ClientKeyExchange using the public key the server provides in its
+ServerKeyExchange message. In this case, of course, the server is authenticating itself and, thus, has sent a Certificate message instead of
+a ServerKeyExchange. The client, therefore, encrypts its ClientKeyExchange information using the public key contained in the
+server’s certificate. This step is important because it allows the client
+to make sure that the party with whom it is communicating actually
+possesses the server’s private key. Only a system with the actual private key will be able to decrypt this message and successfully continue the communication.
+3.6 Separating Encryption from Authentication
+The previous section explained how a server can send a Certificate
+message instead of a ServerKeyExchange message to authenticate itself. One consequence of this approach is that the same public key
+information used to verify the server’s identity is also used to encrypt
+key material in the client’s ClientKeyExchange message. This constraint is not always desirable; indeed, in some cases it is actually impossible to support.
+The impossible cases are easiest to describe. Some public key algorithms (such as the Digital Signature Algorithm) can only be used
+for signing. By their very design, they cannot be used for encryption.
+In such cases, it will be impossible for the client to encrypt its ClientKeyExchange information using the server’s public key
+
+This limitation alone would be sufficient to require greater flexibility
+from the ssl protocol, but it is worthwhile to understand why combining signing and encryption might be undesirable, even when the
+public key algorithm supports both operations. The most common
+reason for separating encryption from signing is based not on technical considerations, but on legal ones. Some countries, including important producers of cryptographic products such as the United
+States (at least at the time of this writing), control the use or the export of products that include cryptography. In particular, the United
+States makes it more difficult for suppliers to export cryptographic
+products that use encryption key lengths greater than a certain
+minimum. (Key lengths less than or equal to these limits are said to
+
+be exportable.) In principle, at least, the United States does not impose the same restrictions on keys used for digital signatures. Systems
+that fall under u.s. jurisdiction, therefore, may prefer to use the longest practical keys for authenticating their identity (thus providing the
+strongest practical authentication), but use encryption keys that conform to the weaker export restrictions.
+Whatever the reason, ssl does provide a mechanism for separating
+server authentication from the encryption. Table 3-9 outlines the
+steps involved, and figure 3-6 illustrates the entire process. The figure
+highlights the three messages that are significant for separating encryption and server authentication. They are the Certificate,
+ServerKeyExchange, and ClientKeyExchange messages.
+
+\paragraph{Certificate}
+The Certificate message in this example is identical to the example
+in section 3.5, except that the public key in the server’s certificate will
+only be used to verify its identity. The client still has all the responsibilities section 3.5.1 discussed, however. It must verify the certificate’s
+signatures, validity times, and revocation status, and it must ensure
+that the certificate authority is trusted, and that the certificate was issued to the party with whom it wishes to communicate.
+\paragraph{ServerKeyExchange}
+The server follows its Certificate message with a ServerKeyExchange
+message. It is this second message that contains the public key the
+client should use to encrypt session key information. The
+ServerKeyExchange is the same message that we saw when no authentication was involved, and the information contained in the message is the same as described in section 3.3.3—with one significant
+difference: Unlike the example of section 3.3, in which the server keys
+were sent by themselves, in this scenario, the key information is
+signed using the public key contained in the server’s certificate. This
+step is essential to give the client a way to verify that the server really
+does possess the private key corresponding to its public key certificate.
+\paragraph{ClientKeyExchange}
+The client uses a ClientKeyExchange message to finish the negotiation process, just as it does in other scenarios. As before, this message
+contains the key information for the symmetric encryption algorithm
+the two parties have selected. Also as before, this information is encrypted using the server’s public key. It is important to note that the
+public key used for this encryption is the public key from the
+ServerKeyExchange message, not the public key from the server’s
+Certificate message (even if that public key algorithm supports encryption)
+
