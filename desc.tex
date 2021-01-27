@@ -264,8 +264,214 @@ featuring sniffing live connections, content filtering, and support for active a
 dissection of multiple protocols. Ettercap works by putting the attacker's network
 interface into promiscuous mode and ARP for poisoning the victim machines.
 \section{Virtualización}
+(AGREGAR GRAFICOS SI O SI)
+Virtualization provides abstraction on top of the actual resources we want to virtualize.
+ The level at which this abstraction is applied changes the way that different
+  virtualization techniques look.At a higher level, there are two major
+   virtualization techniques based on the level of abstraction.
+   • Virtual machine (VM)-based
+   • Container-based
+   Apart from these two virtualizing techniques, there are other techniques, such as unikernels, which are lightweight single-purpose VMs. IBM is currently attempting to run unikernels as processes with projects like Nabla. In this book, we will mainly look at VM-based and container-based virtualizations only.
 \subsection{Máquinas virtuales}
-\subsection{Máquinas Docker}
+VM-Based  VirtualizationThe VM-based approach virtualizes the complete OS. The abstraction
+ it presents to the VM are virtual devices like virtual disks, virtual CPUs, and virtual 
+ NICs. In other words, we can state that this is virtualizing the complete ISA
+  (instruction set architecture); as an example, the x86 ISA.With virtual machines,
+   multiple OSes can share the same hardware resources, with virtualized representations 
+   of each of the resources available to the VM. For example, the OS on the virtual
+    machine (also called the guest) can continue to do I/O operations on a disk 
+    (in this case, it’s a virtual disk), thinking that it’s the only OS running on the 
+    physical hardware (also called the host), although in actuality, it is shared by 
+    multiple virtual machines as well as by the host OS.VMs are very similar to other 
+    processes in the host OS. VMs execute in a hardware-isolated virtual address space 
+    and at a lower privilege level than the host OS. The primary difference between a
+     process and a VM is the ABI (Application Binary Interface) exposed by the host
+      to the VM. In the case of a process, the exposed ABI has constructs like network 
+      sockets, FDs, and so on, whereas with a full-fledged OS virtualization, the ABI 
+      will have a virtual disk, a virtual CPU, virtual network cards, and so on.
+
+Hypervisors
+A special piece of software is used to virtualize the OS, called the hypervisor. The 
+hypervisor itself has two parts:
+• Virtual Machine Monitor (VMM): Used for trapping and emulating the privileged 
+instruction set (which only the kernel of the operating system can perform).
+The VMM has to satisfy three properties (Popek and Goldberg, 1973):
+    • Isolation :  
+Should isolate guests (VMs) from each other.
+    • Equivalency : Should behave the same, 
+with or without virtualization. This means we run the majority (almost all) of the 
+instructions on the physical hardware without any translation, and so on.
+    • Performance : 
+Should perform as good as it does without any virtualization. This again means that 
+the overhead of running a VM is minimal.
+
+Device  Model
+The device model of the hypervisor handles the I/O virtualization again by trapping 
+and emulating and then delivering interrupts back to the specific virtual machine.
+The device model handles:
+•Memory  Virtualization
+•Shadow Page Table
+•CPU  Virtualization
+•IO  Virtualization
+
+\subsection{Container-Based  Virtualization}
+Container-Based  VirtualizationThis form of virtualization doesn’t abstract the 
+hardware but uses techniques within the Linux kernel to isolate access paths for
+ different resources. It carves out a logical boundary within the same operating 
+ system. As an example, we get a separate root file system, a separate process tree, 
+ a separate network subsystem, and so on.
+
+
+The Linux kernel is made up of several components and functionalities; the ones related to
+containers are as follows:
+Control groups (cgroups)
+Namespaces
+Security-Enhanced Linux (SELinux)
+Cgroups
+The cgroup functionality allows for limiting and prioritizing resources, such as CPUs,
+RAM, the network, the filesystem, and so on. The main goal is to not exceed the
+resources—to avoid wasting resources that might be needed for other processes.
+Namespaces
+The namespace functionality allows for partitioning of kernel resources, such that one set of
+processes sees one set of resources, while another set of processes sees a different set of
+resources. The feature works by having the same namespace for these resources in the
+various sets of processes, but having those names refer to distinct resources. Examples of
+resource names that can exist in multiple spaces (so that the named resources will be
+partitioned) are process IDs, hostnames, user IDs, filenames, and some names associated
+with network access and inter-process communication.
+When a Linux system boots; that is, only one namespace is created. Processes and resources
+will join the same namespace, until a different namespace is created, resources assigned to
+it, and processes join it.
+SELinux
+SELinux is a module of the Linux kernel that provides a mechanism to enforce the security
+of the system, with specific policies.
+Basically, SELinux can limit programs from accessing files and network resources. The idea
+is to limit the privileges of programs and daemons to a minimum, so that it can limit the
+risk of system halt.
+The preceding functionalities have been around for many years. Namespaces were first
+released in 2002, and cgroups in 2005, by Google (cgroups were first named process
+containers, and then cgroups). For example, SunSolaris 5.10, released at the beginning of
+2005, provided support for Solaris containers.
+Nowadays, Linux containers are the new buzzword, and some people think they are a
+new means of virtualization.
+Containerization uses resources directly, and does not need an emulator at all; the fewer
+resources, the more efficiency. Different applications can run on the same host: isolated at
+the kernel level and isolated by namespaces and cgroups. The kernel (that is, the OS) is
+shared by all containers, as shown in the following diagram:
+Containers
+When we talk about containers, we are indirectly referring to two main concepts—a
+container image and a running container image.
+A container image is the definition of the container, wherein all software stacks are
+installed as additional layers, as depicted by the following diagram:
+A container image is typically made up of multiple layers.
+The first layer is given by the base image, which provides the OS core functionalities, with
+all of the tools needed to get started. Teams often work by building their own layers on
+these base images. Users can also build on more advanced application images, which not
+only have an OS, but which also include language runtimes, debugging tools, and libraries,
+as shown in the following diagram:
+Base images are built from the same utilities and libraries that are included in an OS. A
+good base image provides a secure and stable platform on which to build applications. Red
+Hat provides base images for Red Hat Enterprise Linux. These images can be used like a
+normal OS. Users can customize them for their applications as necessary, installing
+packages and enabling services to start up just like a normal Red Hat Enterprise Linux
+Server.
+Containers provide isolation by taking advantage of kernel technologies, like cgroups,
+kernel namespaces, and SELinux, which have been battle-tested and used for years at
+Google and the US Department of Defense, in order to provide application isolation.
+Since containers use a shared kernel and container host, they reduce the amount of
+resources required for the container itself, and are more lightweight when compared to
+VMs. Therefore, containers provide an unmatched agility that is not feasible with VMs; for
+example, it only takes a few seconds to start a new container. Furthermore, containers
+support a more flexible model when it comes to CPU utilization and memory resources,
+and allow for resource burst modes, so that applications can consume more resources when
+required, within the defined boundaries.
+
+\subsection{Docker}
+Docker
+Docker is a piece of software that lets you create Linux containers with a specific image
+format, that is, the Docker image format.
+Docker brought Linux containers to a large scale, providing a toolkit for developers and
+administrators.
+Docker adds an application deployment
+engine on top of a virtualized container execution environment. It is
+designed to provide a lightweight and fast environment in which to run your
+code as well as an efficient workflow to get that code from your laptop to
+your test environment and then into production. Docker is incredibly
+simple. Indeed, you can get started with Docker on a minimal host running
+nothing but a compatible Linux kernel and a Docker binary. Docker’s
+mission is to provide
+\subsubsection{Docker components}
+Let’s look at the core components that compose the Docker Community
+Edition:
+The Docker client and server, also called the Docker Engine.
+Docker Images
+Registries
+Docker Containers
+\paragraph{Docker client and server}
+Docker is a client-server application. The Docker client talks to the Docker
+server or daemon, which, in turn, does all the work. You’ll also sometimes
+see the Docker daemon called the Docker Engine. Docker ships with a
+command line client binary, docker, as well as a full RESTful API to
+interact with the daemon: dockerd. You can run the Docker daemon and
+client on the same host or connect your local Docker client to a remote
+daemon running on another host. You can see Docker’s architecture
+depicted here:
+\paragraph{Docker images}
+Images are the building blocks of the Docker world. You launch your
+containers from images. Images are the “build” part of Docker’s life cycle.
+They have a layered format, using Union file systems, that are built step-bystep using a series of instructions. For example:
+Add a file.
+Run a command.
+Open a port.
+You can consider images to be the “source code” for your containers. They
+are highly portable and can be shared, stored, and updated. In the book,
+we’ll learn how to use existing images as well as build our own images.
+\paragraph{Registries}
+Docker stores the images you build in registries. There are two types of
+registries: public and private. Docker, Inc., operates the public registry for
+images, called the Docker Hub. You can create an account on the Docker
+Hub and use it to share and store your own images.
+The Docker Hub also contains, at last count, over 10,000 images that other
+people have built and shared. Want a Docker image for an Nginx web
+server, the Asterisk open source PABX system, or a MySQL database? All
+of these are available, along with a whole lot more.
+You can also store images that you want to keep private on the Docker Hub.
+These images might include source code or other proprietary information
+you want to keep secure or only share with other members of your team or
+organization.
+You can also run your own private registry, and we’ll show you how to do
+that in Chapter 4. This allows you to store images behind your firewall,
+which may be a requirement for some organizations.
+\paragraph{Containers}
+Docker helps you build and deploy containers inside of which you can
+package your applications and services. As we’ve just learned, containers
+are launched from images and can contain one or more running processes.
+You can think about images as the building or packing aspect of Docker and
+the containers as the running or execution aspect of Docker.
+A Docker container is:
+An image format.
+A set of standard operations.
+An execution environment.
+Docker borrows the concept of the standard shipping container, used to
+transport goods globally, as a model for its containers. But instead of
+shipping goods, Docker containers ship software.
+Each container contains a software image – its ‘cargo’ – and, like its
+physical counterpart, allows a set of operations to be performed. For
+example, it can be created, started, stopped, restarted, and destroyed.
+Like a shipping container, Docker doesn’t care about the contents of the
+container when performing these actions; for example, whether a container
+is a web server, a database, or an application server. Each container is
+loaded the same as any other container.
+Docker also doesn’t care where you ship your container: you can build on
+your laptop, upload to a registry, then download to a physical or virtual
+server, test, deploy to a cluster of a dozen Amazon EC2 hosts, and run. Like
+a normal shipping container, it is interchangeable, stackable, portable, and
+as generic as possible.
+With Docker, we can quickly build an application server, a message bus, a
+utility appliance, a CI test bed for an application, or one of a thousand other
+possible applications, services, and tools. It can build local, self-contained
+test environments or replicate complex application stacks for production or
+development purposes. The possible use cases are endless.
    \section{Casos de estudio}
 \subsection{Caso de estudio: Sniffing de la red para obtener credenciales}
 (HAY MAS, CON GRAFICOS EN)
