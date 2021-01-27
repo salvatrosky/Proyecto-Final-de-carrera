@@ -6,15 +6,270 @@ En éste capítulo se verá por qué los protocolos http y smtp son inseguros, i
 %----------------------------------------------------------------------
 
 \section{El problema de los protocolos http y smtp}
-\section{Conceptos básicos}
-\subsection{Snoofing}
-\subsection{Spoofing}
-\subsection{Arp attack}
+
+
+(Agregar una intro)
+
+\subsection{Establishing Authority}
+
+HTTP relies on the notion of an authoritative response: a response
+that has been determined by (or at the direction of) the authority
+identified within the target URI to be the most appropriate response
+for that request given the state of the target resource at the time
+of response message origination.  Providing a response from a
+non-authoritative source, such as a shared cache, is often useful to
+improve performance and availability, but only to the extent that the
+source can be trusted or the distrusted response can be safely used.
+
+Unfortunately, establishing authority can be difficult.  For example,
+phishing is an attack on the user's perception of authority, where
+that perception can be misled by presenting similar branding in
+hypertext, possibly aided by userinfo obfuscating the authority
+component (see Section 2.7.1).  User agents can reduce the impact of
+phishing attacks by enabling users to easily inspect a target URI
+prior to making an action, by prominently distinguishing (or
+rejecting) userinfo when present, and by not sending stored
+credentials and cookies when the referring document is from an
+unknown or untrusted source.
+
+When a registered name is used in the authority component, the "http"
+URI scheme (Section 2.7.1) relies on the user's local name resolution
+service to determine where it can find authoritative responses.  This
+means that any attack on a user's network host table, cached names,
+or name resolution libraries becomes an avenue for attack on
+establishing authority.  Likewise, the user's choice of server for
+Domain Name Service (DNS), and the hierarchy of servers from which it
+obtains resolution results, could impact the authenticity of address
+mappings; DNS Security Extensions are one way to
+improve authenticity.
+
+Furthermore, after an IP address is obtained, establishing authority
+for an "http" URI is vulnerable to attacks on Internet Protocol
+routing.
+
+
+\subsection{Risks of Intermediaries}
+
+By their very nature, HTTP intermediaries are men-in-the-middle and,
+thus, represent an opportunity for man-in-the-middle attacks.
+Compromise of the systems on which the intermediaries run can result
+in serious security and privacy problems.  Intermediaries might have
+access to security-related information, personal information about
+individual users and organizations, and proprietary information
+belonging to users and content providers.  A compromised
+intermediary, or an intermediary implemented or configured without
+regard to security and privacy considerations, might be used in the
+commission of a wide range of potential attacks.
+
+Intermediaries that contain a shared cache are especially vulnerable
+to cache poisoning attacks.
+Implementers need to consider the privacy and security implications
+of their design and coding decisions, and of the configuration
+options they provide to operators (especially the default
+configuration).
+
+Users need to be aware that intermediaries are no more trustworthy
+than the people who run them; HTTP itself cannot solve this problem.
+
+\subsection{Attacks via Protocol Element Length}
+
+Because HTTP uses mostly textual, character-delimited fields, parsers
+are often vulnerable to attacks based on sending very long (or very
+slow) streams of data, particularly where an implementation is
+expecting a protocol element with no predefined length.
+
+
+
+\subsection{Response Splitting}
+
+Response splitting (a.k.a, CRLF injection) is a common technique,
+used in various attacks on Web usage, that exploits the line-based
+nature of HTTP message framing and the ordered association of
+requests to responses on persistent connections [Klein].  This
+technique can be particularly damaging when the requests pass through
+a shared cache.
+
+Response splitting exploits a vulnerability in servers (usually
+within an application server) where an attacker can send encoded data
+within some parameter of the request that is later decoded and echoed
+within any of the response header fields of the response.  If the
+decoded data is crafted to look like the response has ended and a
+subsequent response has begun, the response has been split and the
+content within the apparent second response is controlled by the
+attacker.  The attacker can then make any other request on the same
+persistent connection and trick the recipients (including
+intermediaries) into believing that the second half of the split is
+an authoritative answer to the second request.
+
+For example, a parameter within the request-target might be read by
+an application server and reused within a redirect, resulting in the
+same parameter being echoed in the Location header field of the
+response.  If the parameter is decoded by the application and not
+properly encoded when placed in the response field, the attacker can
+send encoded CRLF octets and other content that will make the
+application's single response look like two or more responses.
+
+
+\subsection{Request Smuggling}
+
+Request smuggling ([Linhart]) is a technique that exploits
+differences in protocol parsing among various recipients to hide
+additional requests (which might otherwise be blocked or disabled by
+policy) within an apparently harmless request.  Like response
+splitting, request smuggling can lead to a variety of attacks on HTTP
+usage.
+
+
+\subsection{Message Integrity}
+
+HTTP does not define a specific mechanism for ensuring message
+integrity, instead relying on the error-detection ability of
+underlying transport protocols and the use of length or
+chunk-delimited framing to detect completeness.  Additional integrity
+mechanisms, such as hash functions or digital signatures applied to
+the content, can be selectively added to messages via extensible
+metadata header fields.  Historically, the lack of a single integrity
+mechanism has been justified by the informal nature of most HTTP
+communication.  However, the prevalence of HTTP as an information
+access mechanism has resulted in its increasing use within
+environments where verification of message integrity is crucial.
+
+User agents are encouraged to implement configurable means for
+detecting and reporting failures of message integrity such that those
+means can be enabled within environments for which integrity is
+necessary.  For example, a browser being used to view medical history
+or drug interaction information needs to indicate to the user when
+such information is detected by the protocol to be incomplete,
+expired, or corrupted during transfer.  Such mechanisms might be
+selectively enabled via user agent extensions or the presence of
+message integrity metadata in a response.  At a minimum, user agents
+ought to provide some indication that allows a user to distinguish
+between a complete and incomplete response message (Section 3.4) when
+such verification is desired.
+
+\subsection{Message Confidentiality}
+
+HTTP relies on underlying transport protocols to provide message
+confidentiality when that is desired.  HTTP has been specifically
+designed to be independent of the transport protocol, such that it
+can be used over many different forms of encrypted connection, with
+the selection of such transports being identified by the choice of
+URI scheme or within user agent configuration.
+
+\section{Network Security Attacks: basic concepts}
+There are mainly two types of network attacks – passive attack and active attack
+
+Passive: This type of attack happens when sensitive information is monitored and
+analyzed, possibly compromising the security of enterprises and their customers.
+In short, network intruder intercepts data traveling through the network.
+• Active: This type of attack happens when information is modified, altered or
+demolished entirely by a hacker. Here the interloper starts instructions to disturb
+the network’s regular process.
+
+So the motives behind passive attackers and active attackers are totally different.
+Whereas the motive of passive attackers is simply to steal sensitive information and
+to analyze the traffic to steal future messages, the motive of active attackers is to stop
+normal communication between two legitimate entities.
+\subsection{Passive Attacks}
+Passive attackers aremainly interested in stealing sensitive information. This happens
+without the knowledge of the victim. As such passive attacks are difficult to detect
+and thereby secure the network. The following are some of the passive attacks that
+are in existence [7].
+\begin{itemize}
+    \item Traffic Analysis: Attacker senses the communication path between the sender
+    and receiver.
+    \item Monitoring: Attacker can read the confidential data, but he cannot edit or modify
+    the data.
+    \item Eavesdropping: This type of attack occurs in the mobile ad-hoc network where
+    basically the attacker finds out some secret or confidential information from
+    communication.
+\end{itemize}
+
+\subsection{Active Attacks}
+The active attacks happen in such a manner so as to notify the victims that their
+systems have been compromised. As a result, the victim stops communication with
+the other party. Some of the active attacks are as follows [8].
+\begin{itemize}
+    \item Modification: Some alterations in the routing route is performed by the malicious
+    node. This results in causing the sender to send messages through the long route,
+    which causes communication delay. This is an attack on integrity as shown in
+    Fig. 2.
+    \item Wormhole: This attack is also called a tunneling attack. A packet is received
+    by an attacker at one point. He then tunnels it to another malicious node in the
+    network. This causes a beginner to assume that he found the shortest path in the
+    network as shown in Fig. 3.
+    \item Fabrication: A malicious node generates a false routing message that causes the
+    generation of incorrect information about the route between devices. This is an
+    attack on authenticity as shown in Fig. 4.    
+    \item Spoofing: A malicious node miss-present his identity so that the sender changes
+    his topology as shown in Fig. 5.
+    \item Denial of services: A malicious node sends a message to the node and consumes
+    the bandwidth of the network as given in Fig.
+    \item  Man-in-the-middle: Attack—Also called a hijacking attack, it is an attack where
+    the attacker secretly alters and relays the communications between two legitimate
+    parties without their knowledge. These parties in turn are unaware of the secret
+    hacker consider that they are doing direct communication with each other [13].
+    Figure 12 depicts this attack.
+\end{itemize}
+
 \section{Herramientas utilizadas}
     \subsection{Kali Linux}
+    BackTrack is one of the most famous Linux distribution systems, as can be proven by
+the number of downloads that reached more than four million as of BackTrack Linux
+4.0 pre final.
+
+Kali Linux Version 1.0 was released on March 12, 2013. Five days later, Version 1.0.1
+was released, which fixed the USB keyboard issue. In those five days, Kali has been
+downloaded more than 90,000 times.
+
+    Kali Linux is security-focused Linux distribution based on Debian. It's a rebranded
+    version of the famous Linux distribution known as Backtrack, which came with
+    a huge repository of open source hacking tools for network, wireless, and web
+    application penetration testing. Although Kali Linux contains most of the tools
+    from Backtrack, the main aim of Kali Linux is to make it portable so that it could
+    be installed on devices based on the ARM architectures such as tablets and
+    Chromebook, which makes the tools available at your disposal with much ease.
+
+    Using open source hacking tools comes with a major drawback: they contain a
+whole lot of dependencies when installed on Linux and they need to be installed in
+a predefined sequence. Moreover, authors of some tools have not released accurate
+documentation, which makes our life difficult.
+
+Kali Linux simplifies this process; it contains many tools preinstalled with all the
+dependencies and is in ready to use condition so that you can pay more attention
+for the actual attack and not on installing the tool. Updates for tools installed in Kali
+Linux are more frequently released, which helps you to keep the tools up to date. A
+non-commercial toolkit that has all the major hacking tools preinstalled to test realworld networks and applications is a dream of every ethical hacker and the authors
+of Kali Linux make every effort to make our life easy, which enables us to spend
+more time on finding the actual flaws rather than building a toolkit.
+
+(EXPLICAR COMO Y DONDE LO INSTALE)
+(DECIR QUE FUE EL SISTEMA OPERATIVO UTILIZADO QUE CONTIENEN LAS SIGUIENTES HERRAMIENTAS)
+\subsection{Wireshark}
+Wireshark is one of the most popular, free, and open source network protocol
+analyzers. Wireshark is preinstalled in Kali and ideal for network troubleshooting,
+analysis, and for this chapter, a perfect tool to monitor traffic from potential targets
+with the goal of capturing session tokens. Wireshark uses a GTK+ widget toolkit to
+implement its user interface and pcap to capture packets. It operates very similarly to
+a tcpdump command; however, acting as a graphical frontend with integrated sorting
+and filtering options.
+(HAY MAS, CON GRAFICOS EN)
+Joseph Muniz, Aamir Lakhani - Web Penetration Testing with Kali Linux-Packt Publishing (2013)
+
     \subsection{Ettrcap}
-    \subsection{Wireshark}
-\section{Casos de estudio}
+    Ettercap is a free and open source comprehensive suite for man-in-the-middle-based
+attacks.
+Ettercap can be used for computer network protocol analysis and security auditing,
+featuring sniffing live connections, content filtering, and support for active and passive
+dissection of multiple protocols. Ettercap works by putting the attacker's network
+interface into promiscuous mode and ARP for poisoning the victim machines.
+\section{Virtualización}
+\subsection{Máquinas virtuales}
+\subsection{Máquinas Docker}
+   \section{Casos de estudio}
 \subsection{Caso de estudio: Sniffing de la red para obtener credenciales}
+(HAY MAS, CON GRAFICOS EN)
+Joseph Muniz, Aamir Lakhani - Web Penetration Testing with Kali Linux-Packt Publishing (2013)
+Aca yo segui un tutorial, buscarlo
 \subsection{Caso de estudio: Sniffing de la red para obtener mails internos/externos}
 
