@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.20)  14 JAN 2021 20:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.20)  14 FEB 2021 18:45
 entering extended mode
 **"d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex"
 ("d:/Users/scatalfamo/OneDrive/Proyecto Final de Carrera/Documento/Main.tex"
@@ -99,6 +99,41 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \mathdisplay@stack=\toks20
 LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
+) (C:\Users\scatalfamo\AppData\Roaming\MiKTeX\tex/latex/mathtools\mathtools.sty
+Package: mathtools 2020/03/24 v1.24 mathematical typesetting tools
+ ("D:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks21
+) ("D:\Program Files\MiKTeX\tex/latex/tools\calc.sty"
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count199
+\calc@Bcount=\count266
+\calc@Adimen=\dimen149
+\calc@Bdimen=\dimen150
+\calc@Askip=\skip52
+\calc@Bskip=\skip53
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count267
+\calc@Cskip=\skip54
+) (C:\Users\scatalfamo\AppData\Roaming\MiKTeX\tex/latex/mathtools\mhsetup.sty
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
+\g_MT_multlinerow_int=\count268
+\l_MT_multwidth_dim=\dimen151
+\origjot=\skip55
+\l_MT_shortvdotswithinadjustabove_dim=\dimen152
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen153
+\l_MT_above_intertext_sep=\dimen154
+\l_MT_below_intertext_sep=\dimen155
+\l_MT_above_shortintertext_sep=\dimen156
+\l_MT_below_shortintertext_sep=\dimen157
+\xmathstrut@box=\box49
+\xmathstrut@dim=\dimen158
 ) ("D:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
  ("D:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty"
@@ -110,29 +145,26 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) ("D:\Program Files\MiKTeX\tex/latex/tools\longtable.sty"
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip52
-\LTright=\skip53
-\LTpre=\skip54
-\LTpost=\skip55
-\LTchunksize=\count199
-\LTcapwidth=\dimen149
-\LT@head=\box49
-\LT@firsthead=\box50
-\LT@foot=\box51
-\LT@lastfoot=\box52
-\LT@cols=\count266
-\LT@rows=\count267
-\c@LT@tables=\count268
-\c@LT@chunks=\count269
-\LT@p@ftn=\toks21
+\LTleft=\skip56
+\LTright=\skip57
+\LTpre=\skip58
+\LTpost=\skip59
+\LTchunksize=\count269
+\LTcapwidth=\dimen159
+\LT@head=\box50
+\LT@firsthead=\box51
+\LT@foot=\box52
+\LT@lastfoot=\box53
+\LT@cols=\count270
+\LT@rows=\count271
+\c@LT@tables=\count272
+\c@LT@chunks=\count273
+\LT@p@ftn=\toks22
 ) ("D:\Program Files\MiKTeX\tex/latex/base\makeidx.sty"
 Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
 ) ("D:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty"
 Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
- ("D:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty"
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks22
-) ("D:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty"
+ ("D:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty"
 Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
  ("D:\Program Files\MiKTeX\tex/latex/graphics\trig.sty"
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -143,20 +175,20 @@ Package graphics Info: Driver file: dvips.def on input line 105.
  ("D:\Program Files\MiKTeX\tex/latex/graphics-def\dvips.def"
 File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
 ))
-\Gin@req@height=\dimen150
-\Gin@req@width=\dimen151
+\Gin@req@height=\dimen160
+\Gin@req@width=\dimen161
 ) (setbmp.tex)
-LaTeX Info: Redefining \. on input line 22.
-LaTeX Info: Redefining \% on input line 22.
+LaTeX Info: Redefining \. on input line 23.
+LaTeX Info: Redefining \% on input line 23.
  (commands.tex
-\c@defx=\count270
-\c@lemx=\count271
-\c@corox=\count272
-\c@algx=\count273
-\c@ejemx=\count274
-\c@propx=\count275
-\c@teox=\count276
-\c@obsx=\count277
+\c@defx=\count274
+\c@lemx=\count275
+\c@corox=\count276
+\c@algx=\count277
+\c@ejemx=\count278
+\c@propx=\count279
+\c@teox=\count280
+\c@obsx=\count281
 )
 \@indexfile=\write3
 \openout3 = `Main.idx'.
@@ -165,8 +197,8 @@ LaTeX Info: Redefining \% on input line 22.
 Writing index file Main.idx
 ("D:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def"
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count278
-\l__pdf_internal_box=\box53
+\l__kernel_color_stack_int=\count282
+\l__pdf_internal_box=\box54
 ) ("d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.aux"
 LaTeX Info: Redefining \. on input line 9.
 LaTeX Info: Redefining \% on input line 9.
@@ -179,22 +211,22 @@ LaTeX Warning: Label `capImp' multiply defined.
 )
 \openout1 = `Main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Info: Redefining \. on input line 47.
-LaTeX Info: Redefining \% on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Info: Redefining \. on input line 48.
+LaTeX Info: Redefining \% on input line 48.
  (titulo.tex
 File: uni.bmp Graphic file (type bmp)
  <uni.bmp> [1
@@ -215,9 +247,9 @@ File: uni.bmp Graphic file (type bmp)
 
 Non-PDF special ignored!
 <special> em: graph uni.bmp,85.03915bp,85.03915bp
-]) (resumen.tex) [1
+]) (resumen.tex [2
 
-] [2
+]) [3] [4
 
 ] ("d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.toc"
 LaTeX Info: Redefining \. on input line 1.
@@ -231,166 +263,308 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
  ("D:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [3] [4])
+) [5] [6] [7]
+Overfull \hbox (3.20444pt too wide) in paragraph at lines 112--112
+ [][] []\OT1/cmr/m/n/12 Deploy a DNS TXT re-cord pro-vi-ded by Let's 
+ []
+
+
+Overfull \hbox (7.72363pt too wide) in paragraph at lines 112--112
+ \OT1/cmr/m/n/12 Encrypt cert-bot af-ter run-ning the abo-ve com- 
+ []
+
+[8])
 \tf@toc=\write4
 \openout4 = `Main.toc'.
 
- [5] [6
+ [9] [10
 
 ]
 Cap\'{\i }tulo 1.
 (introduccion.tex
-Underfull \hbox (badness 10000) in paragraph at lines 27--34
+Underfull \hbox (badness 10000) in paragraph at lines 33--38
 
  []
 
 File: uni.bmp Graphic file (type bmp)
-<uni.bmp>) [1
+<uni.bmp> [1
 
-]
-LaTeX Info: Redefining \. on input line 84.
-LaTeX Info: Redefining \% on input line 84.
+])
+LaTeX Info: Redefining \. on input line 85.
+LaTeX Info: Redefining \% on input line 85.
  [2
 Non-PDF special ignored!
 <special> em: graph uni.bmp,85.03915bp,85.03915bp
 ]
 Cap\'{\i }tulo 2.
-(traficoRedInterna.tex (http.tex [1
+(traficoRedInterna.tex (http.tex [3
 
 ]
-Overfull \hbox (52.79118pt too wide) in paragraph at lines 43--46
+Overfull \hbox (52.79118pt too wide) in paragraph at lines 44--47
 []\OT1/cmr/m/n/12 request ->UserAgent =======================================
  []
 
-LaTeX Info: Redefining \. on input line 62.
-LaTeX Info: Redefining \% on input line 62.
-[2]
-Overfull \hbox (2.37213pt too wide) in paragraph at lines 69--73
+LaTeX Info: Redefining \. on input line 63.
+LaTeX Info: Redefining \% on input line 63.
+[4]
+Overfull \hbox (2.37213pt too wide) in paragraph at lines 70--74
 []\OT1/cmr/m/n/12 GET /he-llo.txt HTTP/1.1 User-Agent: curl/7.16.3 lib-curl/7.16.3 OpenSSL/0.9.7l
  []
 
-LaTeX Info: Redefining \. on input line 111.
-LaTeX Info: Redefining \% on input line 111.
-[3]
-Underfull \vbox (badness 2635) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 163.
-LaTeX Info: Redefining \% on input line 163.
- [4]
-LaTeX Info: Redefining \. on input line 215.
-LaTeX Info: Redefining \% on input line 215.
- [5]
-LaTeX Info: Redefining \. on input line 262.
-LaTeX Info: Redefining \% on input line 262.
+LaTeX Info: Redefining \. on input line 112.
+LaTeX Info: Redefining \% on input line 112.
+[5]
+LaTeX Info: Redefining \. on input line 159.
+LaTeX Info: Redefining \% on input line 159.
  [6]
-LaTeX Info: Redefining \. on input line 304.
-LaTeX Info: Redefining \% on input line 304.
+LaTeX Info: Redefining \. on input line 204.
+LaTeX Info: Redefining \% on input line 204.
  [7]
-Overfull \hbox (6.05446pt too wide) in paragraph at lines 341--349
+LaTeX Info: Redefining \. on input line 255.
+LaTeX Info: Redefining \% on input line 255.
+ [8]
+LaTeX Info: Redefining \. on input line 299.
+LaTeX Info: Redefining \% on input line 299.
+ [9]
+Overfull \hbox (6.05446pt too wide) in paragraph at lines 342--350
  \OT1/cmr/bx/n/12 2.2.3.3.2. Content-Length [] \OT1/cmr/m/n/12 When a mes-sa-ge does not ha-ve a Transfer-Encoding
  []
 
-LaTeX Info: Redefining \. on input line 358.
-LaTeX Info: Redefining \% on input line 358.
-[8]
+LaTeX Info: Redefining \. on input line 353.
+LaTeX Info: Redefining \% on input line 353.
+[10]
 LaTeX Info: Redefining \. on input line 405.
 LaTeX Info: Redefining \% on input line 405.
- [9]
-Overfull \hbox (1.19173pt too wide) in paragraph at lines 420--425
+ [11]
+Overfull \hbox (1.19173pt too wide) in paragraph at lines 421--426
 \OT1/cmr/m/n/12 close-delimiting fea-tu-re exists pri-ma-rily for back-wards com-pa-ti-bi-lity with HTTP/1.0. 
  []
 
-LaTeX Info: Redefining \. on input line 454.
-LaTeX Info: Redefining \% on input line 454.
-[10]
-Overfull \hbox (12.66934pt too wide) in paragraph at lines 491--494
-[]\OT1/cmr/m/n/12 Furthermore, af-ter an IP ad-dress is ob-tai-ned, es-ta-blishing autho-rity for an "http[]URI
- []
-
-LaTeX Info: Redefining \. on input line 508.
-LaTeX Info: Redefining \% on input line 508.
-[11]
-LaTeX Info: Redefining \. on input line 548.
-LaTeX Info: Redefining \% on input line 548.
- [12]
-LaTeX Info: Redefining \. on input line 594.
-LaTeX Info: Redefining \% on input line 594.
+LaTeX Info: Redefining \. on input line 455.
+LaTeX Info: Redefining \% on input line 455.
+[12]
+LaTeX Info: Redefining \. on input line 495.
+LaTeX Info: Redefining \% on input line 495.
  [13]
-LaTeX Info: Redefining \. on input line 632.
-LaTeX Info: Redefining \% on input line 632.
+LaTeX Info: Redefining \. on input line 557.
+LaTeX Info: Redefining \% on input line 557.
  [14]
-LaTeX Info: Redefining \. on input line 692.
-LaTeX Info: Redefining \% on input line 692.
- [15]
-Overfull \hbox (15.62183pt too wide) in paragraph at lines 722--730
+Overfull \hbox (15.62183pt too wide) in paragraph at lines 574--582
 \OT1/cmr/m/n/12 for Web traf-fic. For exam-ple, a CON-NECT to a request-target of .[]ample.com:25"would
  []
 
-LaTeX Info: Redefining \. on input line 747.
-LaTeX Info: Redefining \% on input line 747.
-[16]
-LaTeX Info: Redefining \. on input line 791.
-LaTeX Info: Redefining \% on input line 791.
- [17]
-Underfull \vbox (badness 10000) detected at line 852
+LaTeX Info: Redefining \. on input line 611.
+LaTeX Info: Redefining \% on input line 611.
+[15]
+LaTeX Info: Redefining \. on input line 650.
+LaTeX Info: Redefining \% on input line 650.
+ [16]
+Underfull \vbox (badness 10000) detected at line 704
  []
 
-LaTeX Info: Redefining \. on input line 872.
-LaTeX Info: Redefining \% on input line 872.
-[18]
-LaTeX Info: Redefining \. on input line 875.
-LaTeX Info: Redefining \% on input line 875.
+LaTeX Info: Redefining \. on input line 724.
+LaTeX Info: Redefining \% on input line 724.
+[17]
+LaTeX Info: Redefining \. on input line 727.
+LaTeX Info: Redefining \% on input line 727.
+ [18]
+LaTeX Info: Redefining \. on input line 782.
+LaTeX Info: Redefining \% on input line 782.
  [19]
-LaTeX Info: Redefining \. on input line 916.
-LaTeX Info: Redefining \% on input line 916.
- [20])
-Overfull \hbox (11.26245pt too wide) in paragraph at lines 7--7
+LaTeX Info: Redefining \. on input line 833.
+LaTeX Info: Redefining \% on input line 833.
+ [20]
+LaTeX Info: Redefining \. on input line 869.
+LaTeX Info: Redefining \% on input line 869.
+ [21]
+LaTeX Info: Redefining \. on input line 919.
+LaTeX Info: Redefining \% on input line 919.
+ [22]
+Overfull \hbox (9.76291pt too wide) in paragraph at lines 945--965
+ \OT1/cmr/bx/n/12 2.2.7.2.6. Chan-ge-CipherS-pec[] \OT1/cmr/m/n/12 Af-ter the client sends key in-for-ma-tion in a Client-
+ []
+
+LaTeX Info: Redefining \. on input line 965.
+LaTeX Info: Redefining \% on input line 965.
+[23]
+LaTeX Info: Redefining \. on input line 1000.
+LaTeX Info: Redefining \% on input line 1000.
+ [24]
+LaTeX Info: Redefining \. on input line 1039.
+LaTeX Info: Redefining \% on input line 1039.
+ [25]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 1078.
+LaTeX Info: Redefining \% on input line 1078.
+ [26]
+Overfull \hbox (3.97478pt too wide) in paragraph at lines 1079--1082
+ \OT1/cmr/bx/n/12 2.2.7.4.2. Multi-Domain[] \OT1/cmr/m/n/12 This SSL ty-pe is a jack-of-all-trades cer-ti-fi-ca-te. Multi-
+ []
+
+LaTeX Info: Redefining \. on input line 1109.
+LaTeX Info: Redefining \% on input line 1109.
+[27]
+Overfull \hbox (83.41516pt too wide) in paragraph at lines 1143--1147
+\OT1/cmr/m/n/12 AC-ME client, and your AC-ME client puts a fi-le on your web ser-ver at http://YOUR[]DOMAIN/.well-
+ []
+
+LaTeX Info: Redefining \. on input line 1153.
+LaTeX Info: Redefining \% on input line 1153.
+[28]
+LaTeX Info: Redefining \. on input line 1209.
+LaTeX Info: Redefining \% on input line 1209.
+ [29])
+Overfull \hbox (11.26245pt too wide) in paragraph at lines 10--10
 []\OT1/cmr/bx/n/17.28 Protocolos aso-cia-dos al Co-rreo electroni-co (ex-
  []
 
 )
-Underfull \vbox (badness 1082) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 88.
-LaTeX Info: Redefining \% on input line 88.
- [21]
-LaTeX Info: Redefining \. on input line 88.
-LaTeX Info: Redefining \% on input line 88.
- [22]
+LaTeX Info: Redefining \. on input line 89.
+LaTeX Info: Redefining \% on input line 89.
+ [30]
 Cap\'{\i }tulo 3.
-(desc.tex)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1
+(desc.tex [31
 
 ]
-LaTeX Info: Redefining \. on input line 92.
-LaTeX Info: Redefining \% on input line 92.
- [2]
-Cap\'{\i }tulo 4.
-(implemen.tex
-Overfull \hbox (61.94246pt too wide) in paragraph at lines 8--8
-[] \OT1/cmr/bx/n/17.28 (Sec-cion va pa-ra He-rra-mien-tas uti-li-za-das)Conceptos
+Overfull \hbox (12.66934pt too wide) in paragraph at lines 46--49
+[]\OT1/cmr/m/n/12 Furthermore, af-ter an IP ad-dress is ob-tai-ned, es-ta-blishing autho-rity for an "http[]URI
  []
 
-)
+LaTeX Info: Redefining \. on input line 80.
+LaTeX Info: Redefining \% on input line 80.
+[32]
+LaTeX Info: Redefining \. on input line 136.
+LaTeX Info: Redefining \% on input line 136.
+ [33]
+LaTeX Info: Redefining \. on input line 168.
+LaTeX Info: Redefining \% on input line 168.
+ [34]
+LaTeX Info: Redefining \. on input line 197.
+LaTeX Info: Redefining \% on input line 197.
+ [35]
+LaTeX Info: Redefining \. on input line 232.
+LaTeX Info: Redefining \% on input line 232.
+ [36]
+Underfull \vbox (badness 8113) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 266.
+LaTeX Info: Redefining \% on input line 266.
+ [37]
+LaTeX Info: Redefining \. on input line 292.
+LaTeX Info: Redefining \% on input line 292.
+ [38]
+LaTeX Info: Redefining \. on input line 388.
+LaTeX Info: Redefining \% on input line 388.
+ [39]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [1
+LaTeX Info: Redefining \. on input line 388.
+LaTeX Info: Redefining \% on input line 388.
+ [40]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 416.
+LaTeX Info: Redefining \% on input line 416.
+ [41]
+LaTeX Info: Redefining \. on input line 451.
+LaTeX Info: Redefining \% on input line 451.
+ [42]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 486.
+LaTeX Info: Redefining \% on input line 486.
+ [43]
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 509.
+ ("D:\Program Files\MiKTeX\tex/latex/base\ulasy.fd"
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Info: Redefining \. on input line 520.
+LaTeX Info: Redefining \% on input line 520.
+ [44]
+LaTeX Info: Redefining \. on input line 550.
+LaTeX Info: Redefining \% on input line 550.
+ [45])
+LaTeX Info: Redefining \. on input line 93.
+LaTeX Info: Redefining \% on input line 93.
+ [46]
+Cap\'{\i }tulo 4.
+(implemen.tex [47
 
 ]
-Overfull \vbox (171.94318pt too high) has occurred while \output is active []
+LaTeX Info: Redefining \. on input line 69.
+LaTeX Info: Redefining \% on input line 69.
+ [48]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 102.
-LaTeX Info: Redefining \% on input line 102.
- [2]
+LaTeX Info: Redefining \. on input line 108.
+LaTeX Info: Redefining \% on input line 108.
+
+Overfull \hbox (3.91687pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 4.1.  MEJORANDO LA SEGURIDAD EN LA NAVEGACI[]ON - ALTERNATIVAS \OT1/cmr/m/n/12 49
+ []
+
+[49]
+Overfull \hbox (4.93211pt too wide) in alignment at lines 110--123
+ [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 123
+ []
+
+
+Overfull \hbox (30.15889pt too wide) in paragraph at lines 143--143
+[]\OT1/cmtt/m/n/12 -d *.salvadorcatalfamo.com --manual --preferred-challenges dns-01 certonly[] 
+ []
+
+
+Overfull \hbox (70.76372pt too wide) in alignment at lines 147--152
+ [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 152
+ []
+
+
+Overfull \vbox (19.526pt too high) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 152.
+LaTeX Info: Redefining \% on input line 152.
+ [50]
+Overfull \hbox (178.35896pt too wide) in paragraph at lines 180--180
+[]      \OT1/cmtt/m/n/12 server_name *.example.com;  ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;[] 
+ []
+
+
+Overfull \hbox (17.80888pt too wide) in paragraph at lines 180--180
+[]      \OT1/cmtt/m/n/12 ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;[] 
+ []
+
+
+Overfull \hbox (67.20891pt too wide) in paragraph at lines 180--180
+[]      \OT1/cmtt/m/n/12 ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;  root /var/www/example.com;[] 
+ []
+
+LaTeX Info: Redefining \. on input line 210.
+LaTeX Info: Redefining \% on input line 210.
+
+Overfull \hbox (3.91687pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 4.1.  MEJORANDO LA SEGURIDAD EN LA NAVEGACI[]ON - ALTERNATIVAS \OT1/cmr/m/n/12 51
+ []
+
+[51])
+LaTeX Info: Redefining \. on input line 103.
+LaTeX Info: Redefining \% on input line 103.
+ [52]
 Cap\'{\i }tulo 5.
-(conclusiones.tex) [3
+(conclusiones.tex) [53
 
 ]
-LaTeX Info: Redefining \. on input line 110.
-LaTeX Info: Redefining \% on input line 110.
- [4
+LaTeX Info: Redefining \. on input line 111.
+LaTeX Info: Redefining \% on input line 111.
+ [54
 
 ]
 Ap\'{e}ndice A.
@@ -402,12 +576,12 @@ Underfull \vbox (badness 10000) detected at line 11
 Underfull \vbox (badness 10000) detected at line 19
  []
 
-) (Main.bbl [5]
+) (Main.bbl [55]
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [6
+ [56
 
-]) [7] ("d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.aux"
+]) [57] ("d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.aux"
 LaTeX Info: Redefining \. on input line 9.
 LaTeX Info: Redefining \% on input line 9.
 LaTeX Info: Redefining \. on input line 10.
@@ -418,17 +592,17 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3422 strings out of 479799
- 45895 string characters out of 2879528
- 346443 words of memory out of 3000000
- 20348 multiletter control sequences out of 15000+200000
- 546288 words of font info for 71 fonts, out of 3000000 for 9000
+ 3997 strings out of 479799
+ 56258 string characters out of 2879528
+ 357656 words of memory out of 3000000
+ 20910 multiletter control sequences out of 15000+200000
+ 545032 words of font info for 65 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,8n,72p,647b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
-<D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.pdf" (42 pages, 237476 bytes).
+ 66i,6n,72p,647b,445s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\scatalfamo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><D:/Program Files/MiKTeX/fonts/type1/public/amsfonts/latxfont/lasy10.pfb>
+Output written on "d:/Users\scatalfamo\OneDrive\Proyecto Final de Carrera\Documento\build\Main.pdf" (69 pages, 293055 bytes).
 PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
+ 281 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
