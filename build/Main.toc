@@ -2,72 +2,20 @@
 \babel@toc {spanish}{}
 \contentsline {chapter}{\numberline {1}Introducci\'on}{1}{}%
 \contentsline {section}{\numberline {1.1}Objetivos}{1}{}%
-\contentsline {section}{\numberline {1.2}Plan de tesis y principales contribuciones}{2}{}%
+\contentsline {section}{\numberline {1.2}Plan de tesis y principales contribuciones}{1}{}%
 \contentsline {section}{\numberline {1.3}Trabajos previos relacionados}{2}{}%
 \contentsline {chapter}{\numberline {2}(Ajustar) ¿Qué circula por una red interna? }{3}{}%
 \contentsline {section}{\numberline {2.1}Introducción}{3}{}%
 \contentsline {section}{\numberline {2.2}Protocolos asociados a la web}{3}{}%
 \contentsline {subsection}{\numberline {2.2.1}¿Que es el protocolo HTTP?}{3}{}%
 \contentsline {subsection}{\numberline {2.2.2}Arquitectura}{4}{}%
-\contentsline {subsubsection}{\numberline {2.2.2.1}Client/Server Messaging}{4}{}%
-\contentsline {subsubsection}{\numberline {2.2.2.2}Ejemplo}{5}{}%
-\contentsline {subsection}{\numberline {2.2.3}Formato del mensaje (Mejorar intro)}{5}{}%
-\contentsline {subsubsection}{\numberline {2.2.3.1}Start Line}{6}{}%
-\contentsline {paragraph}{\numberline {2.2.3.1.1}Request Line}{6}{}%
-\contentsline {paragraph}{\numberline {2.2.3.1.2}Status Line}{6}{}%
-\contentsline {subsubsection}{\numberline {2.2.3.2}Header Fields}{7}{}%
-\contentsline {paragraph}{\numberline {2.2.3.2.1}Field Extensibility}{7}{}%
-\contentsline {paragraph}{\numberline {2.2.3.2.2}Field Order}{7}{}%
-\contentsline {paragraph}{\numberline {2.2.3.2.3}Whitespace}{7}{}%
-\contentsline {paragraph}{\numberline {2.2.3.2.4}Field Parsing}{8}{}%
-\contentsline {paragraph}{\numberline {2.2.3.2.5}Field Limits }{8}{}%
-\contentsline {paragraph}{\numberline {2.2.3.2.6}Field Value Components}{8}{}%
-\contentsline {subsubsection}{\numberline {2.2.3.3}Message Body }{9}{}%
-\contentsline {paragraph}{\numberline {2.2.3.3.1}Transfer-Encoding }{10}{}%
-\contentsline {paragraph}{\numberline {2.2.3.3.2}Content-Length }{10}{}%
-\contentsline {paragraph}{\numberline {2.2.3.3.3}Message Body Length }{11}{}%
+\contentsline {subsection}{\numberline {2.2.3}Formato del mensaje (Mejorar intro)}{6}{}%
 \contentsline {subsection}{\numberline {2.2.4}Métodos del protocolo HTTP}{13}{}%
 \contentsline {subsection}{\numberline {2.2.5}Response Status Codes}{16}{}%
 \contentsline {subsection}{\numberline {2.2.6}Overview of Status Codes}{17}{}%
-\contentsline {subsubsection}{\numberline {2.2.6.1}Informational 1xx}{19}{}%
-\contentsline {subsubsection}{\numberline {2.2.6.2}Successful 2xx}{19}{}%
-\contentsline {subsubsection}{\numberline {2.2.6.3}Redirection 3xx}{19}{}%
-\contentsline {subsubsection}{\numberline {2.2.6.4}Client Error 4xx}{20}{}%
-\contentsline {subsubsection}{\numberline {2.2.6.5}Server Error 5xx}{20}{}%
 \contentsline {subsection}{\numberline {2.2.7}HTTPS con SSL}{20}{}%
-\contentsline {subsubsection}{\numberline {2.2.7.1}SSL Roles}{20}{}%
-\contentsline {subsubsection}{\numberline {2.2.7.2}SSL Messages}{21}{}%
-\contentsline {paragraph}{\numberline {2.2.7.2.1}ClientHello}{21}{}%
-\contentsline {paragraph}{\numberline {2.2.7.2.2}ServerHello}{22}{}%
-\contentsline {paragraph}{\numberline {2.2.7.2.3}ServerKeyExchange}{22}{}%
-\contentsline {paragraph}{\numberline {2.2.7.2.4}ServerHelloDone}{23}{}%
-\contentsline {paragraph}{\numberline {2.2.7.2.5}ClientKeyExchange}{23}{}%
-\contentsline {paragraph}{\numberline {2.2.7.2.6}ChangeCipherSpec}{23}{}%
-\contentsline {paragraph}{\numberline {2.2.7.2.7}Finished}{24}{}%
-\contentsline {paragraph}{\numberline {2.2.7.2.8}Ending Secure Communications}{25}{}%
-\contentsline {subsubsection}{\numberline {2.2.7.3}Authenticating the Server’s Identity}{25}{}%
-\contentsline {paragraph}{\numberline {2.2.7.3.1}Certificate}{26}{}%
-\contentsline {paragraph}{\numberline {2.2.7.3.2}ClientKeyExchange}{26}{}%
-\contentsline {subsubsection}{\numberline {2.2.7.4}Certificate Functionality}{27}{}%
-\contentsline {paragraph}{\numberline {2.2.7.4.1}Single Domain}{27}{}%
-\contentsline {paragraph}{\numberline {2.2.7.4.2}Multi-Domain}{27}{}%
-\contentsline {paragraph}{\numberline {2.2.7.4.3}Wildcard}{27}{}%
-\contentsline {paragraph}{\numberline {2.2.7.4.4}Multi-Domain Wildcard}{27}{}%
-\contentsline {subsubsection}{\numberline {2.2.7.5}Validation Level}{27}{}%
-\contentsline {paragraph}{\numberline {2.2.7.5.1}Domain Validation (DV)}{27}{}%
-\contentsline {paragraph}{\numberline {2.2.7.5.2}Organization Validation (OV)}{27}{}%
-\contentsline {paragraph}{\numberline {2.2.7.5.3}Extended Validation (EV)}{28}{}%
-\contentsline {subsubsection}{\numberline {2.2.7.6}Identifier Validation Challenges}{28}{}%
-\contentsline {paragraph}{\numberline {2.2.7.6.1}HTTP Challenge}{28}{}%
-\contentsline {paragraph}{\numberline {2.2.7.6.2}DNS Challenge}{29}{}%
-\contentsline {section}{\numberline {2.3}Protocolos asociados al Correo electrónico (explicacion de todo lo que hace un servidor de correo, y sus protocolos)}{30}{}%
-\contentsline {subsection}{\numberline {2.3.1}¿Que es el protocolo SMTP?}{30}{}%
-\contentsline {subsection}{\numberline {2.3.2}Recorrido completo de un mail}{30}{}%
-\contentsline {subsection}{\numberline {2.3.3}SMTP con SSL}{30}{}%
-\contentsline {section}{\numberline {2.4}Protocolos asociados a la consulta de un sitio (DNS)}{30}{}%
-\contentsline {subsection}{\numberline {2.4.1}¿Que es el protocolo DNS?}{30}{}%
-\contentsline {subsection}{\numberline {2.4.2}Recorrido completo de un mail}{30}{}%
-\contentsline {subsection}{\numberline {2.4.3}SMTP con SSL}{30}{}%
+\contentsline {section}{\numberline {2.3}Protocolos asociados a la consulta de un sitio (DNS)}{30}{}%
+\contentsline {subsection}{\numberline {2.3.1}¿Que es el protocolo DNS?}{30}{}%
 \contentsline {chapter}{\numberline {3}(Nuevo) Herramientas a Utilizar}{31}{}%
 \contentsline {section}{\numberline {3.1}El problema de los protocolos http y smtp}{31}{}%
 \contentsline {subsection}{\numberline {3.1.1}Establishing Authority}{31}{}%
@@ -98,7 +46,6 @@
 \contentsline {subsubsection}{\numberline {3.5.1.1}Diagrama de explicacion}{44}{}%
 \contentsline {subsubsection}{\numberline {3.5.1.2}Preparando Ettercap para el ataque ARP Poisoning}{44}{}%
 \contentsline {subsubsection}{\numberline {3.5.1.3}Nuestro Ettercap ya está listo. Ya podemos empezar con el ataque ARP Poisoning}{45}{}%
-\contentsline {subsection}{\numberline {3.5.2}Caso de estudio: Sniffing de la red para obtener mails internos/externos}{46}{}%
 \contentsline {chapter}{\numberline {4}Casos de estudio (Explotaciones y soluciones)}{47}{}%
 \contentsline {section}{\numberline {4.1}Mejorando la seguridad en la navegación - Alternativas}{47}{}%
 \contentsline {subsection}{\numberline {4.1.1}Self-signed Certificates}{47}{}%

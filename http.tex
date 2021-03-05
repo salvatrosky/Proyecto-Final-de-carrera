@@ -1,5 +1,6 @@
 \subsection{¿Que es el protocolo HTTP?}
-The Hypertext Transfer Protocol (HTTP) is a stateless application-level request/response protocol that uses extensible semantics and
+The Hypertext Transfer Protocol (HTTP) is a stateless application-level 
+request/response protocol that uses extensible semantics and
    self-descriptive message payloads for flexible interaction with
    network-based hypertext information systems.
    HTTP is a generic interface protocol for information systems.  It is
@@ -27,7 +28,9 @@ HTTP was created for the World Wide Web (WWW) architecture and has
 evolved over time to support the scalability needs of a worldwide
 hypertext system.  Much of that architecture is reflected in the
 terminology and syntax productions used to define HTTP.
-\subsubsection{Client/Server Messaging}
+
+\subsubsection*{Client/Server Messaging}
+
 HTTP is a stateless request/response protocol that operates by
 exchanging messages across a reliable transport- or
 session-layer "connection".  An HTTP "client" is a
@@ -41,9 +44,17 @@ case, this might be accomplished via a single bidirectional
 connection (===) between the user agent (UA) and the origin
 server (O).
 
-         request   ->
-    UserAgent ======================================= Origin server
-                                <   response
+
+
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics{2.1.png}
+      \end{center}
+      \caption{Simple comunication method}
+   \end{figure}
+\end{center}
+
 
 A client sends an HTTP request to a server in the form of a request
 message, beginning with a request-line that includes a method, URI,
@@ -60,7 +71,7 @@ A server responds to a client's request by sending one or more HTTP
    (Section 3.2), an empty line to indicate the end of the header
    section, and finally a message body containing the payload body (if
    any, Section 3.3).
-\subsubsection{Ejemplo}
+\subsubsection*{Ejemplo}
 The following example illustrates a typical message exchange for a
 GET request (Section 4.3.1 of [RFC7231]) on the URI
 "http://www.example.com/hello.txt":
@@ -111,7 +122,7 @@ The normal procedure for parsing an HTTP message is to read the
    equal to the message body length is read or the connection is closed.
 
  
-\subsubsection{Start Line}
+\subsubsection*{Start Line}
 An HTTP message can be either a request from client to server or a
    response from server to client.  Syntactically, the two types of
    message differ only in the start-line, which is either a request-line
@@ -124,7 +135,7 @@ An HTTP message can be either a request from client to server or a
    clients are implemented to only expect a response.
 
      
-\paragraph{Request Line}
+   \paragraph*{Request Line}
 A request-line begins with a method token, followed by a single space
    (SP), the request-target, another single space (SP), the protocol
    version, and ends with CRLF.
@@ -141,7 +152,7 @@ A request-line begins with a method token, followed by a single space
 
 
   
-\paragraph{Status Line}
+\paragraph*{Status Line}
 The first line of a response message is the status-line, consisting
    of the protocol version, a space (SP), the status code, another
    space, a possibly empty textual phrase describing the status code,
@@ -156,7 +167,7 @@ The first line of a response message is the status-line, consisting
   
 
 
-\subsubsection {Header Fields}
+\subsubsection* {Header Fields}
 Each header field consists of a case-insensitive field name followed
 by a colon (":"), optional leading whitespace, the field value, and
 optional trailing whitespace.
@@ -167,7 +178,7 @@ header-field   = field-name ":" OWS field-value OWS
 The field-name token labels the corresponding field-value as having
 the semantics defined by that header field.  
 
-\paragraph{Field Extensibility}
+\paragraph*{Field Extensibility}
 Header fields are fully extensible: there is no limit on the
 introduction of new field names, each presumably defining new
 semantics, nor on the number of header fields used in a given
@@ -180,7 +191,7 @@ by a recipient, they might override or enhance the interpretation of
 previously defined header fields, define preconditions on request
 evaluation, or refine the meaning of responses.
 
-\paragraph{Field Order}
+\paragraph*{Field Order}
 The order in which header fields with differing field names are
    received is not significant.  However, it is good practice to send
    header fields that contain control data first, such as Host on
@@ -188,7 +199,7 @@ The order in which header fields with differing field names are
    when not to handle a message as early as possible. 
 
 
-\paragraph{Whitespace}
+\paragraph*{Whitespace}
 This specification uses three rules to denote the use of linear
 whitespace: OWS (optional whitespace), RWS (required whitespace), and
 BWS ("bad" whitespace).
@@ -201,7 +212,7 @@ required to separate field tokens.
 The BWS rule is used where the grammar allows optional whitespace
 only for historical reasons. 
 
-\paragraph{Field Parsing}
+\paragraph*{Field Parsing}
 Messages are parsed using a generic algorithm, independent of the
 individual header field names.  The contents within a given field
 value are not parsed until a later stage of message interpretation
@@ -219,7 +230,7 @@ the past, differences in the handling of such whitespace have led to
 security vulnerabilities in request routing and response handling. 
 
 
-\paragraph{Field Limits }
+\paragraph*{Field Limits }
 HTTP does not place a predefined limit on the length of each header
 field or on the length of the header section as a whole.  Various 
 ad hoc limitations on individual header
@@ -227,7 +238,7 @@ field length are found in practice, often depending on the specific
 field semantics.
 
 
-\paragraph{Field Value Components}
+\paragraph*{Field Value Components}
 (no entiendo, tal vez se puede sacar)
 Most HTTP header field values are defined using common syntax
 components (token, quoted-string, and comment) separated by
@@ -268,7 +279,7 @@ where necessary to quote DQUOTE and backslash octets occurring within
 that string.  A sender SHOULD NOT generate a quoted-pair in a comment
 except where necessary to quote parentheses ["(" and ")"] and
 backslash octets occurring within that comment.
-\subsubsection{Message Body }
+\subsubsection*{Message Body }
 The message body (if any) of an HTTP message is used to carry the
 payload body of that request or response.  The message body is
 identical to the payload body unless a transfer coding has been
@@ -296,7 +307,7 @@ All 1xx (Informational), 204 (No Content), and 304 (Not Modified)
 responses do not include a message body.  All other responses do
 include a message body, although the body might be of zero length.
 
-\paragraph{Transfer-Encoding }
+\paragraph*{Transfer-Encoding }
 
 The Transfer-Encoding header field lists the transfer coding names
 corresponding to the sequence of transfer codings that have been (or
@@ -338,7 +349,7 @@ Transfer-Encoding was added in HTTP/1.1.  It is generally assumed
 that implementations advertising only HTTP/1.0 support will not
 understand how to process a transfer-encoded payload. 
 
-\paragraph{Content-Length }
+\paragraph*{Content-Length }
 When a message does not have a Transfer-Encoding header field, a
    Content-Length header field can provide the anticipated size, as a
    decimal number of octets, for a potential payload body.  For messages
@@ -350,7 +361,7 @@ When a message does not have a Transfer-Encoding header field, a
 
     
 
-\paragraph{Message Body Length }
+\paragraph*{Message Body Length }
 
 (no entiendo, ver diferencia con content-length)
 The length of a message body is determined by one of the following
@@ -728,7 +739,7 @@ The status-code element is a three-digit integer code giving the
 
    
    
-   \subsubsection{Informational 1xx}
+   \subsubsection*{Informational 1xx}
 
    The 1xx (Informational) class of status code indicates an interim
    response for communicating connection status or request progress
@@ -741,14 +752,14 @@ The status-code element is a three-digit integer code giving the
   
 
 
-   \subsubsection{Successful 2xx}
+   \subsubsection*{Successful 2xx}
 
    The 2xx (Successful) class of status code indicates that the client's
    request was successfully received, understood, and accepted.
 
 
 
-   \subsubsection{Redirection 3xx}
+   \subsubsection*{Redirection 3xx}
 
    The 3xx (Redirection) class of status code indicates that further
    action needs to be taken by the user agent in order to fulfill the
@@ -779,7 +790,7 @@ The status-code element is a three-digit integer code giving the
 
 
 
-\subsubsection{Client Error 4xx}
+\subsubsection*{Client Error 4xx}
 
    The 4xx (Client Error) class of status code indicates that the client
    seems to have erred.  Except when responding to a HEAD request, the
@@ -791,7 +802,7 @@ The status-code element is a three-digit integer code giving the
 
 
 
-\subsubsection{Server Error 5xx}
+\subsubsection*{Server Error 5xx}
 
    The 5xx (Server Error) class of status code indicates that the server
    is aware that it has erred or is incapable of performing the
@@ -814,7 +825,7 @@ to send (and not to send) each one. In this chapter, we consider what
 those messages are, the general information they contain, and how
 systems use the different messages in a communications session. 
 
-\subsubsection{SSL Roles}
+\subsubsection*{SSL Roles}
 The Secure Sockets Layer protocol defines two different roles for the
 communicating parties. One system is always a client, while the other
 is a server. The distinction is very important, because ssl requires the
@@ -831,7 +842,7 @@ deciding what the two systems will actually use. Although the final
 decision rests with the server, the server can only choose from among
 those options that the client originally proposed.
 
-\subsubsection{SSL Messages}
+\subsubsection*{SSL Messages}
 When ssl clients and servers communicate, they do so by exchanging ssl messages. 
 this chapter will show how systems use these messages in their communications.
 The most basic function that an ssl client and server can perform is
@@ -842,7 +853,7 @@ in more detail by considering each message in the exchange.
 
 GRAFIQUITO DE LOS MENSAJES 
 
-\paragraph{ClientHello}
+\paragraph*{ClientHello}
 The ClientHello message starts the ssl communication between the
 two parties. The client uses this message to ask the server to begin
 negotiating security services by using ssl. 
@@ -874,7 +885,7 @@ effectiveness of any data compression techniques. Encryption changes the
 mathematical properties of information in a
 way that makes data compression virtually impossible. 
 
-\paragraph{ServerHello}
+\paragraph*{ServerHello}
 When the server receives the ClientHello message, it responds with a
 ServerHello. 
 The Version field is the first example of a server making a final 
@@ -902,7 +913,7 @@ be used for the session. Again, the server must pick from among
 those listed in the ClientHello. Current ssl versions have not defined
 any compression methods, however, so this field has no practical utility.
 
-\paragraph{ServerKeyExchange}
+\paragraph*{ServerKeyExchange}
 In this example, the server follows its ServerHello message with a
 ServerKeyExchange message. This message complements the CipherSuite field 
 of the ServerHello. While the CipherSuite field indicates
@@ -916,13 +927,13 @@ encryption, so that only public key information can be safely included within it
  The client will use the server’s public key to encrypt
 a session key, which the parties will use to actually encrypt the application
  data for the session.
-\paragraph{ServerHelloDone}
+\paragraph*{ServerHelloDone}
 The ServerHelloDone message tells the client that the server has finished with
  its initial negotiation messages. The message itself contains no other 
  information, but it is important to the client, because
 once the client receives a ServerHelloDone, it can move to the next
 phase of establishing the secure communications.
-\paragraph{ClientKeyExchange}
+\paragraph*{ClientKeyExchange}
 When the server has finished its part of the initial ssl negotiation,
 the client responds with a ClientKeyExchange message. Just as the
 ServerKeyExchange provides the key information for the server, the
@@ -941,7 +952,7 @@ forwarding the messages to an unsuspecting client. Since a fake
 server won’t know the real server’s private key, it won’t be able to decrypt 
 the ClientKeyExchange message. Without the information in
 that message, communication between the two parties cannot succeed.
-\paragraph{ChangeCipherSpec}
+\paragraph*{ChangeCipherSpec}
 After the client sends key information in a ClientKeyExchange message, 
 the preliminary ssl negotiation is complete. At that point, the
 parties are ready to begin using the security services they have negotiated.
@@ -975,7 +986,7 @@ read state.
 
 GRAFIQUITO Figures 3-2 and 3-3
 
-\paragraph{Finished}
+\paragraph*{Finished}
 Immediately after sending their ChangeCipherSpec messages, each
 system also sends a Finished message. The Finished messages allow
 both systems to verify that the negotiation has been successful and
@@ -998,7 +1009,7 @@ legitimate messages from the communication. If an attacker were able
 to do so, the client’s and server’s hash calculations would not match,
 and they would detect the compromise.
 
-\paragraph{Ending Secure Communications}
+\paragraph*{Ending Secure Communications}
 
 Although as a practical matter it is rarely used (primarily due to the
 nature of Web sessions), ssl does have a defined procedure for ending a
@@ -1008,7 +1019,7 @@ Explicitly closing a session protects against a truncation attack, in
 which an attacker is able to compromise security by prematurely terminating
  a communication. 
 
-\subsubsection{Authenticating the Server’s Identity}
+\subsubsection*{Authenticating the Server’s Identity}
 previously it was explained how ssl can establish encrypted
 communications between two parties, that may not really add that
 much security to the communication. With encryption alone neither
@@ -1037,7 +1048,7 @@ for example, it can validate that number. Since the server doesn’t
 need ssl to authenticate your identity, the ssl protocol allows for
 server authentication only. 
 
-\paragraph{Certificate}
+\paragraph*{Certificate}
 When authenticating your identity, the server sends a Certificate message 
 in place of the ServerKeyExchange message previously described. The Certificate 
 message simply contains a certificate chain
@@ -1055,7 +1066,7 @@ Web servers that want to rely on this trust mechanism can only
 obtain their certificates (at least indirectly) from one of these wellknown
  authorities.
 
-\paragraph{ClientKeyExchange}
+\paragraph*{ClientKeyExchange}
 The client’s ClientKeyExchange message also differs in server authentication, 
 though the difference is not major. When encryption
 only is to be used, the client encrypts the information in the ClientKeyExchange
@@ -1069,51 +1080,51 @@ to make sure that the party with whom it is communicating actually
 possesses the server’s private key. Only a system with the actual private key will 
 be able to decrypt this message and successfully continue the communication.
 
-\subsubsection{Certificate Functionality}
+\subsubsection*{Certificate Functionality}
 
-\paragraph{Single Domain}
+\paragraph*{Single Domain}
 As the name suggests, a single domain SSL certificate can only be used on a single 
 domain or IP. This is considered the default SSL certificate type. The DV SSL type is
 available at all validation levels.
-\paragraph{Multi-Domain}
+\paragraph*{Multi-Domain}
 This SSL type is a jack-of-all-trades certificate. Multi-Domain Wildcards can encrypt
  up to 250 different domains and unlimited sub-domains. Unfortunately, it's not available
   in EV.
-\paragraph{Wildcard}
+\paragraph*{Wildcard}
 Wildcards are specifically designed to encrypt one domain and all of its accompanying 
 sub-domains. Unlimited sub-domains. Unfortunately, Wildcards are only available at the 
 DV and OV levels.
-\paragraph{Multi-Domain Wildcard}
+\paragraph*{Multi-Domain Wildcard}
 These are the jack-of-all-trades certificates. Multi-Domain Wildcards can encrypt up 
 to 250 different domains and unlimited sub-domains. Unfortunately, it's not available 
 in EV.
 
-\subsubsection{Validation Level}
+\subsubsection*{Validation Level}
 There are three types of SSL Certificate available today; Extended Validation 
 (EV SSL), Organization Validated (OV SSL) and Domain Validated (DV SSL). The 
 encryption levels are the same for each certificate, what differs is the vetting
  and verification processes needed to obtain the certificate.
-\paragraph{Domain Validation (DV)}
+\paragraph*{Domain Validation (DV)}
 Domain Validation SSL or DV SSL represents the base-level for SSL types. These 
 are perfect for websites that just need encryption and nothing more. DV SSL 
 certificates are typically inexpensive and they can be issued within minutes. That's 
 because the validation process is fully automated. Just prove you own your domain 
 and the DV SSL certificate is yours.
-\paragraph{Organization Validation (OV)}
+\paragraph*{Organization Validation (OV)}
 Organization Validation SSL or OV SSL represents the middle ground for SSL certificate 
 types. To obtains OV SSL, your company or organization must undergo light business
  vetting. This can take up to three business days because someone has to verify 
  your business information. OV SSL displays the same visual indicators as DV SSL,
   but provides a way for your customers to check your verified business information 
   in the certificate details section.
-\paragraph{Extended Validation (EV)}
+\paragraph*{Extended Validation (EV)}
 Extended Validation SSL or EV SSL requires extensive business vetting by Comodo. This
  may sound like a lot, but it's really not if your business has publicly available 
  records. EV SSL activates a unique visual indicator – your verified organization name
   shown in the browser.
 
   
-\subsubsection{Identifier Validation Challenges}
+\subsubsection*{Identifier Validation Challenges}
 
 (CAMBIAR LA INTRO, NO ME GUSTA LO DE IDENTIFICADOR, RELACIONARLO MAS CON UN DOMINIO)
 
@@ -1132,7 +1143,7 @@ object in a POST request to a challenge URL.
 
    
 
-\paragraph{HTTP Challenge}
+\paragraph*{HTTP Challenge}
 
    With HTTP validation, the client in an ACME transaction proves its
    control over a domain name by proving that it can provision HTTP
@@ -1170,7 +1181,7 @@ object in a POST request to a challenge URL.
 
    (EXPLICAR POR QUE NO PUEDO USAR ESTE DESAFIO)
 
-\paragraph{DNS Challenge}
+\paragraph*{DNS Challenge}
    When the identifier being validated is a domain name, the client can
    prove control of that domain by provisioning a TXT resource record
    containing a designated value for a specific validation domain name.
