@@ -5,18 +5,13 @@
 
 
 
-
-
-
-
-\section{Mejorando la seguridad en la navegación - Alternativas}
 Se han investigado tres alternativas enfocadas en redes internas mara mejorar la seguridad de las 
 mismas, luego de eso se eligió la que mas ventajas ons ofrecio.
 Vimos tres alternativas posibles: Los certificados auto-firmado (Self-signed Certificates), implementar
 una entidad certificante interna, y la utilizacion de un certificado emitido por una entidad
 certificante conocida
 
-\subsection{Self-signed Certificates}
+\section{Self-signed Certificates}
 Self-signed certificates are the least useful of the three. Firefox
 makes it easier to use them safely; you create an exception on the
 first visit, after which the self-signed certificate is treated as valid
@@ -52,7 +47,7 @@ CA. It requires a little more work upfront, but once the
 infrastructure is in place and the root key is safely distributed to
 all users, such deployments are as secure as the rest of the PKI
 ecosystem.
-\subsection{Internal CA}
+\section{Internal CA}
 
 Aca se tiene que decir: "Como se explicó anteriormente, una entidad de certificacion es ..."
 Esta alternativa implica establecer una entidad de certificacion interna a la red privada. Esto se hace 
@@ -88,7 +83,7 @@ a la red privada que nuestra entidad certificante es de confianza, lo que puede 
 aun asi, pueden suceder que en nuestra red se conecten agentes externos a nuestra organizacion, por lo 
 que no podremos realizar la configuración mencionada
 
-\subsection{Estrategia utilizadas, ojala que con let's encrypt}
+\section{Cerfification with let's encrypt}
 Esta estrategia consiste en generar un certificado wildrau, y utilizarlo en cada sitio de la organizacion
 Para esto se debe tener un dominio, en mi caso, salvadorcatalfamo.com, tener la propiedad del dominio
 implica poder manejar registros dns del mismo, que es lo que requiere letsencript para poder verificar el mismo
@@ -101,8 +96,8 @@ agregar el registro txt al dns
 solicitar la llave publica y privada 
 colocarla en cada sitio
 
-\subsubsection{Pasos a seguir}
-\paragraph{Get a Domain}
+\subsection{Pasos a seguir}
+\subsubsection*{Get a Domain}
 The firs step is getting a Domain, in my case, I had one: salvadorcatalfamo.com.
 This domain points to mi public ip address. For that, I had to create some DNS records:
 
@@ -122,27 +117,27 @@ This domain points to mi public ip address. For that, I had to create some DNS r
 \\ \hline
 \end{longtable}
 
-\paragraph{Installing Let’s Encrypt on the server}
+\subsubsection*{Installing Let’s Encrypt on the server}
 \begin{verbatim}
    sudo add-apt-repository ppa:certbot/certbotsudo 
    apt-get update
    sudo apt-get install python-certbot-nginx
 \end{verbatim}
 
-\paragraph{Installing Nginx}
+\subsubsection*{Installing Nginx}
 \begin{verbatim}
 sudo apt-get update
 sudo apt-get install nginx
 \end{verbatim}
 
 
-\paragraph{Obtaining wildcard ssl certificate from Let’s Encrypt}
+\subsubsection*{Obtaining wildcard ssl certificate from Let’s Encrypt}
 \begin{verbatim}
 sudo certbot --server https://acme-v02.api.letsencrypt.org/directory 
 -d *.salvadorcatalfamo.com --manual --preferred-challenges dns-01 certonly
 \end{verbatim}
 
-\paragraph{Deploy a DNS TXT record provided by Let’s Encrypt certbot after running the above command}
+\subsubsection*{Deploy a DNS TXT record provided by Let’s Encrypt certbot after running the above command}
 Then I added an entry to my dns records
 \begin{longtable}{|l|l|l|l|l|} 
    \hline
@@ -151,7 +146,7 @@ Then I added an entry to my dns records
 \\ \hline
 \end{longtable}
 
-\paragraph{Configuring Nginx to serve wildcard subdomains}
+\subsubsection*{Configuring Nginx to serve wildcard subdomains}
 
 Create a config file sudo touch /etc/nginx/sites-available/example.com
 
@@ -182,7 +177,7 @@ Add the following code in the file
 The above server block is listening on port 80 and redirects the request to the server block below 
 it that is listening on port 443.
 
-\paragraph{Test and restart Nginx}
+\subsubsection*{Test and restart Nginx}
 EXTEDER
 Test Nginx configuration using 
 sudo nginx -t
@@ -205,9 +200,4 @@ Tal vez la duracion de validez del certificado
 Tal vez la confiabilidad
 
 
-
-
-\section{Estrategia}
-\section{CertBot para redes internas}
-\section{Mejorando la seguridad en los servidores de correo}
 
