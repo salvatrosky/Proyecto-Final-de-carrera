@@ -1,0 +1,203 @@
+%-*- ES -*-
+%----------------------------------------------------------------------
+% Capitulo: Implementacion de la solución propuesta
+%----------------------------------------------------------------------
+
+
+
+Se han investigado tres alternativas enfocadas en redes internas mara mejorar la seguridad de las 
+mismas, luego de eso se eligió la que mas ventajas ons ofrecio.
+Vimos tres alternativas posibles: Los certificados auto-firmado (Self-signed Certificates), implementar
+una entidad certificante interna, y la utilizacion de un certificado emitido por una entidad
+certificante conocida
+
+\section{Self-signed Certificates}
+Self-signed certificates are the least useful of the three. Firefox
+makes it easier to use them safely; you create an exception on the
+first visit, after which the self-signed certificate is treated as valid
+on subsequent connections. Other browsers make you clickthrough a certificate
+ warning every time.Unless you’re
+actually checking the certificate fingerprint every time, it is not
+possible to make that self-signed certificate safe. Even with
+Firefox, it might be difficult to use self-signed certificates safely.
+
+For example, to request an SSL certificate from a trusted CA like Verisign or GoDaddy, you send them a 
+Certificate Signing Request (CSR), and they give you a certificate in return, that they signed
+ using their root certificate and private key. All browsers have a copy (or access a copy from
+  the operating system) of them root certificate, so the browser can verify that your certificate
+   was signed by a trusted CA.
+
+When we generate a self-signed certificate, we generate our own root certificate and private 
+key. Because you generate a self-signed certificate the browser doesn’t trust it. It’s 
+self-signed. It hasn’t been signed by a CA. All certificates that we generate and sign will 
+be inherently trusted.
+
+La principal dificultad es que los usuarios siempre encontrarán una advertencia 
+donde el navegador diga que se encuentra en un sitio con un certificado autofirmado. 
+En la mayoria de los casos, no verificarán que el certificado es el correcto, por lo que 
+generará desconfianza en los usuarios.
+
+Today, self-signed certificates are considered insecure because there is no way for average users to
+differentiate them from self-signed MITM certificates. In other words, all self-signed certificates
+look the same. But, we can use a secure DNS to pin the certificate, thus allowing our user agent to
+know that they are using the right one. MITM certificates are easily detected.
+
+In virtually all cases, a much better approach is to use a private
+CA. It requires a little more work upfront, but once the
+infrastructure is in place and the root key is safely distributed to
+all users, such deployments are as secure as the rest of the PKI
+ecosystem.
+\section{Internal CA}
+
+Aca se tiene que decir: "Como se explicó anteriormente, una entidad de certificacion es ..."
+Esta alternativa implica establecer una entidad de certificacion interna a la red privada. Esto se hace 
+mediente un servidor dedicado que certifique los certificados que circulen internamente.
+Como ventaja se tiene que ... 
+
+Advantages internal Certificate Authority (CA)
+
+• Simplified and ease of management is the main advantage of using internal Certificate 
+Authority (CA). There is no need to depend an external entity for certificates.
+
+• In a Microsoft Windows environment, internal Certificate Authority (CA) can be integrated in Active
+ Directory. This further simplifies the management of the CA structure.
+
+• There is no cost per certificate wen you are using an internal Certificate Authority (CA).
+
+Disadvantages of internal Certificate Authority (CA)
+
+• Implementing internal Certificate Authority (CA) is more complicated than using external 
+Certificate Authority (CA).
+
+• The security and accountability of Public Key Infrastructure (PKI) is completely on the 
+organization's shoulder.
+
+• External parties/users normally will not trust a digital certificate signed by an internal Certification 
+Authority (CA).
+
+• The certificate management overhead of internal Certification Authority (CA) is higher than that 
+of external Certification Authority (CA).
+
+La desventaja por la que decidí ir por una mejor opcion fue que, se debe establecer individualmente en cada uno de los hosts pertenecientes
+a la red privada que nuestra entidad certificante es de confianza, lo que puede llevar un gran trabajo de los administradores, y, 
+aun asi, pueden suceder que en nuestra red se conecten agentes externos a nuestra organizacion, por lo 
+que no podremos realizar la configuración mencionada
+
+\section{Cerfification with let's encrypt}
+Esta estrategia consiste en generar un certificado wildrau, y utilizarlo en cada sitio de la organizacion
+Para esto se debe tener un dominio, en mi caso, salvadorcatalfamo.com, tener la propiedad del dominio
+implica poder manejar registros dns del mismo, que es lo que requiere letsencript para poder verificar el mismo
+La verificacion es la minima, que es la de que dice cque soy el dueño del dominio
+y la verificacion de que cada sitio es mio es la del dns, donde se hace la verificacion con el
+registro dns
+Entonces, formalmente los requisitos solución
+tener el dominio
+agregar el registro txt al dns
+solicitar la llave publica y privada 
+colocarla en cada sitio
+
+\subsection{Pasos a seguir}
+\subsubsection*{Get a Domain}
+The firs step is getting a Domain, in my case, I had one: salvadorcatalfamo.com.
+This domain points to mi public ip address. For that, I had to create some DNS records:
+
+
+\begin{longtable}{|l|l|p{5cm}|l|l|} 
+   \hline
+   \textbf{Tipo} & \textbf{Nombre} & \textbf{Contenido} & \textbf{Prioridad} & \textbf{TTL}
+\\ \hline A  & salvadorcatalfamo.com & 181.228.121.12 & 0 & 14400
+\\ \hline NS  & salvadorcatalfamo.com & ns1.donweb.com & 0 & 14400
+\\ \hline SOA & salvadorcatalfamo.com & ns2.donweb.com & 0 & 14400
+\\ \hline SOA & salvadorcatalfamo.com & ns3.hostmar.com \newline root.hostmar.com 
+                                       \newline 2021010700 28800 7200 
+                                       \newline 2000000 86400
+                                       \newline ns2.donweb.com & 0 & 14400                  
+
+
+\\ \hline
+\end{longtable}
+
+\subsubsection*{Installing Let’s Encrypt on the server}
+\begin{verbatim}
+   sudo add-apt-repository ppa:certbot/certbotsudo 
+   apt-get update
+   sudo apt-get install python-certbot-nginx
+\end{verbatim}
+
+\subsubsection*{Installing Nginx}
+\begin{verbatim}
+sudo apt-get update
+sudo apt-get install nginx
+\end{verbatim}
+
+
+\subsubsection*{Obtaining wildcard ssl certificate from Let’s Encrypt}
+\begin{verbatim}
+sudo certbot --server https://acme-v02.api.letsencrypt.org/directory 
+-d *.salvadorcatalfamo.com --manual --preferred-challenges dns-01 certonly
+\end{verbatim}
+
+\subsubsection*{Deploy a DNS TXT record provided by Let’s Encrypt certbot after running the above command}
+Then I added an entry to my dns records
+\begin{longtable}{|l|l|l|l|l|} 
+   \hline
+   \textbf{Tipo} & \textbf{Nombre} & \textbf{Contenido} & \textbf{Prioridad} & \textbf{TTL}
+\\ \hline TXT  & 	\_acme-challenge.salvadorcatalfamo.com & 11UZJD27bPDb\_jFs6f... & 0 & 14400
+\\ \hline
+\end{longtable}
+
+\subsubsection*{Configuring Nginx to serve wildcard subdomains}
+
+Create a config file sudo touch /etc/nginx/sites-available/example.com
+
+Open the file sudo vi /etc/nginx/sites-available/example.com
+
+Add the following code in the file
+
+\begin{verbatim}
+   server {
+      listen 80;
+      listen [::]:80;
+      server_name *.example.com;
+      return 301 https://$host$request_uri;
+   }
+   server {
+      listen 443 ssl;
+      server_name *.example.com;  ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+      ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+      include /etc/letsencrypt/options-ssl-nginx.conf;
+      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;  root /var/www/example.com;
+      index index.html;
+      location / {
+        try_files $uri $uri/ =404;
+      }
+    } 
+\end{verbatim}
+
+The above server block is listening on port 80 and redirects the request to the server block below 
+it that is listening on port 443.
+
+\subsubsection*{Test and restart Nginx}
+EXTEDER
+Test Nginx configuration using 
+sudo nginx -t
+If it’s success reload Nginx using 
+\begin{verbatim}
+sudo /etc/init.d/nginx reload
+\end{verbatim}
+Nginx is now setup to handle wildcard subdomains.
+
+Ver una posible automatizacion, aunque creo que será con puppet
+
+ventajas
+No mas mensajes de errores
+Seguridad de encriptacion 
+privacidad, etc etc
+
+Desventajas
+Tal vez la cantidad de dominios gratis
+Tal vez la duracion de validez del certificado
+Tal vez la confiabilidad
+
+
+

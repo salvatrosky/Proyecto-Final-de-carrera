@@ -1,0 +1,10 @@
+
+*.log
+build/Main.fdb_latexmk
+build/Main.fdb_latexmk
+build/Main.log
+build/Main.aux
+build/Main.fls
+build/Main.log
+build/Main.synctex.gz
+build/Main.toc
