@@ -5,12 +5,9 @@
 En éste capítulo se verá por qué los protocolos http y smtp son inseguros, introducción al snnifin, spoofing, arp attack
 %----------------------------------------------------------------------
 
-\section{El problema del protocolo http}
-
-
 (Agregar una intro)
 
-\subsection{Establishing Authority}
+\section{Establishing Authority}
 
 HTTP relies on the notion of an authoritative response: a response
 that has been determined by (or at the direction of) the authority
@@ -48,7 +45,7 @@ for an "http" URI is vulnerable to attacks on Internet Protocol
 routing.
 
 
-\subsection{Risks of Intermediaries}
+\section{Risks of Intermediaries}
 
 By their very nature, HTTP intermediaries are men-in-the-middle and,
 thus, represent an opportunity for man-in-the-middle attacks.
@@ -71,7 +68,7 @@ configuration).
 Users need to be aware that intermediaries are no more trustworthy
 than the people who run them; HTTP itself cannot solve this problem.
 
-\subsection{Attacks via Protocol Element Length}
+\section{Attacks via Protocol Element Length}
 
 Because HTTP uses mostly textual, character-delimited fields, parsers
 are often vulnerable to attacks based on sending very long (or very
@@ -80,7 +77,7 @@ expecting a protocol element with no predefined length.
 
 
 
-\subsection{Response Splitting}
+\section{Response Splitting}
 
 Response splitting (a.k.a, CRLF injection) is a common technique,
 used in various attacks on Web usage, that exploits the line-based
@@ -110,7 +107,7 @@ send encoded CRLF octets and other content that will make the
 application's single response look like two or more responses.
 
 
-\subsection{Request Smuggling}
+\section{Request Smuggling}
 
 Request smuggling ([Linhart]) is a technique that exploits
 differences in protocol parsing among various recipients to hide
@@ -120,7 +117,7 @@ splitting, request smuggling can lead to a variety of attacks on HTTP
 usage.
 
 
-\subsection{Message Integrity}
+\section{Message Integrity}
 
 HTTP does not define a specific mechanism for ensuring message
 integrity, instead relying on the error-detection ability of
@@ -147,7 +144,7 @@ ought to provide some indication that allows a user to distinguish
 between a complete and incomplete response message (Section 3.4) when
 such verification is desired.
 
-\subsection{Message Confidentiality}
+\section{Message Confidentiality}
 
 HTTP relies on underlying transport protocols to provide message
 confidentiality when that is desired.  HTTP has been specifically
@@ -211,4 +208,7 @@ the other party. Some of the active attacks are as follows [8].
     hacker consider that they are doing direct communication with each other [13].
     Figure 12 depicts this attack.
 \end{itemize}
+
+\section{Caso de estudio: Sniffing de la red para obtener credenciales}
+\input{caseOfStudy}
 

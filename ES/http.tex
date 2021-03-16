@@ -1,303 +1,268 @@
-\subsection{¿Que es el protocolo HTTP?}
-The Hypertext Transfer Protocol (HTTP) is a stateless application-level 
-request/response protocol that uses extensible semantics and
-   self-descriptive message payloads for flexible interaction with
-   network-based hypertext information systems.
-   HTTP is a generic interface protocol for information systems.  It is
-   designed to hide the details of how a service is implemented by
-   presenting a uniform interface to clients that is independent of the
-   types of resources provided.  Likewise, servers do not need to be
-   aware of each client's purpose: an HTTP request can be considered in
-   isolation rather than being associated with a specific type of client
-   or a predetermined sequence of application steps.  The result is a
-   protocol that can be used effectively in many different contexts and
-   for which implementations can evolve independently over time.
-  
-   One consequence of this flexibility is that the protocol cannot be
-   defined in terms of what occurs behind the interface.  Instead, we
-   are limited to defining the syntax of communication, the intent of
-   received communication, and the expected behavior of recipients.  If
-   the communication is considered in isolation, then successful actions
-   ought to be reflected in corresponding changes to the observable
-   interface provided by servers.  However, since multiple clients might
-   act in parallel and perhaps at cross-purposes, we cannot require that
-   such changes be observable beyond the scope of a single response.
+\subsection{Protocolo HTTP}
+
+El Protocolo de transferencia de hipertexto (HTTP) es un protocolo de 
+solicitud/respuesta “stateless” (sin estado) que utiliza semántica 
+extensible y cargas útiles de mensajes autodescriptivos para una 
+interacción flexible con sistemas basados en red.
+   HTTP es un protocolo genérico para sistemas de información. Está 
+   diseñado para ocultar los detalles de cómo se implementa un servicio 
+   mostrando una interfaz a los clientes que es independiente de los 
+   tipos de recursos proporcionados. Del mismo modo, los servidores 
+   no necesitan conocer el propósito de cada cliente: una solicitud 
+   HTTP puede aislada en vez de estar asociada con un tipo específico
+    de cliente o una secuencia predeterminada de pasos de la aplicación.
+     El resultado es un protocolo que se puede utilizar de forma eficaz 
+     en muchos contextos diferentes y cuyas implementaciones pueden
+      evolucionar a lo largo del tiempo.
+   Una consecuencia de esta flexibilidad es que el protocolo no 
+   se puede definir en términos de lo que ocurre detrás de la 
+   interfaz: estamos limitados a definir la sintaxis de la comunicación, 
+   los mensajes y el comportamiento esperado de los destinatarios. 
+   Si la comunicación se considera de forma aislada, las acciones 
+   exitosas deben reflejarse correspondientemente. Sin embargo, 
+   dado que varios clientes pueden actuar en paralelo y quizás con
+    propósitos cruzados, no podemos exigir que tales cambios sean 
+    observables más allá del alcance de una única respuesta.
    
 \subsection{Arquitectura}
-HTTP was created for the World Wide Web (WWW) architecture and has
-evolved over time to support the scalability needs of a worldwide
-hypertext system.  Much of that architecture is reflected in the
-terminology and syntax productions used to define HTTP.
+HTTP fue creado para la arquitectura World Wide Web (WWW) y ha 
+evolucionado con el tiempo para soportar las necesidades de
+ escalabilidad de un sistema mundial. Gran parte de esa arquitectura 
+ se refleja en la terminología y  definiciones de sintaxis utilizadas 
+ para definir HTTP.
 
-\subsubsection*{Client/Server Messaging}
-
-HTTP is a stateless request/response protocol that operates by
-exchanging messages across a reliable transport- or
-session-layer "connection".  An HTTP "client" is a
-program that establishes a connection to a server for the purpose of
-sending one or more HTTP requests.  An HTTP "server" is a program
-that accepts connections in order to service HTTP requests by sending
-HTTP responses.
-Most HTTP communication consists of a retrieval request (GET) for a
-representation of some resource identified by a URI.  In the simplest
-case, this might be accomplished via a single bidirectional
-connection (===) between the user agent (UA) and the origin
-server (O).
+\subsubsection*{Mensajes Cliente/Servidor}
 
 
+HTTP es un protocolo de solicitud/respuesta que opera intercambiando 
+mensajes a través de una ``conexión'' en la capa de sesión o transporte.
+ Un "cliente" HTTP es un programa que establece una conexión a un 
+ servidor con el propósito de enviar una o más solicitudes HTTP. 
+ Un "servidor" HTTP es un programa que acepta conexiones para
+  atender solicitudes HTTP mediante el envío de respuestas HTTP. 
+  La mayoría de las comunicaciones HTTP consisten en una solicitud
+   (GET) de algún recurso identificado por un URI. En el caso más 
+   simple, esto podría lograrse mediante una única conexión entre un
+    usuario y el servidor.
 
 \begin{center}
    \begin{figure}   
       \begin{center}
          \includegraphics{2.1.png}
       \end{center}
-      \caption{Simple comunication method}
+      \caption{Comunicación básica en HTTP}
    \end{figure}
 \end{center}
 
+Un cliente envía una solicitud HTTP a un servidor en forma de mensaje
+ de solicitud, comenzando con una línea que incluye un método, URI y 
+ versión del protocolo, seguida de campos de encabezado que contienen
+  modificadores de solicitud, información del cliente y metadatos de
+   representación, una línea vacía para indicar el final de la sección
+    del encabezado, y finalmente un cuerpo del mensaje que contiene el 
+    cuerpo de la carga útil (si lo hay). Un servidor responde a la 
+    solicitud de un cliente enviando uno o más mensajes de respuesta 
+    HTTP, cada uno de los cuales comienza con una línea de estado que 
+    incluye la versión del protocolo, un código de estado (éxito o error)
+     y una descripción en forma de texto asociada al mismo, posiblemente 
+     seguida de campos de encabezado con información del servidor y
+      metadatos de recursos, una línea vacía para indicar el final 
+      de la sección del encabezado y finalmente, un cuerpo del mensaje
+       la carga útil del mismo
 
-A client sends an HTTP request to a server in the form of a request
-message, beginning with a request-line that includes a method, URI,
-and protocol version, followed by header fields
-containing request modifiers, client information, and representation
-metadata, an empty line to indicate the end of the
-header section, and finally a message body containing the payload
-body (if any, Section 3.3).
-A server responds to a client's request by sending one or more HTTP
-   response messages, each beginning with a status line that includes
-   the protocol version, a success or error code, and textual reason
-   phrase (Section 3.1.2), possibly followed by header fields containing
-   server information, resource metadata, and representation metadata
-   (Section 3.2), an empty line to indicate the end of the header
-   section, and finally a message body containing the payload body (if
-   any, Section 3.3).
 \subsubsection*{Ejemplo}
-The following example illustrates a typical message exchange for a
-GET request (Section 4.3.1 of [RFC7231]) on the URI
-"http://www.example.com/hello.txt":
+El siguiente ejemplo ilustra un intercambio de mensajes típico 
+para una solicitud GET a la direccion "http://www.example.com/hello.txt":
 
-Client request:
+\bigskip
+\noindent
+\underline{Client request:}
+\begin{verbatim}
+   GET /hello.txt HTTP/1.1
+   User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+   Host: www.example.com
+   Accept-Language: en, mi
+  \end{verbatim}
+\underline{Server response:}
+\begin{verbatim}
+   HTTP/1.1 200 OK
+   Date: Mon, 27 Jul 2009 12:28:53 GMT
+   Server: Apache
+   Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+   ETag: "34aa387-d-1568eb00"
+   Accept-Ranges: bytes
+   Content-Length: 51
+   Vary: Accept-Encoding
+   Content-Type: text/plain
 
-  GET /hello.txt HTTP/1.1
-  User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
-  Host: www.example.com
-  Accept-Language: en, mi
-
-
-Server response:
-
-  HTTP/1.1 200 OK
-  Date: Mon, 27 Jul 2009 12:28:53 GMT
-  Server: Apache
-  Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
-  ETag: "34aa387-d-1568eb00"
-  Accept-Ranges: bytes
-  Content-Length: 51
-  Vary: Accept-Encoding
-  Content-Type: text/plain
-
-  Hello World! My payload includes a trailing CRLF.
-
-  HTTP is defined as a stateless protocol, meaning that each request
-   message can be understood in isolation.  Many implementations depend
-   on HTTP's stateless design in order to reuse proxied connections or
-   dynamically load balance requests across multiple servers.  Hence, a
-   server MUST NOT assume that two requests on the same connection are
-   from the same user agent unless the connection is secured and
-   specific to that agent.  Some non-standard HTTP extensions (e.g.,
-   [RFC4559]) have been known to violate this requirement, resulting in
-   security and interoperability problems.
-
-    
- 
+   Hello World! My payload includes a trailing CRLF.
+\end{verbatim}
 
 
 \subsection{Métodos mas importantes del del protocolo HTTP}
 
-head 
-delete      
-CONNECT
-OPTIONS
-TRACE
-PUT
+El protocolo HTTP contiene varios método, comopor ejemplo PUT, HEAD, DELETE, etc. Sin
+embargo, para nuestro trabajo explicaremos los dos mas utilizados GET y POST, lo que
+nos permitirá tener una base a la hora del caso de estudio del capitulo \ref{capCaseOfStudy}
 
-4.3.1.  GET
+%CONNECT OPTIONS TRACE PUT 
 
-   The GET method requests transfer of a current selected representation
-   for the target resource.  GET is the primary mechanism of information
-   retrieval and the focus of almost all performance optimizations.
-   Hence, when people speak of retrieving some identifiable information
-   via HTTP, they are generally referring to making a GET request.
+\subsubsection*{GET}
 
-   It is tempting to think of resource identifiers as remote file system
-   pathnames and of representations as being a copy of the contents of
-   such files.  In fact, that is how many resources are implemented 
-   .  However, there are
-   no such limitations in practice.  The HTTP interface for a resource
-   is just as likely to be implemented as a tree of content objects, a
-   programmatic view on various database records, or a gateway to other
-   information systems.  Even when the URI mapping mechanism is tied to
-   a file system, an origin server might be configured to execute the
-   files with the request as input and send the output as the
-   representation rather than transfer the files directly.  Regardless,
-   only the origin server needs to know how each of its resource
-   identifiers corresponds to an implementation and how each
-   implementation manages to select and send a current representation of
-   the target resource in a response to GET.
+El método GET solicita al servidor la transferencia de un recurso.
+GET es el mecanismo principal de recuperación de información y el 
+foco de casi todas las optimizaciones de rendimiento. Por lo tanto,
+cuando las personas hablan de recuperar información identificable
+a través de HTTP, generalmente se refieren a realizar una solicitud
+GET.
 
+Se puede pensar que a la hora de solicitar un recuro, este sea un archivo 
+dentro de un directorio, y la respuesta sea el mismo archivo. Sin embargo, 
+no existen tales limitaciones en la práctica. De hecho, se puede 
+configurar un servidor para ejecutar los archivos de la solicitud y 
+enviar la salida en lugar de transferir los archivos directamente. 
+Independientemente de la solicitud, el servidor solo necesita saber 
+cómo tratar a cada uno de sus recursos.
 
-4.3.3.  POST
+\subsubsection*{POST}
 
-   The POST method requests that the target resource process the
-   representation enclosed in the request according to the resource's
-   own specific semantics.  For example, POST is used for the following
-   functions (among others):
+El método POST solicita que un recurso del servidor sea procesado con 
+los datos que el cliente le envía. Por ejemplo, POST se utiliza para 
+las siguientes funciones (entre otras):
 
-   o  Providing a block of data, such as the fields entered into an HTML
-      form, to a data-handling process;
-      o  Posting a message to a bulletin board, newsgroup, mailing list,
-      blog, or similar group of articles;
-
-   o  Creating a new resource that has yet to be identified by the
-      origin server; and
-
-   o  Appending data to a resource's existing representation(s).
+\begin{itemize}
+   \item Proporcionar un bloque de datos, como los campos ingresados 
+   en un formulario HTML, a un proceso de manejo de datos.
+   \item Publicar un mensaje en un tablón de anuncios, grupo de 
+   noticias, lista de correo, blog o grupo similar de artículos.
+   \item Crear un nuevo recurso que aún no ha sido identificado por 
+   el servidor.
+   \item Agregar datos a las representaciones existentes de un recurso.
+\end{itemize}
 
 
 \subsection{Response Status Codes} 
-The status-code element is a three-digit integer code giving the
-   result of the attempt to understand and satisfy the request.
+El código de estado es un número entero de tres dígitos que da el 
+resultado del intento de comprender y satisfacer la solicitud.
 
-   HTTP status codes are extensible.  HTTP clients are not required to
-   understand the meaning of all registered status codes, though such
-   understanding is obviously desirable.  However, a client MUST
-   understand the class of any status code, as indicated by the first
-   digit, and treat an unrecognized status code as being equivalent to
-   the x00 status code of that class, with the exception that a
-   recipient MUST NOT cache a response with an unrecognized status code.
+   Los códigos de estado HTTP son extensibles. No se requiere que los
+    clientes HTTP comprendan el significado de todos los códigos de
+     estado registrados, aunque se espara una mínima comprensión.
 
-   For example, if an unrecognized status code of 471 is received by a
-   client, the client can assume that there was something wrong with its
-   request and treat the response as if it had received a 400 (Bad
-   Request) status code.  The response message will usually contain a
-   representation that explains the status.
+   Por ejemplo, si un cliente recibe un código de estado no reconocido
+    de 471, el cliente puede asumir que hubo algo mal con su solicitud
+     y tratar la respuesta como si hubiera recibido un código de estado
+      400 (Solicitud incorrecta). El mensaje de respuesta generalmente 
+      contendrá una representación que explica el estado.
 
-   The first digit of the status-code defines the class of response.
-   The last two digits do not have any categorization role.  There are
-   five values for the first digit:
+   El primer dígito del código de estado define la clase de respuesta.
+    Los dos últimos dígitos no tienen ninguna función de categorización.
+     Hay cinco valores para el primer dígito:
 
-   o  1xx (Informational): The request was received, continuing process
+   o 1xx (Informativo): Se recibió la solicitud, se continua procesando
 
-   o  2xx (Successful): The request was successfully received,
-      understood, and accepted
+   o 2xx (satisfactoria): la solicitud se recibió, comprendió y 
+   aceptó correctamente
 
-   o  3xx (Redirection): Further action needs to be taken in order to
-      complete the request
+   o 3xx (redireccionamiento): se deben realizar más acciones para
+    completar la solicitud
 
-   o  4xx (Client Error): The request contains bad syntax or cannot be
-      fulfilled
-      o  5xx (Server Error): The server failed to fulfill an apparently
-      valid request
-  
+   o 4xx (Error del cliente): la solicitud contiene una sintaxis
+    incorrecta o no se puede cumplir
+
+      o 5xx (error del servidor): el servidor no cumplió con una
+       solicitud aparentemente válida
+
 
 \subsection{HTTPS con SSL} 
 
-With an understanding of some of the key concepts of cryptography,
-we can now look closely at the operation of the Secure Sockets Layer
-(ssl) protocol. Although ssl is not an extremely complicated protocol, 
-it does offer several options and variations. 
-The ssl protocol consists of a set of messages and rules about when
-to send (and not to send) each one. In this chapter, we consider what
-those messages are, the general information they contain, and how
-systems use the different messages in a communications session. 
+Con una comprensión mínima de los conceptos la criptografía, podemos 
+observar cómo funciona el protocolo Secure Sockets Layer (ssl). Aunque
+ ssl no es un protocolo extremadamente complicado, ofrece varias 
+ opciones y variaciones.
+
+El protocolo ssl consiste en un conjunto de mensajes y reglas sobre
+ cuándo enviar (y no enviar) cada mensaje. En este capítulo, consideramos 
+ cuáles son esos mensajes, la información general que contienen y 
+ cómo los sistemas usan los diferentes mensajes en una sesión de
+  comunicaciones.
+
 
 \subsubsection*{SSL Roles}
-The Secure Sockets Layer protocol defines two different roles for the
-communicating parties. One system is always a client, while the other
-is a server. The distinction is very important, because ssl requires the
-two systems to behave very differently. The client is the system that
-initiates the secure communications; the server responds to the client’s request. 
-In the most common use of ssl, secure Web browsing,
-the Web browser is the ssl client and the Web site is the ssl server.
-For ssl itself, the most important distinctions between clients and
-servers are their actions during the negotiation of security parameters. 
-Since the client initiates a communication, it has the
-responsibility of proposing a set of ssl options to use for the
-exchange. The server selects from the client’s proposed options,
-deciding what the two systems will actually use. Although the final
-decision rests with the server, the server can only choose from among
-those options that the client originally proposed.
+El protocolo Secure Sockets Layer define dos roles diferentes para las
+partes que se comunican. Por un lado tenemos un cliente, y por el otro
+un servidor. La distinción es muy importante, porque ssl requiere que 
+los dos sistemas se comporten de manera muy diferente. 
 
-\subsubsection*{SSL Messages}
-When ssl clients and servers communicate, they do so by exchanging ssl messages. 
-this chapter will show how systems use these messages in their communications.
-The most basic function that an ssl client and server can perform is
-establishing a channel for encrypted communications. 
-This section looks at these steps
-in more detail by considering each message in the exchange.
+El cliente es el sistema que inicia las comunicaciones seguras; el 
+servidor responde a la solicitud del cliente. En el uso más común 
+de ssl, la navegación web segura, el navegador web es el cliente ssl 
+y el sitio web es el servidor ssl. Para SSL en sí, las distinciones 
+más importantes entre clientes y servidores son sus acciones durante 
+la negociación de los parámetros de seguridad.
+
+Dado que el cliente inicia una comunicación, tiene la responsabilidad 
+de proponer un conjunto de opciones ssl para usar en el intercambio. 
+El servidor selecciona entre las opciones propuestas por el cliente 
+y decide qué utilizarán realmente los dos sistemas. Aunque la decisión 
+final recae en el servidor, el servidor solo puede elegir entre las 
+opciones que el cliente propuso originalmente.
 
 
-GRAFIQUITO DE LOS MENSAJES 
+\subsubsection*{Mensajes SSL}
+Cuando los clientes y servidores ssl se comunican, lo hacen 
+intercambiando mensajes ssl. Este capítulo mostrará cómo los 
+sistemas utilizan estos mensajes en sus comunicaciones. La función 
+más básica (y uno de los propósitos mas importantes) que realiza 
+un cliente y un servidor SSL es establecer la seguridad a través
+de un canal para comunicaciones cifradas. Los primeros tres mensajes
+SYN, SYN ACK y SYN corresponden al protocolo TCP, Luego, inician los 
+mensajes pertenecientes a la comunicación SSL.
+
+
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics[width=13cm,height=13cm]{2.2.5.png}
+      \end{center}
+      \caption{Mensajes SSL (grafico beta)}
+   \end{figure}
+\end{center}
+
 
 \paragraph*{ClientHello}
-The ClientHello message starts the ssl communication between the
-two parties. The client uses this message to ask the server to begin
-negotiating security services by using ssl. 
+El mensaje ClientHello inicia la comunicación ssl entre las dos partes. 
+El cliente usa este mensaje para pedirle al servidor que comience a 
+negociar los servicios de seguridad usando ssl.
 
-The Version field of the ClientHello message contains the highest
-version number of ssl that the client can support. The current ssl
-version is 3.0, and it is by far the most widely deployed on the Internet. 
+El mensaje este compuesto por ciertos campos: 
+\begin{itemize}
+   \item Versión: refiere a la versión más alta de SSL que el cliente 
+   puede admitir. 
+   \item RandomNumber: proporciona la semilla para cálculos criptográficos
+   críticos. 
+   \item SessionID: es opcional, y muchas veces no es utilizado. 
+   \item CipherSuites: permite a un cliente enumerar los diversos 
+   servicios criptográficos que el cliente puede admitir
+   \item CompressionMethods: es utilizado por el cliente para enumerar 
+   todos los diversos métodos de compresión de datos que puede admitir.
+    Los métodos de compresión son una parte importante de ssl porque el 
+    cifrado tiene una secuencia significativa en la efectividad de 
+    cualquier técnica de compresión de datos. 
+\end{itemize}
 
-The RandomNumber field, as you might expect, contains a random
-number. This random value, along with a similar random value that
-the server creates, provides the seed for critical cryptographic calculations.
-  The ssl specification suggests that
-four of this field’s 32 bytes consist of the time and date. 
-
-The next field in the ClientHello message is SessionID. Although all
-ClientHello messages may include this field, in this example, the
-field is meaningless and would be empty. 
-The CipherSuites field allows a client to list the various cryptographic
-services that the client can support, including exact algorithms and
-key sizes. The server actually makes the final decision as to which
-cryptographic services will be used for the communication, but it is
-limited to choosing from this list. 
-
-The CompressionMethods field is, in theory, similar to the CipherSuites field.
- In it, the client may list all of the various data compression methods that 
- it can support. Compression methods are an
-important part of ssl because encryption has significant consequences on the 
-effectiveness of any data compression techniques. Encryption changes the 
-mathematical properties of information in a
-way that makes data compression virtually impossible. 
 
 \paragraph*{ServerHello}
-When the server receives the ClientHello message, it responds with a
-ServerHello. 
-The Version field is the first example of a server making a final 
-decision for the communications. The ClientHello’s version simply identifies 
-which ssl versions the client can support. The ServerHello’s
-version, on the other hand, determines the ssl version that the communication
- will use. 
-The RandomNumber field of the ServerHello is essentially the same
-as in the ClientHello, though this random value is chosen by the
-server. Along with the client’s value, this number seeds important
-cryptographic calculations. 
-The SessionID field of a ServerHello may contain a value, unlike the
-ClientHello’s field just discussed. The value in this case uniquely
-identifies this particular ssl communication, or session. The main reason for 
-explicitly identifying a particular ssl session is to refer to it
-again later.
-The CipherSuite field (note that the name is singular, not plural, as in
-the case of a ClientHello) determines the exact cryptographic parameters, 
-specifically algorithms and key sizes, to be used for the session. 
-The server must select a single cipher suite from among those
-listed by the client in its ClientHello message.
-The CompressionMethod field is also singular for a ServerHello. In
-theory, the server uses this field to identify the data compression to
-be used for the session. Again, the server must pick from among
-those listed in the ClientHello. Current ssl versions have not defined
-any compression methods, however, so this field has no practical utility.
+Cuando el servidor recibe el mensaje ClientHello, responde con un 
+"ServerHello". En este mensaje el servidor toma la decisión de elegir 
+la versión de SSL que se utilizará, además se establece un SessionID, 
+que identifica de forma única esta sesión o comunicación SSL en particular. 
+La razón principal para identificar explícitamente una sesión SSL en 
+particular es hacer referencia a ella en mensajes posteriores. Por 
+último, se establece los parámetros criptográficos y mecanismos de 
+compresión a utilizar. Cade aclarar que, las versiones actuales de 
+SSL no han definido ningún método de compresión, por lo que este 
+campo no tiene ninguna utilidad práctica.
 
 \paragraph*{ServerKeyExchange}
 In this example, the server follows its ServerHello message with a

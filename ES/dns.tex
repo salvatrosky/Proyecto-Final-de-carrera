@@ -1,0 +1,91 @@
+\section{Servidor dns con Docker}
+
+Se eligio el servidor dns coredns ya que es amigable con Docker, sucede que, por cada versión del 
+programa, se generan las imágenes de docker correspondientes. Estas imágenes son publicas y oficiales, 
+lo que da confiabilidad y seguridad extra a la hora de utilizarlas. La configuración esta formada por 
+los siguientes componentes.
+
+Los archivos de configuración de coredns son el corefile y los sitios que nosotros deseemos, en nuestro 
+caso salvadorcatalfamo.
+
+El Corefile es el archivo de configuración de CoreDNS.Este define:
+\begin{itemize}
+    \item Qué servidores escuchan en qué puertos y qué protocolo.
+    \item Para qué zona tiene autoridad cada servidor.
+    \item Qué plugins (complementos) se cargan en un servidor.
+\end{itemize}
+
+\noindent El formato es el siguiente
+\begin{verbatim}
+    ZONE: [PORT] {
+        [PLUGIN] ...
+    }
+\end{verbatim}
+
+\noindent ZONE: define la zona de este servidor. El puerto por defecto es el 53º bien el valor que se le indique 
+con el flag -dns.port.
+
+\noindent PLUGIN: define los complementos que queremos cargar. Cada plugin puede tener varias propiedades, por 
+lo que también podrían tener argumentos de entrada.
+
+\noindent Nuestro archivo de configuración es el siguiente:
+\begin{verbatim}
+    .:53 {
+        forward . 8.8.8.8 9.9.9.9
+        log
+    }
+
+    salvadorcatalfamo.intra:53 {
+        file /etc/coredns/salvadorcatalfamo
+        log
+        reload 10s
+    }    
+\end{verbatim}
+
+A grandes rasgos, lo que indica esta configuración es que va a existir una zona 
+“salvadorcatalfamo.intra”, que estará definida por el archivo que se encuentra en 
+“/etc/coredns/salvadorcatalfamo”. Por otro lado, el tráfico restante será fordwardeado a 
+servidores dns externos (8.8.8.8 y 9.9.9.9). Además se establecieron algunos plugins de logeo y 
+de refresco de configuración.
+
+Nuestro archivo “/etc/coredns/salvadorcatalfamo” contiene la siguiente información.
+\begin{verbatim}
+salvadorcatalfamo.intra.        IN  SOA ns1.salvadorcatalfamo.intra. salvador.cata95.gmail.com. 2021031502 7200 3600 1209600 3600
+page1.salvadorcatalfamo.intra.  IN  A   192.168.0.201
+page2.salvadorcatalfamo.intra.  IN  A   192.168.0.202
+page3.salvadorcatalfamo.intra.  IN  A   192.168.0.203    
+\end{verbatim}
+
+Esto, en principio es suficiente para nuestro sitio interno, y contiene las direcciones ip de los 
+servidores webs y entidades certificantes.
+
+Por el lado de Docker, se utilizó un archivo Docker.compose.yml, y un Dockerfile. El fichero 
+Docker-compose sirve para …. En nuestro caso, se definió de la siguiente manera
+
+\begin{verbatim}
+version: '3.1'
+services:
+    coredns:
+        build: .
+        container_name: coredns
+        restart: always
+        expose:
+            - '53'
+            - '53/udp'
+        ports:
+            - '53:53'
+            - '53:53/udp'
+        volumes:
+            - './config:/etc/coredns'    
+\end{verbatim}
+
+Por otro lado, el fichero dockerfile esta compuesto por las siguientes líneas
+\begin{verbatim}
+FROM coredns/coredns:1.7.0
+
+ENTRYPOINT ["/coredns"]
+CMD ["-conf", "/etc/coredns/Corefile"]    
+\end{verbatim}
+
+En conjunto, establecen la imagen de coredns que se utilizará, los archivos de configuración y
+los puertos que se expondrán, entre otras configuraciones.
