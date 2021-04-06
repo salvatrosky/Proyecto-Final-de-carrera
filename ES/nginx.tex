@@ -1,0 +1,30 @@
+\subsubsection*{Nginx con docker}
+
+Para probar nuestro certificado, utilizaremos una imagen oficial de Nginx, los archivos de configuración
+son los siguientes:
+
+
+\begin{verbatim}
+docker-compose.yml
+
+web:
+  image: nginx
+  volumes:
+   - ./pagina1:/usr/share/nginx/html:ro
+  ports:
+   - "80:80"
+  environment:
+   - NGINX_HOST=pagina1.salvadorcatalfamo.intra
+   - NGINX_PORT=80
+\end{verbatim}
+
+En el archivo mostrado, le decimos a docker que utilice la imagen "nginx", que nuestros archivos fuentes
+van a estar en el directorio ./pagina1 y que exponga el puerto 80, entre otras cosas.
+
+\noindent Para ejecutar este contenedor, se debe ejecutar el siguiente comando:
+
+\begin{verbatim}
+    docker-compose up -d
+\end{verbatim}
+
+

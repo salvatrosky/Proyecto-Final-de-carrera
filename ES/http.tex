@@ -253,226 +253,198 @@ El mensaje este compuesto por ciertos campos:
 
 
 \paragraph*{ServerHello}
-Cuando el servidor recibe el mensaje ClientHello, responde con un 
-"ServerHello". En este mensaje el servidor toma la decisión de elegir 
-la versión de SSL que se utilizará, además se establece un SessionID, 
-que identifica de forma única esta sesión o comunicación SSL en particular. 
-La razón principal para identificar explícitamente una sesión SSL en 
-particular es hacer referencia a ella en mensajes posteriores. Por 
-último, se establece los parámetros criptográficos y mecanismos de 
-compresión a utilizar. Cade aclarar que, las versiones actuales de 
-SSL no han definido ningún método de compresión, por lo que este 
-campo no tiene ninguna utilidad práctica.
+Este mensaje complementa el campo CipherSuite del ServerHello. Si bien 
+el campo CipherSuite indica los algoritmos criptográficos y los tamaños 
+de clave, este mensaje contiene la información de la clave pública en sí. 
+Tenga en cuenta que el mensaje ServerKeyExchange se transmite sin cifrado, 
+por lo que solo se puede incluir de forma segura información de clave 
+pública. El cliente utilizará la clave pública del servidor para cifrar 
+una clave de sesión, que las partes utilizarán para cifrar los datos de 
+la aplicación para la sesión.
 
 \paragraph*{ServerKeyExchange}
-In this example, the server follows its ServerHello message with a
-ServerKeyExchange message. This message complements the CipherSuite field 
-of the ServerHello. While the CipherSuite field indicates
-the cryptographic algorithms and key sizes, this message contains the
-public key information itself. The exact format of the key information depends
- on the particular public key algorithm used. For the rsa
-algorithm, for example, the server includes the modulus and public
-exponent of the server’s rsa public key.
-Note that the ServerKeyExchange message is transmitted without
-encryption, so that only public key information can be safely included within it.
- The client will use the server’s public key to encrypt
-a session key, which the parties will use to actually encrypt the application
- data for the session.
+
+Este mensaje complementa el campo CipherSuite del ServerHello. 
+Si bien el campo CipherSuite indica los algoritmos criptográficos y 
+los tamaños de clave, este mensaje contiene la información de la clave 
+pública en sí. Tenga en cuenta que el mensaje ServerKeyExchange se 
+transmite sin cifrado, por lo que solo se puede incluir de forma 
+segura información de clave pública. El cliente utilizará la clave 
+pública del servidor para cifrar una clave de sesión, que las partes 
+utilizarán para cifrar los datos de la aplicación para la sesión.
+
 \paragraph*{ServerHelloDone}
-The ServerHelloDone message tells the client that the server has finished with
- its initial negotiation messages. The message itself contains no other 
- information, but it is important to the client, because
-once the client receives a ServerHelloDone, it can move to the next
-phase of establishing the secure communications.
+El mensaje ServerHelloDone le dice al cliente que el servidor ha 
+terminado con sus mensajes iniciales de negociación. El mensaje en 
+sí no contiene otra información, pero es importante para el cliente, 
+porque una vez que el cliente recibe un ServerHelloDone, puede pasar a 
+la siguiente fase para establecer las comunicaciones seguras.
+
 \paragraph*{ClientKeyExchange}
-When the server has finished its part of the initial ssl negotiation,
-the client responds with a ClientKeyExchange message. Just as the
-ServerKeyExchange provides the key information for the server, the
-ClientKeyExchange tells the server the client’s key information. In
-
-this case, however, the key information is for the symmetric encryption 
-algorithm both parties will use for the session. Furthermore, the
-information in the client’s message is encrypted using the public key
-of the server. This encryption protects the key information as it traverses
- the network, and it allows the client to verify that the server
-truly possesses the private key corresponding to its public key. Otherwise,
- the server won’t be able to decrypt this message. This operation is an 
- important protection against an attacker that intercepts
-messages from a legitimate server and pretends to be that server by
-forwarding the messages to an unsuspecting client. Since a fake
-server won’t know the real server’s private key, it won’t be able to decrypt 
-the ClientKeyExchange message. Without the information in
-that message, communication between the two parties cannot succeed.
+Cuando el servidor ha terminado su parte de la negociación ssl inicial, 
+el cliente responde con un mensaje ClientKeyExchange. Así como 
+ServerKeyExchange proporciona la información clave para el servidor, 
+ClientKeyExchange le dice al servidor la información clave del cliente. 
+En este caso, sin embargo, la información clave es para el algoritmo de 
+cifrado simétrico que ambas partes usarán para la sesión. Además, la 
+información del mensaje del cliente se cifra mediante la clave pública 
+del servidor. Este cifrado protege la información de la clave a medida 
+que atraviesa la red y permite al cliente verificar que el servidor 
+realmente posee la clave privada correspondiente a su clave pública. 
+De lo contrario, el servidor no podrá descifrar este mensaje. Esta 
+operación es una protección importante contra un atacante que intercepta 
+mensajes de un servidor legítimo y finge ser ese servidor reenviando los 
+mensajes a un cliente desprevenido. Dado que un servidor falso no conocerá 
+la clave privada del servidor real, no podrá descifrar el mensaje 
+ClientKeyExchange. Sin la información en ese mensaje, la comunicación 
+entre las dos partes no puede tener éxito.
 \paragraph*{ChangeCipherSpec}
-After the client sends key information in a ClientKeyExchange message, 
-the preliminary ssl negotiation is complete. At that point, the
-parties are ready to begin using the security services they have negotiated.
- The ssl protocol defines a special message—
-ChangeCipherSpec—to explicitly indicate that the security services
-should now be invoked.
-Since the transition to secured communication is critical, and both
-parties have to get it exactly right, the ssl specification is very precise
-in describing the process. First, it identifies the set of information
-that defines security services. That information includes a specific
-symmetric encryption algorithm, a specific message integrity algorithm, 
-and specific key material for those algorithms. The ssl specification also 
-recognizes that some of that information (in particular,
-the key material) will be different for each direction of communication. 
-In other words, one set of keys will secure data the client sends
-to the server, and a different set of keys will secure data the server
-sends to the client. (In principle, the actual algorithms could differ as
-well, but ssl does not define a way to negotiate such an option.) For
-any given system, whether it is a client or a server, ssl defines a write
-state and a read state. The write state defines the security information
+Una vez que el cliente envía información clave en un mensaje 
+ClientKeyExchange, se completa la negociación ssl preliminar. En ese 
+momento, las partes están listas para comenzar a utilizar los servicios 
+de seguridad que han negociado.
 
-for data that the system sends, and the read state defines the security
-information for data that the system receives.
-The ChangeCipherSpec message serves as the cue for a system to
-begin using its security information. Before a client or server sends a
-ChangeCipherSpec message, it must know the complete security information it 
-is about to activate. As soon as the system sends this
-message, it activates its write state. Similarly, as soon as a system receives
- a ChangeCipherSpec from its peer, the system activates its
-read state.
+El protocolo ssl define un mensaje especial, ChangeCipherSpec, para 
+indicar explícitamente que ahora se deben invocar los servicios de 
+seguridad. Un conjunto de claves protegerá los datos que el cliente 
+envía al servidor, y un conjunto diferente de claves protegerá los 
+datos que el servidor envía al cliente. Para cualquier sistema dado, 
+ya sea un cliente o un servidor, ssl define un estado de escritura y 
+un estado de lectura. El estado de escritura define la información de 
+seguridad de los datos que envía el sistema y el estado de lectura 
+define la información de seguridad de los datos que recibe el sistema.
 
 GRAFIQUITO Figures 3-2 and 3-3
 
 \paragraph*{Finished}
-Immediately after sending their ChangeCipherSpec messages, each
-system also sends a Finished message. The Finished messages allow
-both systems to verify that the negotiation has been successful and
-that security has not been compromised. Two aspects of the Finished
-message contribute to this security. First, as the previous subsection
-explained, the Finished message itself is subject to the negotiated cipher suite. 
-That means that it is encrypted and authenticated according to that suite.
- If the receiving party cannot successfully decrypt
-and verify the message, then clearly something has gone awry with
-the security negotiation.
-The contents of the Finished message also serve to protect the security of the
- ssl negotiation. Each Finished message contains a cryptographic hash of 
- important information about the just-finished
-negotiation.  Notice that protected data includes the exact content of all
-handshake messages used in the exchange (though ChangeCipherSpec messages 
-are not considered “handshake” messages in the strict
-sense of the word, and thus are not included). This protects against
-an attacker who manages to insert fictitious messages or remove 
-legitimate messages from the communication. If an attacker were able
-to do so, the client’s and server’s hash calculations would not match,
-and they would detect the compromise.
+Inmediatamente después de enviar sus mensajes ChangeCipherSpec, cada 
+sistema también envía un mensaje "Finalizado". Los mensajes "Finalizado" 
+permiten que ambos sistemas verifiquen que la negociación se ha realizado 
+correctamente y que la seguridad no se ha visto comprometida.
 
-\paragraph*{Ending Secure Communications}
+Cada mensaje Finalizado contiene un hash criptográfico de información 
+importante sobre la negociación recién finalizada. Esto protege contra 
+un atacante que logra insertar mensajes ficticios o eliminar mensajes 
+legítimos de la comunicación. Si un atacante pudiera hacerlo, los 
+cálculos de hash del cliente y del servidor no coincidirían y detectarían 
+el compromiso.
 
-Although as a practical matter it is rarely used (primarily due to the
-nature of Web sessions), ssl does have a defined procedure for ending a
- secure communication between two parties. In this procedure,
- the two systems each send a special ClosureAlert to the other.
-Explicitly closing a session protects against a truncation attack, in
-which an attacker is able to compromise security by prematurely terminating
- a communication. 
+\paragraph*{Finalización de las comunicaciones seguras}
 
-\subsubsection*{Authenticating the Server’s Identity}
-previously it was explained how ssl can establish encrypted
-communications between two parties, that may not really add that
-much security to the communication. With encryption alone neither
-party can really be sure of the other’s identity. The typical reason for
-using encryption in the first place is to keep information secret from
-some third party. But if that third party were able to successfully
-masquerade as the intended recipient of the information, then encryption 
-would serve no purpose. The data would be encrypted, but
-the attacker would have all the data necessary to decrypt it.
-To avoid this type of attack, ssl includes mechanisms that allow each
-party to authenticate the identity of the other. With these mechanisms, 
-each party can be sure that the other is genuine, and not a
-masquerading attacker. In this section, we’ll look at how ssl enables a
-server to authenticate itself.
-A natural question is, of course, if authenticating identities is so important,
- why don’t we always authenticate both parties? 
- Aca un ejemplo que sirva en una red interna
- The answer
-lies in the nature of Web commerce. When you want to purchase
-something using your Web browser, it’s very important that the Web
-site you’re browsing is authentic. You wouldn’t want to send your
-credit card number to some imposter posing as your favorite merchant. 
-The merchant, on the other hand, has other means for
-authenticating your identity. Once it receives a credit card number,
-for example, it can validate that number. Since the server doesn’t
-need ssl to authenticate your identity, the ssl protocol allows for
-server authentication only. 
+Aunque, en la práctica, rara vez se utiliza (principalmente debido a la 
+naturaleza de las sesiones web), ssl tiene un procedimiento definido para 
+finalizar una comunicación segura entre dos partes. En este procedimiento, 
+los dos sistemas envían cada uno una alerta de cierre especial al otro. 
+El cierre explícito de una sesión protege contra un ataque de truncamiento,
+en el que un atacante puede comprometer la seguridad al terminar 
+prematuramente una comunicación.
 
-\paragraph*{Certificate}
-When authenticating your identity, the server sends a Certificate message 
-in place of the ServerKeyExchange message previously described. The Certificate 
-message simply contains a certificate chain
-that begins with the server’s public key certificate and ends with the
-certificate authority’s root certificate.
-The client has the responsibility to make sure it can trust the certificate it 
-receives from the server. That responsibility includes verifying
-the certificate signatures, validity times, and revocation status. It also
-means ensuring that the certificate authority is one that the client
-trusts. Typically, clients make this determination by knowing the
-public key of trusted certificate authorities in advance, through some
-trusted means. Netscape and Microsoft, for example, preload their
-browser software with public keys for well-known certificate authorities. 
-Web servers that want to rely on this trust mechanism can only
-obtain their certificates (at least indirectly) from one of these wellknown
- authorities.
+\subsubsection*{Autenticar la identidad del servidor}
+A  nteriormente se explicó cómo SSL puede establecer comunicaciones 
+cifradas entre dos partes, lo que puede no agregar mucha seguridad a 
+la comunicación. Con el cifrado solo, ninguna de las partes puede 
+estar realmente segura de la identidad de la otra. La razón típica 
+para usar el cifrado en primer lugar es mantener la información en 
+secreto de algún tercero. Pero si ese tercero pudiera hacerse pasar 
+con éxito como el destinatario previsto de la información, entonces el 
+cifrado no serviría de nada. Los datos estarían encriptados, pero el 
+atacante tendría todos los datos necesarios para desencriptarlos. Para 
+evitar este tipo de ataques, ssl incluye mecanismos que permiten a cada 
+parte autenticar la identidad de la otra. Con estos mecanismos, cada 
+parte puede estar segura de que la otra es genuina y no un atacante 
+enmascarado. En esta sección, veremos cómo SSL permite que un servidor 
+se autentique.
+
+\paragraph*{Certificado}
+Al autenticar su identidad, el servidor envía un mensaje de certificado 
+en lugar del mensaje ServerKeyExchange descrito anteriormente. El mensaje 
+Certificado simplemente contiene una cadena de certificados que comienza 
+con el certificado de clave pública del servidor y termina con el certificado 
+raíz de la autoridad certificadora.
+
+El cliente tiene la responsabilidad de asegurarse de que puede confiar 
+en el certificado que recibe del servidor. Esa responsabilidad incluye 
+verificar las firmas del certificado, los tiempos de validez y el estado 
+de revocación. También significa asegurarse de que la autoridad de 
+certificación sea una en la que el cliente confíe. Normalmente, los clientes 
+toman esta determinación conociendo la clave pública de las autoridades de 
+certificación confiables de antemano, a través de algunos medios confiables. 
+Microsoft, por ejemplo, carga su software con claves públicas para 
+autoridades de certificación conocidas.
 
 \paragraph*{ClientKeyExchange}
-The client’s ClientKeyExchange message also differs in server authentication, 
-though the difference is not major. When encryption
-only is to be used, the client encrypts the information in the ClientKeyExchange
- using the public key the server provides in its
-ServerKeyExchange message. In this case, of course, the server is authenticating
- itself and, thus, has sent a Certificate message instead of
-a ServerKeyExchange. The client, therefore, encrypts its ClientKeyExchange information 
-using the public key contained in the
-server’s certificate. This step is important because it allows the client
-to make sure that the party with whom it is communicating actually
-possesses the server’s private key. Only a system with the actual private key will 
-be able to decrypt this message and successfully continue the communication.
+El mensaje ClientKeyExchange del cliente también difiere en la autenticación 
+del servidor, aunque la diferencia no es importante. Cuando solo se va a 
+utilizar cifrado, el cliente cifra la información en en mensaje 
+ClientKeyExchange 
+utilizando la clave pública que el servidor proporciona en su mensaje 
+ServerKeyExchange. En este caso, por supuesto, el servidor se está 
+autenticando y, por lo tanto, ha enviado un mensaje de certificado en 
+lugar de un ServerKeyExchange. El cliente, por lo tanto, encripta su 
+información usando la clave pública contenida en el 
+certificado del servidor. Este paso es importante porque le permite 
+al cliente asegurarse de que la parte con la que se está comunicando 
+realmente posee la clave privada del servidor. Solo un sistema con la 
+clave privada real podrá descifrar este mensaje y continuar con éxito 
+la comunicación.
 
-\subsubsection*{Certificate Functionality}
+ 
 
-\paragraph*{Single Domain}
-As the name suggests, a single domain SSL certificate can only be used on a single 
-domain or IP. This is considered the default SSL certificate type. The DV SSL type is
-available at all validation levels.
-\paragraph*{Multi-Domain}
-This SSL type is a jack-of-all-trades certificate. Multi-Domain Wildcards can encrypt
- up to 250 different domains and unlimited sub-domains. Unfortunately, it's not available
-  in EV.
-\paragraph*{Wildcard}
-Wildcards are specifically designed to encrypt one domain and all of its accompanying 
-sub-domains. Unlimited sub-domains. Unfortunately, Wildcards are only available at the 
-DV and OV levels.
-\paragraph*{Multi-Domain Wildcard}
-These are the jack-of-all-trades certificates. Multi-Domain Wildcards can encrypt up 
-to 250 different domains and unlimited sub-domains. Unfortunately, it's not available 
-in EV.
+\subsubsection*{Niveles de validación}
+Hay tres tipos de certificados SSL disponibles en la actualidad: Validación extendida 
+(EV SSL), validación por organización (OV SSL) y validación por dominio (DV SSL). 
+Los niveles de cifrado son los mismos para cada certificado, lo que difiere son los 
+procesos de investigación y verificación necesarios para obtener el certificado.
 
-\subsubsection*{Validation Level}
-There are three types of SSL Certificate available today; Extended Validation 
-(EV SSL), Organization Validated (OV SSL) and Domain Validated (DV SSL). The 
-encryption levels are the same for each certificate, what differs is the vetting
- and verification processes needed to obtain the certificate.
-\paragraph*{Domain Validation (DV)}
-Domain Validation SSL or DV SSL represents the base-level for SSL types. These 
-are perfect for websites that just need encryption and nothing more. DV SSL 
-certificates are typically inexpensive and they can be issued within minutes. That's 
-because the validation process is fully automated. Just prove you own your domain 
-and the DV SSL certificate is yours.
-\paragraph*{Organization Validation (OV)}
-Organization Validation SSL or OV SSL represents the middle ground for SSL certificate 
-types. To obtains OV SSL, your company or organization must undergo light business
- vetting. This can take up to three business days because someone has to verify 
- your business information. OV SSL displays the same visual indicators as DV SSL,
-  but provides a way for your customers to check your verified business information 
-  in the certificate details section.
+\paragraph*{Validación de dominio (DV)}
+Validación de dominio SSL o DV SSL representa el nivel base para los tipos de SSL. 
+Estos son perfectos para sitios web que solo necesitan cifrado y nada más. Los 
+certificados DV SSL suelen ser económicos y se pueden emitir en cuestión de minutos. 
+Eso es porque el proceso de validación está completamente automatizado. Simplemente 
+es necesario demostrar que es propietario de su dominio y que el certificado DV 
+es suyo. 
+
+IMAGEN
+
+\paragraph*{Validación de la organización (OV)}
+Validación de organización u OV SSL representa el término medio para los tipos de 
+certificados SSL. Para obtener OV SSL, su empresa u organización debe someterse a 
+un examen comercial ligero. Esto puede demorar hasta tres días hábiles porque alguien 
+tiene que verificar la información de su empresa. OV SSL muestra los mismos indicadores 
+visuales que DV SSL, pero proporciona una forma de ver la 
+información comercial verificada en la sección de detalles del certificado. 
+
 \paragraph*{Extended Validation (EV)}
-Extended Validation SSL or EV SSL requires extensive business vetting by Comodo. This
- may sound like a lot, but it's really not if your business has publicly available 
- records. EV SSL activates a unique visual indicator – your verified organization name
-  shown in the browser.
+SSL de validación extendida o SSL con EV requiere un exhaustivo examen comercial de 
+Comodo. Esto puede parecer mucho, pero en realidad no lo es si su empresa tiene 
+registros disponibles públicamente. EV SSL activa un indicador visual único: el 
+nombre de su organización verificado que se muestra en el navegador.
+
+IMAGEN
+
+  \subsubsection*{Certificate Functionality}
+
+  \paragraph*{Single Domain}
+  Como sugiere el nombre, un certificado SSL de un solo dominio solo 
+  se puede usar en un solo dominio o IP. Este se considera el tipo de 
+  certificado SSL predeterminado. El tipo de DV está disponible en todos 
+  los niveles de validación.
+  
+  \paragraph*{Multi-Domain}
+  Este tipo de SSL es un certificado para todos los usos. Permiten cifrar 
+  hasta 250 dominios diferentes y subdominios 
+  ilimitados. Desafortunadamente, no está disponible en EV.
+  
+  \paragraph*{Wildcard}
+  
+  Los Wildcard están diseñados específicamente para cifrar un dominio y 
+  todos los subdominios que lo acompañan. Subdominios ilimitados. 
+  Desafortunadamente, los Wildcard solo están disponibles en los 
+  niveles DV y OV.
+  
+  \paragraph*{Multi-Domain Wildcard}
+  Los Wildcard multidominio pueden cifrar hasta 250 dominios diferentes 
+  y subdominios ilimitados. Desafortunadamente, no está disponible en EV.
 
   
 \subsubsection*{Identifier Validation Challenges}
@@ -496,79 +468,74 @@ object in a POST request to a challenge URL.
 
 \paragraph*{HTTP Challenge}
 
-   With HTTP validation, the client in an ACME transaction proves its
-   control over a domain name by proving that it can provision HTTP
-   resources on a server accessible under that domain name.  The ACME
-   server challenges the client to provision a file at a specific path,
-   with a specific string as its content.
+Con la validación HTTP, el cliente prueba su control sobre un nombre de dominio al 
+demostrar que puede guardar recursos HTTP en un servidor accesible bajo ese nombre 
+de dominio. El servidor ACME desafía al cliente solicitándole un archivo en una ruta 
+específica, con una cadena específica como contenido.
 
-   This is the most common challenge type today. The server gives a
-   token to your ACME client, and your ACME client puts a file on your web 
-   server at {http://\<YOUR\_DOMAIN\>/.well-known/acme-challenge/\<TOKEN\>}. That 
-   file contains the token, plus a thumbprint of your account key. 
+Este es el tipo de desafío más común en la actualidad. El servidor le da un token 
+a su cliente ACME y su cliente ACME coloca un archivo en su servidor web 
+en {http://\<SU\_DOMINIO\>/.well-known/acme-challenge/\<TOKEN\>}. Ese archivo contiene 
+el token, más una huella digital de la clave de su cuenta.
 
-   Once the client tells to the server that the file is ready, the server 
-   tries retrieving it.On receiving a response, the server constructs and stores the key
-   authorization from the challenge "token" value and the current client
-   account key.
+Una vez que el cliente le dice al servidor que el archivo está listo, el servidor 
+intenta recuperarlo. Al recibir una respuesta, el servidor construye y almacena la 
+autorización de la clave a partir del valor del "token" de desafío y la clave de 
+la cuenta del cliente actual.
 
-   Given a challenge/response pair, the server verifies the client's
-   control of the domain by verifying that the resource was provisioned
-   as expected.
+Dado un par de desafío/respuesta, el servidor verifica el control del dominio por 
+parte del cliente verificando que el recurso se aprovisionó como se esperaba.
 
-   (TAL VEZ PARA LA PRESENTACION)
+Ventajas:
 
-   Pros:
+\begin{itemize}
+   \item Es fácil de automatizar sin conocimientos adicionales sobre la configuración de un dominio.
+   \item Funciona con servidores web estándar.
+\end{itemize}
 
-    It’s easy to automate without extra knowledge about a domain’s configuration.
-    It allows hosting providers to issue certificates for domains CNAMEd to them.
-    It works with off-the-shelf web servers.
-
-   Cons:
-
-    It doesn’t work if your ISP blocks port 80 (this is rare, but some residential ISPs do this).
-    Let’s Encrypt doesn’t let you use this challenge to issue wildcard certificates.
-    If you have multiple web servers, you have to make sure the file is available on all of them.
-
-   (EXPLICAR POR QUE NO PUEDO USAR ESTE DESAFIO)
-
-\paragraph*{DNS Challenge}
-   When the identifier being validated is a domain name, the client can
-   prove control of that domain by provisioning a TXT resource record
-   containing a designated value for a specific validation domain name.
-
-   A client fulfills this challenge by constructing a key authorization
-   from the "token" value provided in the challenge and the client's
-   account key.  The client then computes the SHA-256 digest 
-   of the key authorization.
-
-   The record provisioned to the DNS contains the base64url encoding of
-   this digest.  The client constructs the validation domain name by
-   prepending the label {\_acme-challenge} to the domain name being
-   validated, then provisions a TXT record with the digest value under
-   that name.  For example, if the domain name being validated is
-   "www.example.org", then the client would provision the following DNS
-   record:
-   \_acme-challenge.www.example.org. 300 IN TXT "gfj9Xq...Rg85nM"
+Desventajas:
+\begin{itemize}
+   \item No funciona si su ISP bloquea el puerto 80 (esto es raro, pero algunos ISP residenciales lo hacen).
+   \item Let's Encrypt no le permite utilizar este desafío para emitir certificados Wildcard.
+   \item Si tiene varios servidores web, debe asegurarse de que el archivo esté disponible en todos ellos.
+\end{itemize}
    
-   On receiving a response, the server constructs and stores the key
-   authorization from the challenge "token" value and the current client
-   account key.
+(EXPLICAR POR QUE NO PUEDO USAR ESTE CHALENGE EN ESTE PROYEXTO)
 
-   To validate a DNS challenge, the server performs the following steps:
 
-   1.  Compute the SHA-256 digest of the stored key
-       authorization
+\paragraph*{Desafío DNS}
+Cuando el identificador que se está validando es un nombre de dominio, el cliente 
+puede demostrar el control de ese dominio proporcionando un registro dns de tipo 
+TXT que contenga un valor designado para el nombre de dominio.
 
-   2.  Query for TXT records for the validation domain name
+Un cliente cumple este desafío construyendo una clave de autorización a partir del 
+valor de un token proporcionado y la clave de la cuenta del cliente. A continuación, el 
+cliente calcula un hash (REVISAR HASH, la palabra es digest) SHA-256 de la clave de 
+autorización.
+El registro proporcionado al DNS contiene la codificación de URL base64 de este 
+hash(REVISAR). 
 
-   3.  Verify that the contents of one of the TXT records match the
-       digest value
+\noindent Ejemplo:
 
-   If all of the above verifications succeed, then the validation is
-   successful.  If no DNS record is found, or DNS record and response
-   payload do not pass these checks, then the validation fails.
+Si se desea validar el nombre de dominio "www.ejemplo.org", el cliente 
+proporcionaría el siguiente registro DNS:
 
-   The client SHOULD de-provision the resource record(s) provisioned for
-   this challenge once the challenge is complete, i.e., once the
-   "status" field of the challenge has the value "valid" or "invalid".
+\begin{verbatim}
+   _acme-challenge.www.ejemplo.org: "gfj9Xq...Rg85nM"
+\end{verbatim}
+
+Al recibir una respuesta, el servidor construye y almacena la llave de autorización
+clave a partir del valor del "token" del desafío y la clave de la cuenta del cliente actual.
+
+\noindent Para validar un desafío de DNS, el servidor realiza los siguientes pasos:
+
+\begin{enumerate}
+   \item Calcula el hash (REVISAR) SHA-256 de la clave de autorización almacenada
+   \item Consulta los registros TXT para el nombre de dominio de validación.
+   \item Verifica que el contenido de uno de los registros TXT coincida con el valor de hash.
+\end{enumerate}
+
+   
+Si todas las verificaciones anteriores tienen éxito, entonces la validación es exitosa. 
+Si no se encuentra ningún registro DNS, o si el registro DNS y el contenido del mismo 
+no pasan estas comprobaciones, la validación falla.

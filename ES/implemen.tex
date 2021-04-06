@@ -3,87 +3,90 @@
 % Capitulo: Implementacion de la solución propuesta
 %----------------------------------------------------------------------
 
-
+\section{Propuestas: Introducción}
 
 Se han investigado tres alternativas enfocadas en redes internas mara mejorar la seguridad de las 
-mismas, luego de eso se eligió la que mas ventajas ons ofrecio.
+mismas, luego de eso se eligió la que mas ventajas nos ofreció.
 Vimos tres alternativas posibles: Los certificados auto-firmado (Self-signed Certificates), implementar
 una entidad certificante interna, y la utilizacion de un certificado emitido por una entidad
 certificante conocida
 
-\section{Self-signed Certificates}
-Self-signed certificates are the least useful of the three. Firefox
-makes it easier to use them safely; you create an exception on the
-first visit, after which the self-signed certificate is treated as valid
-on subsequent connections. Other browsers make you clickthrough a certificate
- warning every time.Unless you’re
-actually checking the certificate fingerprint every time, it is not
-possible to make that self-signed certificate safe. Even with
-Firefox, it might be difficult to use self-signed certificates safely.
+\section{Propuesta 1: Self-signed Certificates}
+Los certificados autofirmados son los menos útiles de los tres. Firefox facilita su uso 
+de forma segura; crea una excepción en la primera visita, después de lo cual el 
+certificado autofirmado se considera válido en las conexiones posteriores. Otros 
+navegadores hacen que haga clic en una advertencia de certificado cada vez. A menos 
+que esté comprobando la huella digital del certificado cada vez, no es posible hacer 
+que ese certificado autofirmado sea seguro. Incluso con Firefox, puede resultar 
+difícil utilizar estos certificados de forma segura.
 
-For example, to request an SSL certificate from a trusted CA like Verisign or GoDaddy, you send them a 
-Certificate Signing Request (CSR), and they give you a certificate in return, that they signed
- using their root certificate and private key. All browsers have a copy (or access a copy from
-  the operating system) of them root certificate, so the browser can verify that your certificate
-   was signed by a trusted CA.
+Por ejemplo, para solicitar un certificado SSL de una CA de confianza como Verisign o 
+GoDaddy, se debe enviae una Solicitud de firma de certificado (CSR) y te dan un 
+certificado a cambio, que firmaron con su certificado raíz y clave privada. Todos 
+los navegadores tienen una copia (o acceden a una copia desde el sistema operativo) 
+del certificado raíz, por lo que el navegador puede verificar que su certificado 
+fue firmado por una CA confiable.
 
-When we generate a self-signed certificate, we generate our own root certificate and private 
-key. Because you generate a self-signed certificate the browser doesn’t trust it. It’s 
-self-signed. It hasn’t been signed by a CA. All certificates that we generate and sign will 
-be inherently trusted.
+Cuando generamos un certificado autofirmado, generamos nuestro propio certificado 
+raíz y clave privada. Debido a que genera un certificado autofirmado, el navegador 
+no confía en él. Está autofirmado. No ha sido firmado por una CA. Todos los 
+certificados que generamos y firmamos serán de confianza inherente.
 
 La principal dificultad es que los usuarios siempre encontrarán una advertencia 
 donde el navegador diga que se encuentra en un sitio con un certificado autofirmado. 
-En la mayoria de los casos, no verificarán que el certificado es el correcto, por lo que 
-generará desconfianza en los usuarios.
+En la mayoría de los casos, no verificarán que el certificado es el correcto, por 
+lo que generará desconfianza en los usuarios.
 
-Today, self-signed certificates are considered insecure because there is no way for average users to
-differentiate them from self-signed MITM certificates. In other words, all self-signed certificates
-look the same. But, we can use a secure DNS to pin the certificate, thus allowing our user agent to
-know that they are using the right one. MITM certificates are easily detected.
+En prácticamente todos los casos, un enfoque mucho mejor es utilizar una CA privada, 
+que es nuestra próxima propuesta. Requiere un poco más de trabajo por adelantado, 
+pero una vez que la infraestructura está establecida y la clave raíz se distribuye 
+de manera segura a todos los usuarios, dichas implementaciones son tan seguras como 
+el resto del ecosistema PKI.
 
-In virtually all cases, a much better approach is to use a private
-CA. It requires a little more work upfront, but once the
-infrastructure is in place and the root key is safely distributed to
-all users, such deployments are as secure as the rest of the PKI
-ecosystem.
-\section{Internal CA}
+\section{Propuesta 2: Internal CA}
 
+(FALTA MAS MARCO TEORICO)
 Aca se tiene que decir: "Como se explicó anteriormente, una entidad de certificacion es ..."
 Esta alternativa implica establecer una entidad de certificacion interna a la red privada. Esto se hace 
 mediente un servidor dedicado que certifique los certificados que circulen internamente.
 Como ventaja se tiene que ... 
 
-Advantages internal Certificate Authority (CA)
+Ventajas de la autoridad de certificación interna (CA)
 
-• Simplified and ease of management is the main advantage of using internal Certificate 
-Authority (CA). There is no need to depend an external entity for certificates.
+• La administración simplificada y fácil es la principal ventaja de utilizar una autoridad de 
+certificación (CA) interna. No es necesario depender de una entidad externa para los certificados.
 
-• In a Microsoft Windows environment, internal Certificate Authority (CA) can be integrated in Active
- Directory. This further simplifies the management of the CA structure.
+• En un entorno de Microsoft Windows, la Autoridad de certificación (CA) interna se puede 
+integrar en Active Directory. Esto simplifica aún más la gestión de la estructura de la CA.
 
-• There is no cost per certificate wen you are using an internal Certificate Authority (CA).
+• No hay ningún costo por certificado cuando utiliza una Autoridad de certificación (CA) 
+interna.
 
-Disadvantages of internal Certificate Authority (CA)
+Desventajas de la autoridad certificadora (CA) interna
 
-• Implementing internal Certificate Authority (CA) is more complicated than using external 
-Certificate Authority (CA).
+• Implementar una autoridad certificadora (CA) interna es más complicado que utilizar una 
+autoridad certificadora (CA) externa.
 
-• The security and accountability of Public Key Infrastructure (PKI) is completely on the 
-organization's shoulder.
+• La seguridad y la responsabilidad de la infraestructura de clave pública (PKI) está 
+completamente sobre el hombro de la organización.
 
-• External parties/users normally will not trust a digital certificate signed by an internal Certification 
-Authority (CA).
+• Las partes / usuarios externos normalmente no confiarán en un certificado digital 
+firmado por una Autoridad de Certificación (CA) interna.
 
-• The certificate management overhead of internal Certification Authority (CA) is higher than that 
-of external Certification Authority (CA).
+• La sobrecarga de gestión de certificados de la Autoridad de certificación (CA) interna es 
+mayor que la de la Autoridad de certificación (CA) externa.
 
-La desventaja por la que decidí ir por una mejor opcion fue que, se debe establecer individualmente en cada uno de los hosts pertenecientes
-a la red privada que nuestra entidad certificante es de confianza, lo que puede llevar un gran trabajo de los administradores, y, 
-aun asi, pueden suceder que en nuestra red se conecten agentes externos a nuestra organizacion, por lo 
-que no podremos realizar la configuración mencionada
+La desventaja por la que decidí ir por una mejor opcion fue que, se debe establecer 
+individualmente en cada uno de los hosts pertenecientes a la red privada que nuestra entidad 
+certificante es de confianza, lo que puede llevar a cabo un gran trabajo de los administradores, 
+y, aun asi, pueden suceder que en nuestra red se conecten agentes externos a nuestra 
+organizacion, por lo que no podremos realizar la configuracion mencionada.
 
-\section{Cerfification with let's encrypt}
+\subsection{Caso de estudio: Creando nuestra propia Entidad Certificante privada}
+\input{dns}
+\input{ca}
+
+\section{Propuesta 3: Cerfification with let's encrypt}
 Esta estrategia consiste en generar un certificado wildrau, y utilizarlo en cada sitio de la organizacion
 Para esto se debe tener un dominio, en mi caso, salvadorcatalfamo.com, tener la propiedad del dominio
 implica poder manejar registros dns del mismo, que es lo que requiere letsencript para poder verificar el mismo

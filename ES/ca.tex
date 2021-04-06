@@ -1,0 +1,154 @@
+\subsubsection*{Creación de nuestra CA en Docker}
+
+La estrategia para crear nuestra ca será seguir los pasos que se deberian realizar en un servidor 
+habitual, pero partiendo desde una imagen de docker de ubuntu (de stock), y luego realizando un 
+commit de estas configuraciones. Luego, archivos importantes como el el certificado root y la llave
+privada deberan resguardarse, o simplemente resguardar el contenedor creado. 
+
+\noindent Como primer paso, corremos una imagen del sistema operativo Ubuntu
+
+\begin{verbatim}
+    docker run -it -v $PWD/ca:/root/ca ubuntu
+\end{verbatim}
+
+\noindent Hay que ver las cosas que se hacen una vez, y las cosas que deben estar configuradas
+
+\begin{verbatim}
+    apt-get update
+    apt-get install ntp
+    apt-get install openssl
+\end{verbatim}
+
+\noindent Setear el hostname al contenedor, hay una linea con la ip del contenedor y el nombre del mismo, 
+que es utilizado como hostname, en nuestro caso
+\begin{verbatim}
+    172.17.0.2      080dec560726
+\end{verbatim}
+
+\noindent Lo cambiamos por un hostname con el dominio incluido
+\begin{verbatim}
+    172.17.0.2      ca.salvadorcatalfamo.intra
+\end{verbatim}
+
+\noindent Creamos las carpetas para mejor organizacion
+\begin{verbatim}
+    mkdr newcerts
+    mkdir certs
+    mkdir crl
+    mkdir private
+    mkdir requests
+\end{verbatim}
+
+\noindent Creamos un archivo vacio y un archivo que contiene el primer numero de serie para los certificados 
+\begin{verbatim}
+    touch index.txt
+    echo '1234' > serial
+\end{verbatim}
+
+\noindent Luego hay que crear la llave privada y el certificado root, en este caso nos pedira una contraseña, si este servidor se usará en un ambiente de producción, deberá ser una contraseña compleja
+
+\begin{verbatim}
+    openssl genrsa -aes256 -out private/cakey.pem
+\end{verbatim}
+
+\noindent Una vez que generamos la llave privada, la misma será utilizada como entrada en la creación de 
+nuestro certificado root. Nos pedirá algunos datos de localización y relacionados a la 
+organización
+
+\begin{verbatim}
+    open ssl req -new -x509 -key /root/ca/private/cakey.pem -out cacert.pem -days 3650
+\end{verbatim}
+
+\noindent Cambiamos los permisos de los archivos que creamos
+\begin{verbatim}
+    chmod 600 -R /root/ca
+\end{verbatim}
+
+\noindent Realizamos unas modificaciones en el archivo de configuración
+\begin{verbatim}
+    vim /usr/lib/ssl/openssl.cnf
+\end{verbatim}
+
+ 
+Lo único que se tiene que cambiar es la siguiente línea 
+ 
+Por la direcciona de los certificados, en nuestro caso el directorio /root/ca
+Luego cambiamos algunas configuraciones opcionales de políticas.
+
+Una vez que realizamos estos pasos, estamos listos para realizar el commit de la imagen, con esto,
+todos los pasos que realizamos (instalar los paquetes, modificar los archivos de configuración, etc)
+no son necesarios que se ejecuten nuevamente.
+
+Para realizar un commit, y que nuestro contenedor sea fácilmente identificable, deberemos seguir 
+los siguientes pasos
+
+\begin{verbatim}
+    docker ps -a #identificamos el ultimo contenedor utilizado
+\end{verbatim}
+ 
+(IMAGEN DOCKER-PS-A)
+
+\begin{verbatim}
+    docker commit {id_del_contenedor} 
+    docker image ls #Identificamos la imagen recien creada, no tendrá ni repositorio ni tag
+\end{verbatim}
+
+(IMAGEN DOCKER IMAGE LS)
+
+\begin{verbatim}
+    docker image ls #Identificamos la imagen recien creada, con repositorio y tag
+\end{verbatim}
+
+(IMAGEN DOCKER IMAGE LS 2)
+
+\begin{verbatim}
+    docker run -it -v $PWD/ca:/root/ca ca:1.0
+\end{verbatim}
+
+Em el comando anterior, estamos asumiendo que queremos compartir los archivos de la CA con el servidor 
+host.
+
+Ahora cada vez que querramos correr nuestra ca, lo haremos de la siguiente manera 
+
+\input{nginx}
+
+\subsubsection*{Creando nuestro certificado}
+
+Para firmar un certificado, el servidor donde se alojará la web debe realizar una solicitud, 
+donde nuestra CA retornará el certificado firmado. Desde el servidor web en cuestión, se debe 
+crear una llave privada privada:
+
+\begin{verbatim}
+    Openssl genrsa -aes256 -out webserver.pem 2048
+\end{verbatim}
+
+\noindent Luego, se deberá crear la solicitud de firma de certificado:
+\begin{verbatim}
+    Openssl req -new -key webserver.pem -out webserver.csr
+\end{verbatim}
+
+\noindent Luego enviamos esta solicitud y la firmamos en nuestra CA, esta solicitud la vamos a colocar en el directorio /root/ca/requests
+\begin{verbatim}
+    Open ssl cd -in webserver.csr -out webserber.crt
+\end{verbatim}
+
+\subsubsection*{Configuración del certificado en el servidor web}
+\noindent Una vez que tenemos este certificado, lo colocamos en en el servidor web y lo configuramos. Para el caso de ngixn, se debe:
+
+…
+…
+
+\noindent Ahora vamos a ver el navegador, podemos ver que aunque tenga el certificado instalado, no es confiable ya que nuestra entidad certificante no esta configurada como confiable.
+
+…
+
+\noindent Para instalar esta nueva CA en windows, debemos seguir los siguientes pasos.
+
+…
+…
+
+\noindent Luego, ya podemos ver que nuestra página aparece como una web confiable.
+
+
+
+
