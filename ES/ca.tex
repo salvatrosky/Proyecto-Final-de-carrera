@@ -1,9 +1,12 @@
 \subsubsection*{Creación de nuestra CA en Docker}
 
-La estrategia para crear nuestra ca será seguir los pasos que se deberian realizar en un servidor 
-habitual, pero partiendo desde una imagen de docker de ubuntu (de stock), y luego realizando un 
+La estrategia para crear nuestra CA será seguir los pasos que se deberían realizar en un servidor 
+habitual, pero partiendo desde una imagen de docker de Ubuntu (de stock), y luego realizando un 
 commit de estas configuraciones. Luego, archivos importantes como el el certificado root y la llave
 privada deberan resguardarse, o simplemente resguardar el contenedor creado. 
+
+Se utilizó esta estrategia ya que no habia habia imágenes oficiales que nos sirva para tal fin, por el 
+simple hecho de que únicamente se requiere tener instalado openssl y configurado.
 
 \noindent Como primer paso, corremos una imagen del sistema operativo Ubuntu
 
@@ -45,10 +48,12 @@ que es utilizado como hostname, en nuestro caso
     echo '1234' > serial
 \end{verbatim}
 
-\noindent Luego hay que crear la llave privada y el certificado root, en este caso nos pedira una contraseña, si este servidor se usará en un ambiente de producción, deberá ser una contraseña compleja
+\noindent Luego hay que crear la llave privada y el certificado root, en este caso nos pedira una contraseña, si este servidor 
+se usará en un ambiente de producción, deberá ser una contraseña compleja.
 
 \begin{verbatim}
     openssl genrsa -aes256 -out private/cakey.pem
+
 \end{verbatim}
 
 \noindent Una vez que generamos la llave privada, la misma será utilizada como entrada en la creación de 
@@ -56,7 +61,7 @@ nuestro certificado root. Nos pedirá algunos datos de localización y relaciona
 organización
 
 \begin{verbatim}
-    open ssl req -new -x509 -key /root/ca/private/cakey.pem -out cacert.pem -days 3650
+    openssl req -new -x509 -key /root/ca/private/cakey.pem -out cacert.pem -days 3650
 \end{verbatim}
 
 \noindent Cambiamos los permisos de los archivos que creamos
@@ -101,6 +106,7 @@ los siguientes pasos
 
 (IMAGEN DOCKER IMAGE LS 2)
 
+Ahora cada vez que querramos correr nuestra ca, lo haremos de la siguiente manera
 \begin{verbatim}
     docker run -it -v $PWD/ca:/root/ca ca:1.0
 \end{verbatim}
@@ -108,7 +114,7 @@ los siguientes pasos
 Em el comando anterior, estamos asumiendo que queremos compartir los archivos de la CA con el servidor 
 host.
 
-Ahora cada vez que querramos correr nuestra ca, lo haremos de la siguiente manera 
+ 
 
 \input{nginx}
 
@@ -119,33 +125,38 @@ donde nuestra CA retornará el certificado firmado. Desde el servidor web en cue
 crear una llave privada privada:
 
 \begin{verbatim}
-    Openssl genrsa -aes256 -out webserver.pem 2048
+    openssl genrsa -aes256 -out webserver.pem 2048
 \end{verbatim}
 
 \noindent Luego, se deberá crear la solicitud de firma de certificado:
 \begin{verbatim}
-    Openssl req -new -key webserver.pem -out webserver.csr
+    openssl req -new -key webserver.pem -out webserver.csr
 \end{verbatim}
 
-\noindent Luego enviamos esta solicitud y la firmamos en nuestra CA, esta solicitud la vamos a colocar en el directorio /root/ca/requests
+\noindent Luego enviamos esta solicitud y la firmamos en nuestra CA, esta solicitud la vamos a colocar 
+en el directorio /root/ca/requests
 \begin{verbatim}
-    Open ssl cd -in webserver.csr -out webserber.crt
+    openssl ca -in webserver.csr -out webserber.crt
 \end{verbatim}
 
 \subsubsection*{Configuración del certificado en el servidor web}
-\noindent Una vez que tenemos este certificado, lo colocamos en en el servidor web y lo configuramos. Para el caso de ngixn, se debe:
+\noindent Una vez que tenemos este certificado, lo colocamos en en el servidor web y 
+lo configuramos. Para el caso de ngixn, se debe editar el archivo de configuración 
+correspondiente a nuestra web, que en este caso es "pagina1.salvadorcatalfamo.intra"
+con el fin de que el mismo pueda localizar correctamente los certificados firmados recientemente.
+Adicionalmente, se puede obligar a que cada requerimiento sea redirigido a una conexión
+segura mediante SSL.
 
-…
+
+\noindent Ahora vamos a ver el navegador, podemos ver que aunque tenga el certificado instalado, no es confiable 
+ya que nuestra entidad certificante no esta configurada como confiable.
+
+ (HAY CAPTURAS)
 …
 
-\noindent Ahora vamos a ver el navegador, podemos ver que aunque tenga el certificado instalado, no es confiable ya que nuestra entidad certificante no esta configurada como confiable.
-
-…
-
-\noindent Para instalar esta nueva CA en windows, debemos seguir los siguientes pasos.
-
-…
-…
+Luego de establecer en nuestra computadora, y, particulamente en nuestro navegador Mozilla, que la 
+entidad certificante creada es confiable, es posible ver que nuestra conexión es segura, como muestra 
+la siguiente captura.
 
 \noindent Luego, ya podemos ver que nuestra página aparece como una web confiable.
 

@@ -8,16 +8,25 @@
 
 
 % se pone una introducci�n al tema en general
-A lo largo de la carrera, hemos visto como las organizaciones abordan los temas de seguridad en sus sistemas informáticos. Mayormente, se concentran en los equipos que están expuestos a la red pública, dejando de lado los que se encuentran aislados de la misma. Erróneamente, se piensa que esto es suficiente, sin embargo, puede traer graves inconvenientes. Por la red interna circulan credenciales, mails, o información sin cifrar crítica, que, si se llegase a filtrar, traerían severos problemas a la organización.  Es por eso que realizaremos un estudio teórico/práctico sobre las consecuencias de la navegación y transferencia de información en redes internas sin cifrado de datos ni certificaciones. 
-El trabajo se dividirá en tres secciones, en primera instancia, se demostrará, con herramientas de fácil acceso y, sin un amplio conocimiento, como se puede obtener la información que pasa por la red. En segunda instancia, se utilizarán las herramientas Docker y Let’s Encript para paliar esta situación, y, por último, se analizarán los resultados obtenidos.
+A lo largo de la carrera, y, particulamente, en una de mis materias preferidas, 
+Seguridad en Sistemas, nos han explicado la importancia la protección de los 
+datos, como asi también la de los canales de comunicación. Mientras se desarrolla 
+una red segura, se debe considerar la confidencialidad, integridad y disponibilidad 
+(CIA). 
+
+También, en nuestra corta experiencia hemos visto como las organizaciones 
+abordan los temas de seguridad en sus sistemas informáticos. Mayormente, se 
+concentran en los equipos que están expuestos a la red pública, dejando de 
+lado los que se encuentran aislados de la misma. Erróneamente, muchas veces 
+se piensa que es suficiente, sin embargo, puede traer graves inconvenientes. 
+Es por eso que realizaremos un estudio teórico/práctico sobre las consecuencias 
+de la navegación en redes internas sin ningún tipo de cifrado de datos ni 
+certificaciones.
+
 \section{Objetivos}
 
-Hence, not only the nodes but the communication channel should also be secured.
-While developing a secure network, Confidentiality, Integrity, Availability (CIA)
-needs to be considered
-
-
 \begin{itemize}
+    \setlength\itemsep{-0.6em}
     \item Aplicar los conocimientos en seguridad en redes para desplegar aplicaciones de red.
     \item Aprender el uso de nuevas herramientas de administración, automatización y seguridad en sistemas.
     \item Montar un escenario virtual que sirva de pruebas frente a la gestión de certificados, administración de la infraestructura y a la detección de debilidades dentro una red privada.
@@ -33,12 +42,8 @@ El trabajo se dividirá en tres etapas de trabajo:
 
 -	Segunda: Se plantearán escenarios de trabajo buscando adquirir experiencia en la utilización de la herramienta Docker, para poder obtener parámetros que nos permitan realizar comparaciones con tecnologías similares y sus áreas de aplicación.
 
--	Tercera: Se implementará un servidor dedicado a ciertos aspectos de la seguridad: 
+-	Tercera: Se investigarán e implementarán posibles soluciones para afrontar los 
+aspectos planteador en la primera etapa 
 
-1.	Proxy que se encargue de los certificados ssl de los hosts pertenecientes a la red LAN, obtención y validación diaria de los mismos contra la autoridad de certificación (CA) Let’s Encript.
-
-2.	Recopilación automática de datos sobre los inicios de sesión en cada uno de los hosts pertenecientes a la organización.
-
-3.	Recopilación automática de datos sobre los permisos que poseen los usuarios de la organización.
 
 

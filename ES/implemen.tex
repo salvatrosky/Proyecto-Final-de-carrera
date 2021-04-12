@@ -82,7 +82,7 @@ certificante es de confianza, lo que puede llevar a cabo un gran trabajo de los 
 y, aun asi, pueden suceder que en nuestra red se conecten agentes externos a nuestra 
 organizacion, por lo que no podremos realizar la configuracion mencionada.
 
-\subsection{Caso de estudio: Creando nuestra propia Entidad Certificante privada}
+\subsection{Caso de estudio: Creando nuestra Entidad Certificante privada}
 \input{dns}
 \input{ca}
 
@@ -202,5 +202,29 @@ Tal vez la cantidad de dominios gratis
 Tal vez la duracion de validez del certificado
 Tal vez la confiabilidad
 
+\section{Caso de estudio: Buscando credenciales en tráfico seguro}
+
+Luego de ver las diversas soluciones propuestas, una parte importante de 
+nuestro proyecto fue verificar que verdaderamente aumenta la seguridad
+cuando nuestro tráfico va encriptado. Para este caso de estudio, se utilizó
+el mismo formulario propuesto en la sección \ref{secCaseOfStudy}, lo 
+único que con servidores en distintas direcciones.
+
+Dado que el proceso de capturar el tráfico en una red interna fue
+explicado previamente, se van a mostrar únicamente los paquetes capturados
+desde la primera solicitud hasta el envío del formulario
+
+(IMAGEN)
+
+En esta captura podemos observar que:
+\begin{itemize}
+   \item No es posible determinar, a diferencia de nuestro caso de 
+   estudio, a simple vista cual es el paquete 
+   en el cual se envía la información critica.
+   \item Viendo el contenido de cada uno de los paquetes mostrados,
+   tampoco es posible ver las credenciales completadas en el formulario, 
+   que obviamente son de nuestro conocimiento.
+   \item Se establece una conexión segura a traves del protocolo TCP.
+\end{itemize}
 
 

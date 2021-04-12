@@ -21,14 +21,6 @@ En este proyecto, explotaremos esta vulnerabilidad para demostrar la facilidad
  con la que un agente puede hacerse de nuestro tráfico.
 
 
-\section{(posible a irse) Ataques a traves de la longitud del elemento del protocolo}
-
-Debido a que HTTP utiliza principalmente campos textiales delimitados por caracteres,
-los analizadores a menudo son vulnerables a ataques basados en el envío de 
-flujos de datos muy largos (o muy lentos), particularmente cuando una 
-implementación espera un elemento de protocolo sin una longitud predefinida.
-
-
 \section{División de respuesta}
 
 
@@ -119,5 +111,6 @@ activos son los  siguientes:
 
 
 \section{Caso de estudio: Interceptando la red para obtener credenciales}
+\label{secCaseOfStudy}
 \input{caseOfStudy}
 

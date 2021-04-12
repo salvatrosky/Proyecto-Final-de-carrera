@@ -1,4 +1,4 @@
-\subsection{Protocolo HTTP}
+\section{Protocolo HTTP}
 
 El Protocolo de transferencia de hipertexto (HTTP) es un protocolo de 
 solicitud/respuesta “stateless” (sin estado) que utiliza semántica 
@@ -36,9 +36,9 @@ evolucionado con el tiempo para soportar las necesidades de
 
 HTTP es un protocolo de solicitud/respuesta que opera intercambiando 
 mensajes a través de una ``conexión'' en la capa de sesión o transporte.
- Un "cliente" HTTP es un programa que establece una conexión a un 
+ Un “cliente” HTTP es un programa que establece una conexión a un 
  servidor con el propósito de enviar una o más solicitudes HTTP. 
- Un "servidor" HTTP es un programa que acepta conexiones para
+ Un “servidor” HTTP es un programa que acepta conexiones para
   atender solicitudes HTTP mediante el envío de respuestas HTTP. 
   La mayoría de las comunicaciones HTTP consisten en una solicitud
    (GET) de algún recurso identificado por un URI. En el caso más 
@@ -72,7 +72,7 @@ Un cliente envía una solicitud HTTP a un servidor en forma de mensaje
 
 \subsubsection*{Ejemplo}
 El siguiente ejemplo ilustra un intercambio de mensajes típico 
-para una solicitud GET a la direccion "http://www.example.com/hello.txt":
+para una solicitud GET a la direccion “http://www.example.com/hello.txt”:
 
 \bigskip
 \noindent
@@ -103,7 +103,8 @@ para una solicitud GET a la direccion "http://www.example.com/hello.txt":
 
 El protocolo HTTP contiene varios método, comopor ejemplo PUT, HEAD, DELETE, etc. Sin
 embargo, para nuestro trabajo explicaremos los dos mas utilizados GET y POST, lo que
-nos permitirá tener una base a la hora del caso de estudio del capitulo \ref{capCaseOfStudy}
+nos permitirá tener una base a la hora del caso de estudio de la 
+sección \ref{secCaseOfStudy}
 
 %CONNECT OPTIONS TRACE PUT 
 
@@ -141,7 +142,7 @@ las siguientes funciones (entre otras):
 \end{itemize}
 
 
-\subsection{Response Status Codes} 
+\subsection{Códigos de respuesta} 
 El código de estado es un número entero de tres dígitos que da el 
 resultado del intento de comprender y satisfacer la solicitud.
 
@@ -174,7 +175,7 @@ resultado del intento de comprender y satisfacer la solicitud.
        solicitud aparentemente válida
 
 
-\subsection{HTTPS con SSL} 
+\subsection{HTTP con Seguridad SSL} 
 
 Con una comprensión mínima de los conceptos la criptografía, podemos 
 observar cómo funciona el protocolo Secure Sockets Layer (ssl). Aunque
@@ -318,7 +319,7 @@ GRAFIQUITO Figures 3-2 and 3-3
 
 \paragraph*{Finished}
 Inmediatamente después de enviar sus mensajes ChangeCipherSpec, cada 
-sistema también envía un mensaje "Finalizado". Los mensajes "Finalizado" 
+sistema también envía un mensaje “Finalizado”. Los mensajes “Finalizado” 
 permiten que ambos sistemas verifiquen que la negociación se ha realizado 
 correctamente y que la seguridad no se ha visto comprometida.
 
@@ -454,7 +455,7 @@ IMAGEN
 ACME uses an extensible challenge/response framework for identifier
 validation.  The server presents a set of challenges in the
 authorization object it sends to a client (as objects in the
-"challenges" array), and the client responds by sending a response
+“challenges” array), and the client responds by sending a response
 object in a POST request to a challenge URL.
 
    Different challenges allow the server to obtain proof of different
@@ -480,7 +481,7 @@ el token, más una huella digital de la clave de su cuenta.
 
 Una vez que el cliente le dice al servidor que el archivo está listo, el servidor 
 intenta recuperarlo. Al recibir una respuesta, el servidor construye y almacena la 
-autorización de la clave a partir del valor del "token" de desafío y la clave de 
+autorización de la clave a partir del valor del “token” de desafío y la clave de 
 la cuenta del cliente actual.
 
 Dado un par de desafío/respuesta, el servidor verifica el control del dominio por 
@@ -517,7 +518,7 @@ hash(REVISAR).
 
 \noindent Ejemplo:
 
-Si se desea validar el nombre de dominio "www.ejemplo.org", el cliente 
+Si se desea validar el nombre de dominio “www.ejemplo.org”, el cliente 
 proporcionaría el siguiente registro DNS:
 
 \begin{verbatim}
@@ -525,7 +526,7 @@ proporcionaría el siguiente registro DNS:
 \end{verbatim}
 
 Al recibir una respuesta, el servidor construye y almacena la llave de autorización
-clave a partir del valor del "token" del desafío y la clave de la cuenta del cliente actual.
+clave a partir del valor del “token” del desafío y la clave de la cuenta del cliente actual.
 
 \noindent Para validar un desafío de DNS, el servidor realiza los siguientes pasos:
 
