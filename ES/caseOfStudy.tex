@@ -3,72 +3,119 @@
     
 \input{tools}
 
-(HAY MAS, CON GRAFICOS EN)
-Joseph Muniz, Aamir Lakhani - Web Penetration Testing with Kali Linux-Packt Publishing (2013)
-Aca yo segui un tutorial, buscarlo
 \subsection{Realización del ataque}
-La idea principal de esta sección es demostrar que, encontrandose en una red interna
-y con con herramientas ya desarrolladas y libres es posible realizar un ataque 
-sin necesidad de conocer a fondo la implementacion de la misma ni de tener mayores
-privilegios
 
-Recordar que esto fue realizado en una red interna donde son todos equipos de nuestra propiedad
+\begin{center}
+    \begin{figure}   
+       \begin{center}
+          \includegraphics[width=9cm,height=9cm]{red.png}
+       \end{center}
+       \caption{Escenario montado}
+    \end{figure}
+ \end{center}
 
+La idea principal de esta sección es demostrar que, encontrándose en una red interna
+y con con herramientas ya desarrolladas y libres, es posible realizar un ataque 
+sin necesidad de conocer a fondo la implementación de la misma ni de tener mayores
+privilegios.
 
-IMAGEN de le red
+El escenario consiste en crear una página web con un 
+simple formulario donde se debe completar con usuario y contraseña, y un 
+submit el cual envía esta información desde el cliente hasta el 
+servidor web. El envío de este formulario contiene la información confidencial,
+ por lo que en un escenario seguro ningún
+intermediario podría obtener estos datos. Dado que este tráfico va a 
+circular por HTTP, demostraremos como nos podemos hacer de las credenciales
+ingresadas por el usuario.
 
-Tiene que estar:
--Router
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics[width=10cm,height=6cm]{form.png}
+      \end{center}
+      \caption{Formulario montado}
+   \end{figure}
+\end{center}
 
--Origen de la pagina
+Recordar que esto fue realizado en una red interna donde son todos equipos de nuestra propiedad.
 
--Consumidor de la pagina
-
--El atacante
 
 \subsection{Preparando Ettercap para el ataque ARP Poisoning}
 
 Lo primero que debemos hacer, en la lista de aplicaciones, es buscar el apartado 
-«9. Sniffing y Spoofing«, ya que es allí donde encontraremos las herramientas necesarias
- para llevar a cabo este ataque.
+\emph{Sniffing} y \emph{Spoofing}, ya que es allí donde encontraremos las herramientas necesarias
+ para llevar a cabo este ataque. A continuación, abriremos Ettercap.
 
-IMAGEN Kali Linux Spoofing
+\begin{center}
+    \begin{figure}   
+       \begin{center}
+          \includegraphics[width=9 cm,height=6cm]{ataque-2.png}
+       \end{center}
+       \caption{Ettercap}
+    \end{figure}
+ \end{center}
 
-A continuación, abriremos «Ettercap» y veremos una ventana similar a la siguiente.
+El siguiente paso es seleccionar la tarjeta de red con la que vamos a trabajar. Para 
+ello, en el menú superior de Ettercap seleccionaremos Sniff $>$ Unified Sniffing y, 
+cuando nos lo pregunte, seleccionaremos nuestra tarjeta de red (por ejemplo, en 
+nuestro caso, eth0).
 
-IMAGEN  Kali Linux Ettercap
+Luego se debe buscar todos los hosts conectados a nuestra red local. Para ello, 
+seleccionaremos Hosts del menú de la parte superior y seleccionaremos la primera 
+opción, Hosts List.
 
-El siguiente paso es seleccionar la tarjeta de red con la que vamos a trabajar. Para ello, en el menú superior de Ettercap seleccionaremos «Sniff > Unified Sniffing» y, cuando nos lo pregunte, seleccionaremos nuestra tarjeta de red (por ejemplo, en nuestro caso, eth0).
+Allí deberían salirnos todos los hosts o dispositivos conectados a nuestra red. 
+Sin embargo, en caso de que no salgan todos, podemos realizar una exploración 
+completa de la red simplemente abriendo el menú Hosts y seleccionando la opción 
+Scan for hosts. Tras unos segundos, la lista de antes se debería actualizar 
+mostrando todos los dispositivos, con sus respectivas IPs y MACs, conectados 
+a nuestra red.
 
-IMAGEN Kali Linux - Ettercap - Tarjeta de red
 
-El siguiente paso es buscar todos los hosts conectados a nuestra red local. Para ello, seleccionaremos «Hosts» del menú de la parte superior y seleccionaremos la primera opción, «Hosts List«.
-
-IMAGEN Kali Linux - Ettercap - Lista de hosts
-
-Aquí deberían salirnos todos los hosts o dispositivos conectados a nuestra red. Sin embargo, en caso de que no salgan todos, podemos realizar una exploración completa de la red simplemente abriendo el menú «Hosts» y seleccionando la opción «Scan for hosts«. Tras unos segundos, la lista de antes se debería actualizar mostrando todos los dispositivos, con sus respectivas IPs y MACs, conectados a nuestra red.
-
-IMAGEN Kali Linux - Ettercap - Lista de hosts 2
 
 \subsection{Nuestro Ettercap ya está listo. Ya podemos empezar con el ataque ARP Poisoning}
 
-En caso de querer realizar un ataque dirigido contra un solo host, por ejemplo, suplantar la identidad de la puerta de enlace para monitorizar las conexiones del iPad que nos aparece en la lista de dispositivos, antes de empezar con el ataque debemos establecer los dos objetivos.
+En caso de querer realizar un ataque dirigido contra un solo host, por ejemplo, 
+suplantar la identidad de la puerta de enlace para monitorear las conexiones 
+de la víctima, antes de empezar con el 
+ataque debemos establecer los dos objetivos.
 
-Para ello, debajo de la lista de hosts podemos ver tres botones, aunque nosotros prestaremos atención a los dos últimos:
+Para ello, debajo de la lista de hosts podemos ver tres botones, aunque nosotros 
+prestaremos atención a los dos últimos:
 
-    Target 1 – Seleccionamos la IP del dispositivo a monitorizar, en este caso, el iPad, y pulsamos sobre dicho botón.
-    Target 2 – Pulsamos la IP que queremos suplantar, en este caso, la de la puerta de enlace.
+    Target 1 – Seleccionamos la IP del dispositivo a monitorear, en este caso, 
+    la computadora de la víctima, y pulsamos sobre dicho botón.
 
-IMAGEN Objetivos Ettercap
+    Target 2 – Pulsamos la IP que queremos suplantar, en este caso, la de la 
+    puerta de enlace y la del servidor web.
 
-Todo listo. Ahora solo debemos elegir el menú «MITM» de la parte superior y, en él, escoger la opción «ARP Poisoning«.
+    \begin{center}
+        \begin{figure}   
+           \begin{center}
+              \includegraphics[width=17cm,height=9.5cm]{ataque-7-deta.png}
+           \end{center}
+           \caption{Ettercap}
+        \end{figure}
+     \end{center}
 
-IMAGEN Kali Linux - Ettercap - Ataques MITM
+Todo listo. Ahora solo debemos elegir el menú MITM de la parte superior y, en él, 
+escoger la opción ARP Poisoning. Nos aparecerá una pequeña ventana de configuración, 
+en la cual debemos asegurarnos de marcar Sniff Remote Connections.
+Pulsamos sobre Ok y el ataque dará lugar. Ahora ya podemos tener el control 
+sobre el host que hayamos establecido como Target 1. Lo siguiente que debemos 
+hacer es, ejecutar Wireshark para capturar todos los paquetes de 
+red y analizarlos en busca de información interesante.
 
-Nos aparecerá una pequeña ventana de configuración, en la cual debemos asegurarnos de marcar «Sniff Remote Connections«.
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics[width=17cm,height=7cm]{paquetes.png}
+      \end{center}
+      \caption{Paquetes capturados}
+   \end{figure}
+\end{center}
 
-IMAGEN Comenzar MITM ARP Poisoning
-
-Pulsamos sobre «Ok» y el ataque dará lugar. Ahora ya podemos tener el control sobre el host que hayamos establecido como «Target 1«. Lo siguiente que debemos hacer es, por ejemplo, ejecutar Wireshark para capturar todos los paquetes de red y analizarlos en busca de información interesante o recurrir a los diferentes plugins que nos ofrece Ettercap, como, por ejemplo, el navegador web remoto, donde nos cargará todas las webs que visite el objetivo.
-
-Plugins Ettercap
+Como se puede ver, Wireshark nos permite filtrar el tráfico, y con el 
+simple hecho de decirle que queremos mostrar los requerimientos GET
+pudimos dar con el paquete que queríamos, en el request podemos ver
+el usuario “salvador@proyectofinal.test” y la contraseña “PASSWORD SEGURO”

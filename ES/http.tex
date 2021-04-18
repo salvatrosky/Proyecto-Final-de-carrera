@@ -1,9 +1,10 @@
 \section{Protocolo HTTP}
 
 El Protocolo de transferencia de hipertexto (HTTP) es un protocolo de 
-solicitud/respuesta “stateless” (sin estado) que utiliza semántica 
+solicitud/respuesta \emph{stateless} (sin estado) que utiliza semántica 
 extensible y cargas útiles de mensajes autodescriptivos para una 
 interacción flexible con sistemas basados en red.
+
    HTTP es un protocolo genérico para sistemas de información. Está 
    diseñado para ocultar los detalles de cómo se implementa un servicio 
    mostrando una interfaz a los clientes que es independiente de los 
@@ -11,7 +12,8 @@ interacción flexible con sistemas basados en red.
    no necesitan conocer el propósito de cada cliente: una solicitud 
    HTTP puede aislada en vez de estar asociada con un tipo específico
     de cliente o una secuencia predeterminada de pasos de la aplicación.
-     El resultado es un protocolo que se puede utilizar de forma eficaz 
+     
+    El resultado es un protocolo que se puede utilizar de forma eficaz 
      en muchos contextos diferentes y cuyas implementaciones pueden
       evolucionar a lo largo del tiempo.
    Una consecuencia de esta flexibilidad es que el protocolo no 
@@ -60,7 +62,9 @@ Un cliente envía una solicitud HTTP a un servidor en forma de mensaje
   modificadores de solicitud, información del cliente y metadatos de
    representación, una línea vacía para indicar el final de la sección
     del encabezado, y finalmente un cuerpo del mensaje que contiene el 
-    cuerpo de la carga útil (si lo hay). Un servidor responde a la 
+    cuerpo de la carga útil (si lo hay). 
+    
+    Un servidor responde a la 
     solicitud de un cliente enviando uno o más mensajes de respuesta 
     HTTP, cada uno de los cuales comienza con una línea de estado que 
     incluye la versión del protocolo, un código de estado (éxito o error)
@@ -72,7 +76,7 @@ Un cliente envía una solicitud HTTP a un servidor en forma de mensaje
 
 \subsubsection*{Ejemplo}
 El siguiente ejemplo ilustra un intercambio de mensajes típico 
-para una solicitud GET a la direccion “http://www.example.com/hello.txt”:
+para una solicitud GET a la dirección “http://www.example.com/hello.txt”:
 
 \bigskip
 \noindent
@@ -101,10 +105,10 @@ para una solicitud GET a la direccion “http://www.example.com/hello.txt”:
 
 \subsection{Métodos mas importantes del del protocolo HTTP}
 
-El protocolo HTTP contiene varios método, comopor ejemplo PUT, HEAD, DELETE, etc. Sin
+El protocolo HTTP contiene varios métodos, como por ejemplo PUT, HEAD, DELETE, etc. Sin
 embargo, para nuestro trabajo explicaremos los dos mas utilizados GET y POST, lo que
-nos permitirá tener una base a la hora del caso de estudio de la 
-sección \ref{secCaseOfStudy}
+nos permitirá tener una base a la hora de presentar el caso de estudio de la 
+sección \ref{secCaseOfStudy}.
 
 %CONNECT OPTIONS TRACE PUT 
 
@@ -132,9 +136,10 @@ los datos que el cliente le envía. Por ejemplo, POST se utiliza para
 las siguientes funciones (entre otras):
 
 \begin{itemize}
+   \setlength\itemsep{-0.6em}
    \item Proporcionar un bloque de datos, como los campos ingresados 
    en un formulario HTML, a un proceso de manejo de datos.
-   \item Publicar un mensaje en un tablón de anuncios, grupo de 
+   \item Publicar un mensaje grupo de 
    noticias, lista de correo, blog o grupo similar de artículos.
    \item Crear un nuevo recurso que aún no ha sido identificado por 
    el servidor.
@@ -145,10 +150,9 @@ las siguientes funciones (entre otras):
 \subsection{Códigos de respuesta} 
 El código de estado es un número entero de tres dígitos que da el 
 resultado del intento de comprender y satisfacer la solicitud.
-
    Los códigos de estado HTTP son extensibles. No se requiere que los
     clientes HTTP comprendan el significado de todos los códigos de
-     estado registrados, aunque se espara una mínima comprensión.
+     estado registrados, aunque se espera una mínima comprensión.
 
    Por ejemplo, si un cliente recibe un código de estado no reconocido
     de 471, el cliente puede asumir que hubo algo mal con su solicitud
@@ -160,50 +164,53 @@ resultado del intento de comprender y satisfacer la solicitud.
     Los dos últimos dígitos no tienen ninguna función de categorización.
      Hay cinco valores para el primer dígito:
 
-   o 1xx (Informativo): Se recibió la solicitud, se continua procesando
+   \begin{itemize}
+      \setlength\itemsep{-0.6em}
+      \item 1xx (Informativo): Se recibió la solicitud, se continua procesando.
+      \item 2xx (Satisfactoria): La solicitud se recibió, comprendió y 
+      aceptó correctamente.
+      \item 3xx (Redireccionamiento): Se deben realizar más acciones para
+    completar la solicitud.
+    \item 4xx (Error del cliente): La solicitud contiene una sintaxis
+    incorrecta o no se puede cumplir.
+    \item 5xx (Error del servidor): El servidor no cumplió con una
+       solicitud aparentemente válida.
+   \end{itemize}
 
-   o 2xx (satisfactoria): la solicitud se recibió, comprendió y 
-   aceptó correctamente
+\subsection{Infraestructura de clave pública: una Introducción a la navegación segura (EL CONTENIDO 
+VA A SER AGREGADO DESPUES DEL PRIMER FEEDBACK) }   
 
-   o 3xx (redireccionamiento): se deben realizar más acciones para
-    completar la solicitud
+%\input{pki.tex}
 
-   o 4xx (Error del cliente): la solicitud contiene una sintaxis
-    incorrecta o no se puede cumplir
-
-      o 5xx (error del servidor): el servidor no cumplió con una
-       solicitud aparentemente válida
-
-
-\subsection{HTTP con Seguridad SSL} 
+\subsection{HTTP con Seguridad SSL (HTTPS)} 
 
 Con una comprensión mínima de los conceptos la criptografía, podemos 
-observar cómo funciona el protocolo Secure Sockets Layer (ssl). Aunque
- ssl no es un protocolo extremadamente complicado, ofrece varias 
+observar cómo funciona el protocolo \emph{Secure Sockets Layer} (SSL). Aunque
+ SSL no es un protocolo extremadamente complicado, ofrece varias 
  opciones y variaciones.
 
-El protocolo ssl consiste en un conjunto de mensajes y reglas sobre
- cuándo enviar (y no enviar) cada mensaje. En este capítulo, consideramos 
+El protocolo SSL consiste en un conjunto de mensajes y reglas sobre
+ cuándo enviar (y no enviar) cada mensaje. En esta sección, mostraremos 
  cuáles son esos mensajes, la información general que contienen y 
  cómo los sistemas usan los diferentes mensajes en una sesión de
   comunicaciones.
 
 
-\subsubsection*{SSL Roles}
-El protocolo Secure Sockets Layer define dos roles diferentes para las
+\subsubsection*{Roles SSL}
+El protocolo \emph{Secure Sockets Layer} define dos roles diferentes para las
 partes que se comunican. Por un lado tenemos un cliente, y por el otro
-un servidor. La distinción es muy importante, porque ssl requiere que 
+un servidor. La distinción es muy importante, porque SSL requiere que 
 los dos sistemas se comporten de manera muy diferente. 
 
 El cliente es el sistema que inicia las comunicaciones seguras; el 
 servidor responde a la solicitud del cliente. En el uso más común 
-de ssl, la navegación web segura, el navegador web es el cliente ssl 
-y el sitio web es el servidor ssl. Para SSL en sí, las distinciones 
+de SSL, la navegación web segura, el navegador web es el cliente SSL 
+y el sitio web es el servidor SSL. Para SSL en sí, las distinciones 
 más importantes entre clientes y servidores son sus acciones durante 
 la negociación de los parámetros de seguridad.
 
 Dado que el cliente inicia una comunicación, tiene la responsabilidad 
-de proponer un conjunto de opciones ssl para usar en el intercambio. 
+de proponer un conjunto de opciones SSL para usar en el intercambio. 
 El servidor selecciona entre las opciones propuestas por el cliente 
 y decide qué utilizarán realmente los dos sistemas. Aunque la decisión 
 final recae en el servidor, el servidor solo puede elegir entre las 
@@ -211,13 +218,13 @@ opciones que el cliente propuso originalmente.
 
 
 \subsubsection*{Mensajes SSL}
-Cuando los clientes y servidores ssl se comunican, lo hacen 
-intercambiando mensajes ssl. Este capítulo mostrará cómo los 
+Cuando los clientes y servidores SSL se comunican, lo hacen 
+intercambiando mensajes SSL. Esta sección mostrará cómo los 
 sistemas utilizan estos mensajes en sus comunicaciones. La función 
 más básica (y uno de los propósitos mas importantes) que realiza 
 un cliente y un servidor SSL es establecer la seguridad a través
 de un canal para comunicaciones cifradas. Los primeros tres mensajes
-SYN, SYN ACK y SYN corresponden al protocolo TCP, Luego, inician los 
+SYN, SYN ACK y SYN correspondientes al protocolo TCP, Luego, inician los 
 mensajes pertenecientes a la comunicación SSL.
 
 
@@ -226,18 +233,19 @@ mensajes pertenecientes a la comunicación SSL.
       \begin{center}
          \includegraphics[width=13cm,height=13cm]{2.2.5.png}
       \end{center}
-      \caption{Mensajes SSL (grafico beta)}
+      \caption{Mensajes SSL}
    \end{figure}
 \end{center}
 
 
 \paragraph*{ClientHello}
-El mensaje ClientHello inicia la comunicación ssl entre las dos partes. 
+El mensaje \emph{ClientHello} inicia la comunicación SSL entre las dos partes. 
 El cliente usa este mensaje para pedirle al servidor que comience a 
-negociar los servicios de seguridad usando ssl.
+negociar los servicios de seguridad usando SSL.
 
 El mensaje este compuesto por ciertos campos: 
 \begin{itemize}
+   \setlength\itemsep{-0.6em}
    \item Versión: refiere a la versión más alta de SSL que el cliente 
    puede admitir. 
    \item RandomNumber: proporciona la semilla para cálculos criptográficos
@@ -247,17 +255,17 @@ El mensaje este compuesto por ciertos campos:
    servicios criptográficos que el cliente puede admitir
    \item CompressionMethods: es utilizado por el cliente para enumerar 
    todos los diversos métodos de compresión de datos que puede admitir.
-    Los métodos de compresión son una parte importante de ssl porque el 
+    Los métodos de compresión son una parte importante de SSL porque el 
     cifrado tiene una secuencia significativa en la efectividad de 
     cualquier técnica de compresión de datos. 
 \end{itemize}
 
 
 \paragraph*{ServerHello}
-Este mensaje complementa el campo CipherSuite del ServerHello. Si bien 
-el campo CipherSuite indica los algoritmos criptográficos y los tamaños 
+Este mensaje complementa el campo \emph{CipherSuite} del \emph{ServerHello}. Si bien 
+el campo \emph{CipherSuite} indica los algoritmos criptográficos y los tamaños 
 de clave, este mensaje contiene la información de la clave pública en sí. 
-Tenga en cuenta que el mensaje ServerKeyExchange se transmite sin cifrado, 
+Tenga en cuenta que el mensaje \emph{ServerKeyExchange} se transmite sin cifrado, 
 por lo que solo se puede incluir de forma segura información de clave 
 pública. El cliente utilizará la clave pública del servidor para cifrar 
 una clave de sesión, que las partes utilizarán para cifrar los datos de 
@@ -265,27 +273,27 @@ la aplicación para la sesión.
 
 \paragraph*{ServerKeyExchange}
 
-Este mensaje complementa el campo CipherSuite del ServerHello. 
-Si bien el campo CipherSuite indica los algoritmos criptográficos y 
+Este mensaje complementa el campo \emph{CipherSuite} del \emph{ServerHello}. 
+Si bien el campo \emph{CipherSuite} indica los algoritmos criptográficos y 
 los tamaños de clave, este mensaje contiene la información de la clave 
-pública en sí. Tenga en cuenta que el mensaje ServerKeyExchange se 
+pública en sí. Tenga en cuenta que el mensaje \emph{ServerKeyExchange} se 
 transmite sin cifrado, por lo que solo se puede incluir de forma 
 segura información de clave pública. El cliente utilizará la clave 
 pública del servidor para cifrar una clave de sesión, que las partes 
 utilizarán para cifrar los datos de la aplicación para la sesión.
 
 \paragraph*{ServerHelloDone}
-El mensaje ServerHelloDone le dice al cliente que el servidor ha 
+El mensaje \emph{ServerHelloDone} le dice al cliente que el servidor ha 
 terminado con sus mensajes iniciales de negociación. El mensaje en 
 sí no contiene otra información, pero es importante para el cliente, 
-porque una vez que el cliente recibe un ServerHelloDone, puede pasar a 
+porque una vez que el cliente recibe un \emph{ServerHelloDone}, puede pasar a 
 la siguiente fase para establecer las comunicaciones seguras.
 
 \paragraph*{ClientKeyExchange}
-Cuando el servidor ha terminado su parte de la negociación ssl inicial, 
-el cliente responde con un mensaje ClientKeyExchange. Así como 
-ServerKeyExchange proporciona la información clave para el servidor, 
-ClientKeyExchange le dice al servidor la información clave del cliente. 
+Cuando el servidor ha terminado su parte de la negociación SSL inicial, 
+el cliente responde con un mensaje \emph{ClientKeyExchange}. Así como 
+\emph{ServerKeyExchange} proporciona la información clave para el servidor, 
+\emph{ClientKeyExchange} le dice al servidor la información clave del cliente. 
 En este caso, sin embargo, la información clave es para el algoritmo de 
 cifrado simétrico que ambas partes usarán para la sesión. Además, la 
 información del mensaje del cliente se cifra mediante la clave pública 
@@ -297,33 +305,31 @@ operación es una protección importante contra un atacante que intercepta
 mensajes de un servidor legítimo y finge ser ese servidor reenviando los 
 mensajes a un cliente desprevenido. Dado que un servidor falso no conocerá 
 la clave privada del servidor real, no podrá descifrar el mensaje 
-ClientKeyExchange. Sin la información en ese mensaje, la comunicación 
+\emph{ClientKeyExchange}. Sin la información en ese mensaje, la comunicación 
 entre las dos partes no puede tener éxito.
 \paragraph*{ChangeCipherSpec}
 Una vez que el cliente envía información clave en un mensaje 
-ClientKeyExchange, se completa la negociación ssl preliminar. En ese 
+\emph{ClientKeyExchange}, se completa la negociación SSL preliminar. En ese 
 momento, las partes están listas para comenzar a utilizar los servicios 
 de seguridad que han negociado.
 
-El protocolo ssl define un mensaje especial, ChangeCipherSpec, para 
+El protocolo SSL define un mensaje especial, \emph{ChangeCipherSpec}, para 
 indicar explícitamente que ahora se deben invocar los servicios de 
 seguridad. Un conjunto de claves protegerá los datos que el cliente 
 envía al servidor, y un conjunto diferente de claves protegerá los 
 datos que el servidor envía al cliente. Para cualquier sistema dado, 
-ya sea un cliente o un servidor, ssl define un estado de escritura y 
+ya sea un cliente o un servidor, SSL define un estado de escritura y 
 un estado de lectura. El estado de escritura define la información de 
 seguridad de los datos que envía el sistema y el estado de lectura 
 define la información de seguridad de los datos que recibe el sistema.
 
-GRAFIQUITO Figures 3-2 and 3-3
-
 \paragraph*{Finished}
-Inmediatamente después de enviar sus mensajes ChangeCipherSpec, cada 
-sistema también envía un mensaje “Finalizado”. Los mensajes “Finalizado” 
+Inmediatamente después de enviar sus mensajes \emph{ChangeCipherSpec}, cada 
+sistema también envía un mensaje \emph{Finished}. Los mensajes \emph{Finished}
 permiten que ambos sistemas verifiquen que la negociación se ha realizado 
 correctamente y que la seguridad no se ha visto comprometida.
 
-Cada mensaje Finalizado contiene un hash criptográfico de información 
+Cada mensaje \emph{Finished} contiene un hash criptográfico de información 
 importante sobre la negociación recién finalizada. Esto protege contra 
 un atacante que logra insertar mensajes ficticios o eliminar mensajes 
 legítimos de la comunicación. Si un atacante pudiera hacerlo, los 
@@ -333,7 +339,7 @@ el compromiso.
 \paragraph*{Finalización de las comunicaciones seguras}
 
 Aunque, en la práctica, rara vez se utiliza (principalmente debido a la 
-naturaleza de las sesiones web), ssl tiene un procedimiento definido para 
+naturaleza de las sesiones web), SSL tiene un procedimiento definido para 
 finalizar una comunicación segura entre dos partes. En este procedimiento, 
 los dos sistemas envían cada uno una alerta de cierre especial al otro. 
 El cierre explícito de una sesión protege contra un ataque de truncamiento,
@@ -341,7 +347,7 @@ en el que un atacante puede comprometer la seguridad al terminar
 prematuramente una comunicación.
 
 \subsubsection*{Autenticar la identidad del servidor}
-A  nteriormente se explicó cómo SSL puede establecer comunicaciones 
+Anteriormente se explicó cómo SSL puede establecer comunicaciones 
 cifradas entre dos partes, lo que puede no agregar mucha seguridad a 
 la comunicación. Con el cifrado solo, ninguna de las partes puede 
 estar realmente segura de la identidad de la otra. La razón típica 
@@ -350,16 +356,16 @@ secreto de algún tercero. Pero si ese tercero pudiera hacerse pasar
 con éxito como el destinatario previsto de la información, entonces el 
 cifrado no serviría de nada. Los datos estarían encriptados, pero el 
 atacante tendría todos los datos necesarios para desencriptarlos. Para 
-evitar este tipo de ataques, ssl incluye mecanismos que permiten a cada 
+evitar este tipo de ataques, SSL incluye mecanismos que permiten a cada 
 parte autenticar la identidad de la otra. Con estos mecanismos, cada 
 parte puede estar segura de que la otra es genuina y no un atacante 
 enmascarado. En esta sección, veremos cómo SSL permite que un servidor 
 se autentique.
 
-\paragraph*{Certificado}
+\paragraph*{Certificate}
 Al autenticar su identidad, el servidor envía un mensaje de certificado 
-en lugar del mensaje ServerKeyExchange descrito anteriormente. El mensaje 
-Certificado simplemente contiene una cadena de certificados que comienza 
+en lugar del mensaje \emph{ServerKeyExchange} descrito anteriormente. El mensaje 
+\emph{Certificate} simplemente contiene una cadena de certificados que comienza 
 con el certificado de clave pública del servidor y termina con el certificado 
 raíz de la autoridad certificadora.
 
@@ -374,14 +380,14 @@ Microsoft, por ejemplo, carga su software con claves públicas para
 autoridades de certificación conocidas.
 
 \paragraph*{ClientKeyExchange}
-El mensaje ClientKeyExchange del cliente también difiere en la autenticación 
+El mensaje \emph{ClientKeyExchange} del cliente también difiere en la autenticación 
 del servidor, aunque la diferencia no es importante. Cuando solo se va a 
 utilizar cifrado, el cliente cifra la información en en mensaje 
-ClientKeyExchange 
+\emph{ClientKeyExchange}
 utilizando la clave pública que el servidor proporciona en su mensaje 
-ServerKeyExchange. En este caso, por supuesto, el servidor se está 
+\emph{ServerKeyExchange}. En este caso, por supuesto, el servidor se está 
 autenticando y, por lo tanto, ha enviado un mensaje de certificado en 
-lugar de un ServerKeyExchange. El cliente, por lo tanto, encripta su 
+lugar de un \emph{ServerKeyExchange}. El cliente, por lo tanto, encripta su 
 información usando la clave pública contenida en el 
 certificado del servidor. Este paso es importante porque le permite 
 al cliente asegurarse de que la parte con la que se está comunicando 
@@ -391,9 +397,10 @@ la comunicación.
 
  
 
-\subsubsection*{Niveles de validación}
-Hay tres tipos de certificados SSL disponibles en la actualidad: Validación extendida 
-(EV SSL), validación por organización (OV SSL) y validación por dominio (DV SSL). 
+\subsubsection*{Niveles de validación}  
+Hay tres tipos de certificados SSL disponibles en la actualidad: validación por 
+dominio (DV),
+validación por organización (OV) y validación extendida (EV).
 Los niveles de cifrado son los mismos para cada certificado, lo que difiere son los 
 procesos de investigación y verificación necesarios para obtener el certificado.
 
@@ -405,7 +412,14 @@ Eso es porque el proceso de validación está completamente automatizado. Simple
 es necesario demostrar que es propietario de su dominio y que el certificado DV 
 es suyo. 
 
-IMAGEN
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics{dv.png}
+      \end{center}
+      \caption{Validación de dominio}
+   \end{figure}
+\end{center}
 
 \paragraph*{Validación de la organización (OV)}
 Validación de organización u OV SSL representa el término medio para los tipos de 
@@ -416,58 +430,86 @@ visuales que DV SSL, pero proporciona una forma de ver la
 información comercial verificada en la sección de detalles del certificado. 
 
 \paragraph*{Extended Validation (EV)}
-SSL de validación extendida o SSL con EV requiere un exhaustivo examen comercial de 
-Comodo. Esto puede parecer mucho, pero en realidad no lo es si su empresa tiene 
-registros disponibles públicamente. EV SSL activa un indicador visual único: el 
-nombre de su organización verificado que se muestra en el navegador.
+SSL de validación extendida o SSL con EV requiere un exhaustivo examen comercial. 
+Esto puede parecer mucho, pero en realidad no lo es si su empresa tiene 
+registros disponibles públicamente. EV SSL activaba un indicador visual único: el 
+nombre de su organización verificado que se muestra en el navegador. Esto en la 
+actualidad ya no sucede, por lo que no es posible a simple vista identificarlo.
 
-IMAGEN
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics[width=11cm,height=6.5cm]{ev.png}
+      \end{center}
+      \caption{Validación extendida (Captura antigua)}
+   \end{figure}
+\end{center}
 
-  \subsubsection*{Certificate Functionality}
+  \subsubsection*{Tipos de certificados}
 
-  \paragraph*{Single Domain}
+  \paragraph*{Dominio Simple}
   Como sugiere el nombre, un certificado SSL de un solo dominio solo 
   se puede usar en un solo dominio o IP. Este se considera el tipo de 
-  certificado SSL predeterminado. El tipo de DV está disponible en todos 
-  los niveles de validación.
+  certificado SSL predeterminado. 
   
-  \paragraph*{Multi-Domain}
+  \paragraph*{Multi-Dominio}
   Este tipo de SSL es un certificado para todos los usos. Permiten cifrar 
   hasta 250 dominios diferentes y subdominios 
   ilimitados. Desafortunadamente, no está disponible en EV.
   
   \paragraph*{Wildcard}
   
-  Los Wildcard están diseñados específicamente para cifrar un dominio y 
-  todos los subdominios que lo acompañan. Subdominios ilimitados. 
-  Desafortunadamente, los Wildcard solo están disponibles en los 
+  Los \emph{wildcard} están diseñados específicamente para cifrar un dominio y 
+  todos los subdominios que lo acompañan (también representado como *.dominio.com). 
+  Desafortunadamente, los \emph{wildcard} solo están disponibles en los 
   niveles DV y OV.
   
-  \paragraph*{Multi-Domain Wildcard}
-  Los Wildcard multidominio pueden cifrar hasta 250 dominios diferentes 
+  \paragraph*{Multi-Dominio Wildcard}
+  Los \emph{wildcard} multidominio pueden cifrar hasta 250 dominios diferentes 
   y subdominios ilimitados. Desafortunadamente, no está disponible en EV.
 
   
-\subsubsection*{Identifier Validation Challenges}
+\subsubsection*{Validación de propiedad de dominio}
 
-(CAMBIAR LA INTRO, NO ME GUSTA LO DE IDENTIFICADOR, RELACIONARLO MAS CON UN DOMINIO)
+Los certificados se utilizan con mayor frecuencia para autenticar 
+nombres de dominio. Por lo tanto, se confía en las autoridades de 
+certificación (CA) para verificar que un solicitante de un certificado 
+represente legítimamente el nombre de dominio en el certificado.
 
-ACME uses an extensible challenge/response framework for identifier
-validation.  The server presents a set of challenges in the
-authorization object it sends to a client (as objects in the
-“challenges” array), and the client responds by sending a response
-object in a POST request to a challenge URL.
+Los diferentes tipos de certificados reflejan diferentes tipos de 
+verificación de CA. Los certificados de “Validación de dominio” (DV) son 
+el tipo más común. La única validación que debe realizar la CA en el 
+proceso de emisión de un certificado DV es verificar que el solicitante 
+tiene un control efectivo del dominio. La CA no está obligada a intentar 
+verificar la identidad real del solicitante. Esto difiere en los certificados 
+de “Validación de la organización” y “Validación extendida”, 
+donde el proceso está destinado a verificar también la identidad real del 
+solicitante.
 
-   Different challenges allow the server to obtain proof of different
-   aspects of control over an identifier.  In some challenges, like HTTP
-   and DNS, the client directly proves its ability to do certain things
-   related to the identifier.  The choice of which challenges to offer
-   to a client under which circumstances is a matter of server policy.
+ACME (\emph{Automatic Certificate Management Environment})
+permite a un cliente 
+la automatización de gestión de certificados 
+mediante un conjunto de mensajes transmitidos a través de HTTPS. La 
+emisión de certificados mediante el protocolo ACME se asemeja al proceso 
+de emisión de una CA tradicional, en el que un usuario crea una cuenta, 
+solicita un certificado y demuestra el control de los dominios con el 
+certificado para que la CA emita el certificado solicitado.
 
 
-   
+ACME utiliza un \emph{framework} de desafío/respuesta extensible para la validación 
+de dominios. El servidor envía al cliente un conjunto de desafíos, y el cliente 
+responde enviando la respuesta al mismo en una solicitud POST a una URL de desafío.
 
-\paragraph*{HTTP Challenge}
+Los diferentes desafíos permiten al servidor obtener pruebas de diferentes 
+aspectos del control sobre un dominio. En los desafíos como HTTP y 
+DNS, el cliente demuestra directamente su capacidad para hacer ciertas 
+acciones relacionadas con el dominio. Es de gran utilidad explicar los 
+diferentes tipos de desafíos que se puede ofrecer a un cliente, ya que uno 
+es el mas común, sin embargo, al hablar de redes internas, no lo podremos 
+utilizar, e iremos por la otra opción, un tanto menos conocida.
+
+
+\paragraph*{Desafío HTTP}
 
 Con la validación HTTP, el cliente prueba su control sobre un nombre de dominio al 
 demostrar que puede guardar recursos HTTP en un servidor accesible bajo ese nombre 
@@ -488,33 +530,37 @@ Dado un par de desafío/respuesta, el servidor verifica el control del dominio p
 parte del cliente verificando que el recurso se aprovisionó como se esperaba.
 
 Ventajas:
-
 \begin{itemize}
+   \setlength\itemsep{-0.6em}
    \item Es fácil de automatizar sin conocimientos adicionales sobre la configuración de un dominio.
    \item Funciona con servidores web estándar.
 \end{itemize}
 
 Desventajas:
 \begin{itemize}
+   \setlength\itemsep{-0.6em}
    \item No funciona si su ISP bloquea el puerto 80 (esto es raro, pero algunos ISP residenciales lo hacen).
    \item Let's Encrypt no le permite utilizar este desafío para emitir certificados Wildcard.
    \item Si tiene varios servidores web, debe asegurarse de que el archivo esté disponible en todos ellos.
 \end{itemize}
    
-(EXPLICAR POR QUE NO PUEDO USAR ESTE CHALENGE EN ESTE PROYEXTO)
+Este desafío está fuera de nuestro alcance, ya que partimos de la premisa de que 
+el tráfico que queremos proteger nunca saldrá a Internet, lo que implica que no 
+tendremos ni puertos ni direcciones expuestas para que un servidor externo pueda 
+verificar el recurso mencionado anteriormente. 
 
 
 \paragraph*{Desafío DNS}
 Cuando el identificador que se está validando es un nombre de dominio, el cliente 
-puede demostrar el control de ese dominio proporcionando un registro dns de tipo 
-TXT que contenga un valor designado para el nombre de dominio.
+puede demostrar el control de ese dominio proporcionando un registro DNS de tipo 
+TXT que contenga un valor designado.
 
 Un cliente cumple este desafío construyendo una clave de autorización a partir del 
 valor de un token proporcionado y la clave de la cuenta del cliente. A continuación, el 
-cliente calcula un hash (REVISAR HASH, la palabra es digest) SHA-256 de la clave de 
+cliente calcula un hash SHA-256 de la clave de 
 autorización.
 El registro proporcionado al DNS contiene la codificación de URL base64 de este 
-hash(REVISAR). 
+hash. 
 
 \noindent Ejemplo:
 
@@ -531,7 +577,8 @@ clave a partir del valor del “token” del desafío y la clave de la cuenta de
 \noindent Para validar un desafío de DNS, el servidor realiza los siguientes pasos:
 
 \begin{enumerate}
-   \item Calcula el hash (REVISAR) SHA-256 de la clave de autorización almacenada
+   \setlength\itemsep{-0.6em}
+   \item Calcula el hash SHA-256 de la clave de autorización almacenada.
    \item Consulta los registros TXT para el nombre de dominio de validación.
    \item Verifica que el contenido de uno de los registros TXT coincida con el valor de hash.
 \end{enumerate}

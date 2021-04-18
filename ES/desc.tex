@@ -2,61 +2,77 @@
 %----------------------------------------------------------------------
 % Capitulo 7: Descripción del problema
 
-En éste capítulo se verá por qué los protocolos http y smtp son inseguros, introducción al snnifin, spoofing, arp attack
+
 %----------------------------------------------------------------------
 
-(Agregar una intro)
+HTTP fue originalmente un protocolo donde la transmisión de datos era en texto 
+plano. Los mensajes HTTP se envían a través de Internet sin cifrar y, por 
+lo tanto, cualquiera puede leer el mismo cuando se dirige a su destino. 
+Internet, como su nombre indica, es una red de computadoras 
+(\emph{interconnected computer networks}), no un sistema 
+punto a punto. Hablando específicamente de una red interna, no sabemos cómo 
+se enrutan los 
+mensajes y nosotros, como usuarios, no tenemos idea de cuántas otras partes 
+pueden ver lo mismos. Debido a que HTTP va a través de texto plano, 
+los mensajes se pueden interceptar, leer, e incluso alterar en el camino.
 
+En éste capítulo veremos por qué el protocolo HTTP es inseguro, adicionando
+luego un 
+caso de estudio donde se demuestra un pequeño ataque.
 
 \section{Riesgos de intermediarios}
 
-Un intermediario es alguien que puede ver el contenido de lo que circula por 
-la red. A esta actividad o ataque se lo conoce como “man-in-the-middle” u 
-hombre en el medio. Los intermediarios pueden tener acceso a información 
-relacionada con la seguridad, información personal sobre usuarios individuales 
-y organizaciones, o contenido propietario de usuarios y proveedores de 
-contenido. HTTP en sí mismo no puede resolver este problema.
+Un intermediario es alguien que puede acceder al contenido de lo que circula por 
+la red. A esta actividad o ataque se lo conoce como \emph{man-in-the-middle} u 
+hombre en el medio. 
+El intermediario puede realizar ciertos actos: interceptar, modificar o 
+fabricar datos. Desde este punto de vista, la confidencialidad puede verse 
+afectada si alguien intercepta datos, y la integridad puede fallar si 
+alguien o un programa modifica o fabrica datos falsos. 
 
+Como mencionamos anteriormente, HTTP no fue pensado para ser seguro, por lo que 
+el protocolo en sí mismo no puede resolver este problema.
 En este proyecto, explotaremos esta vulnerabilidad para demostrar la facilidad
  con la que un agente puede hacerse de nuestro tráfico.
 
 
-\section{División de respuesta}
 
 
-La división de respuestas aprovecha una vulnerabilidad en los servidores 
-(generalmente dentro de un servidor de aplicaciones) donde un atacante 
-puede enviar datos codificados dentro de algún parámetro de la solicitud 
-que luego se decodifica y se repite dentro de cualquiera de los campos de 
-encabezado en la respuesta. Si los datos decodificados están diseñados para 
-que parezca que la respuesta ha finalizado y ha comenzado una respuesta 
-posterior, la respuesta se ha dividido y el atacante controla el contenido 
-de la segunda respuesta aparente. Luego, el atacante puede realizar 
-cualquier otra solicitud en la misma conexión persistente y engañar a los 
-destinatarios (incluidos los intermediarios) para que crean que la segunda 
-mitad de la división es una respuesta autorizada a la segunda solicitud.
-
-
+\section{Confidencialidad del mensaje}
+La definición de confidencialidad es sencilla: solo las personas o los 
+sistemas autorizados pueden acceder a los datos protegidos.
+Sin embargo, como veremos en capítulos posteriores, garantizar la confidencialidad 
+puede resultar difícil.
+ HTTP se basa en 
+protocolos de transporte subyacentes para brindar confidencialidad a los 
+mensajes cuando se desee. Por sí solo, el protocolo no cifra los mensajes, 
+sin embargo, dado que HTTP se ha diseñado para ser independiente del protocolo de 
+transporte, de modo que se puede utilizar en muchas formas diferentes de 
+conexión cifrada.
 
 \section{Integridad de los mensajes}
+Integridad refiere a distintos significados en diferentes contextos. Cuando examinamos 
+la forma en la que usamos este término, encontramos varios significados diferentes. 
+Por ejemplo, si decimos que hemos conservado la integridad de un elemento, podemos 
+querer decir que el elemento está sin modificar, modificado solo de formas aceptables, 
+modificado solo por personas autorizadas, modificado solo por procesos autorizados, 
+etc.
 
+Hablando de datos, se reconocen tres aspectos particulares de la integridad: 
+acciones autorizadas, protección de recursos y detección y corrección de errores. 
+La integridad se puede hacer cumplir de la misma manera que la confidencialidad: 
+mediante un control riguroso de quién o qué puede acceder a qué recursos y de qué 
+manera.
+
+De la misma manera que en la integridad del mensaje,
 HTTP no define un mecanismo específico para garantizar la integridad de los 
 mensajes, sino que se basa en la capacidad de detección de errores de los 
 protocolos de transporte subyacentes y en el uso de tramas delimitadas por 
 longitud. Históricamente, la falta de un mecanismo de integridad único se 
 ha justificado por la naturaleza informal de la mayoría de las comunicaciones 
 HTTP. Sin embargo, el predominio de HTTP como mecanismo de acceso a la 
-información ha dado como resultado la necesidad de veririficar la integridad
+información ha dado como resultado la necesidad de verificar la integridad
 en ciertos entornos.
-
-\section{Confidencialidad del mensaje}
-
-De la misma manera que en la integridad del mensaje, HTTP se basa en 
-protocolos de transporte subyacentes para brindar confidencialidad a los 
-mensajes cuando se desee. Por sí solo, el protocolo no cifra los mensajes, 
-sin embargo, dado que HTTP se ha diseñado para ser independiente del protocolo de 
-transporte, de modo que se puede utilizar en muchas formas diferentes de 
-conexión cifrada.
 
 
 \section{Tipos de ataques}
@@ -67,33 +83,29 @@ pasivos es simplemente robar información sensible y analizar el tráfico para
 robar mensajes futuros, la motivación de los atacantes activos es detener la 
 comunicación normal entre dos entidades legítimas.
 
-\subsection{Passive Attacks}
+\subsection{Ataques Pasivos}
 Los ataques pasivos ocurren cuando se monitorea y analiza 
 información sensible, posiblemente comprometiendo la seguridad de las 
 empresas y sus clientes. 
 
 Los atacantes pasivos están principalmente interesados en robar información 
 confidencial. Esto sucede sin el conocimiento de la víctima. Como tales, 
-los ataques pasivos son difíciles de detectar y, por lo tanto, es dificil de
-proteger la red de los mismos. Entre los ataques mas comunes estan los 
+los ataques pasivos son difíciles de detectar y, por lo tanto, es difícil de
+proteger la red de los mismos. Entre los ataques mas comunes están los 
 ataques de análisis y monitoreo de tráfico, como así también las 
 escuchas de comunicaciones telefónicas.
 
-\subsection{Active Attacks}
+\subsection{Ataques Activos}
 Los ataques activos ocurren cuando la información se modifica, se altera o 
 se destruye por completo. Aquí el intruso inicia instrucciones para 
 perturbar la comunicación regular de la red. Algunos de los ataques 
 activos son los  siguientes:
 \begin{itemize}
     \setlength\itemsep{-0.6em}
-    \item Modificación: el nodo malicioso realiza algunas alteraciones en la 
-    enrutación. Esto da como resultado que el remitente envíe mensajes a 
+    \item Modificación: el nodo malicioso realiza algunas alteraciones en el
+    enrutamiento. Esto da como resultado que el remitente envíe mensajes a 
     través de la ruta larga, lo que provoca un retraso en la comunicación. 
     Este es un ataque a la integridad.
-    \item Wormhole(Agujero de gusano): este ataque también se denomina ataque 
-    de túnel. Un atacante recibe un paquete en un punto. Luego lo envia 
-    a otro nodo malicioso en la red. Esto hace que se piense que se encontró 
-    un camino más corto en la red.
     \item Fabricación: un nodo malicioso genera un mensaje de enrutamiento 
     falso que provoca la generación de información incorrecta sobre la ruta 
     entre dispositivos. Este es un ataque a la autenticidad.
@@ -102,7 +114,7 @@ activos son los  siguientes:
     destino de sus mensajes.
     \item Denegación de servicios: un nodo malicioso envía un mensaje al 
     nodo y consume el ancho de banda de la red en cómputo desperdiciado.
-    \item Ataque Man-in-the-middle: también llamado ataque de secuestro, 
+    \item Ataque \emph{Man-in-the-middle}: también llamado ataque de secuestro, 
     es un ataque en el que el atacante altera y transmite en secreto 
     las comunicaciones entre dos partes legítimas sin su conocimiento. 
     Estas partes, a su vez, desconocen lo que sucede, pues no perciben 

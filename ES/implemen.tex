@@ -5,11 +5,11 @@
 
 \section{Propuestas: Introducción}
 
-Se han investigado tres alternativas enfocadas en redes internas mara mejorar la seguridad de las 
+Se han investigado tres alternativas enfocadas en redes internas para mejorar la seguridad de las 
 mismas, luego de eso se eligió la que mas ventajas nos ofreció.
-Vimos tres alternativas posibles: Los certificados auto-firmado (Self-signed Certificates), implementar
-una entidad certificante interna, y la utilizacion de un certificado emitido por una entidad
-certificante conocida
+Las alternativas son las siguientes: Los certificados auto-firmados (\emph{Self-signed Certificates}), implementar
+una entidad certificante interna, y la utilización de un certificado emitido por una entidad
+certificante conocida.
 
 \section{Propuesta 1: Self-signed Certificates}
 Los certificados autofirmados son los menos útiles de los tres. Firefox facilita su uso 
@@ -20,8 +20,17 @@ que esté comprobando la huella digital del certificado cada vez, no es posible 
 que ese certificado autofirmado sea seguro. Incluso con Firefox, puede resultar 
 difícil utilizar estos certificados de forma segura.
 
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics[width=13cm,height=9cm]{self-signed.png}
+      \end{center}
+      \caption{Advertencia Certificado Autofirmado}
+   \end{figure}
+\end{center}
+
 Por ejemplo, para solicitar un certificado SSL de una CA de confianza como Verisign o 
-GoDaddy, se debe enviae una Solicitud de firma de certificado (CSR) y te dan un 
+GoDaddy, se debe enviar una Solicitud de firma de certificado (CSR) y te dan un 
 certificado a cambio, que firmaron con su certificado raíz y clave privada. Todos 
 los navegadores tienen una copia (o acceden a una copia desde el sistema operativo) 
 del certificado raíz, por lo que el navegador puede verificar que su certificado 
@@ -45,64 +54,62 @@ el resto del ecosistema PKI.
 
 \section{Propuesta 2: Internal CA}
 
-(FALTA MAS MARCO TEORICO)
-Aca se tiene que decir: "Como se explicó anteriormente, una entidad de certificacion es ..."
-Esta alternativa implica establecer una entidad de certificacion interna a la red privada. Esto se hace 
-mediente un servidor dedicado que certifique los certificados que circulen internamente.
-Como ventaja se tiene que ... 
+Como se explicó anteriormente, una entidad de certificación es un agente en el que 
+confiamos para emitir 
+certificados que confirman las identidades de los suscriptores, o bien de los 
+sitios a los cuales visitamos. 
+
+Esta propuesta de solución implica establecer una entidad de certificación interna 
+a la red privada, y por consiguiente hacer que los equipos que se encuentran 
+dentro de la misma confíen el ella. Esto se hace 
+mediante un servidor dedicado que firme los certificados que que se le solicitan.
 
 Ventajas de la autoridad de certificación interna (CA)
-
-• La administración simplificada y fácil es la principal ventaja de utilizar una autoridad de 
-certificación (CA) interna. No es necesario depender de una entidad externa para los certificados.
-
-• En un entorno de Microsoft Windows, la Autoridad de certificación (CA) interna se puede 
-integrar en Active Directory. Esto simplifica aún más la gestión de la estructura de la CA.
-
-• No hay ningún costo por certificado cuando utiliza una Autoridad de certificación (CA) 
-interna.
+\begin{itemize}
+   \setlength\itemsep{-0.6em}
+   \item No es necesario depender de una entidad externa para los certificados.
+   \item En un entorno de Microsoft Windows, la Autoridad de certificación (CA) interna se puede 
+   integrar en Active Directory. Esto simplifica aún más la gestión de la estructura de la CA.
+   \item No hay ningún costo por certificado cuando utiliza una Autoridad de certificación (CA) 
+   interna.
+\end{itemize}
 
 Desventajas de la autoridad certificadora (CA) interna
 
-• Implementar una autoridad certificadora (CA) interna es más complicado que utilizar una 
-autoridad certificadora (CA) externa.
+\begin{itemize}
+   \setlength\itemsep{-0.6em}
+   \item Implementar una autoridad certificadora (CA) interna es más complicado que utilizar una 
+   autoridad certificadora (CA) externa.
+   \item La seguridad y la responsabilidad de la infraestructura de clave pública (PKI) está 
+   completamente a cargo de la organización.
+   \item Los usuarios externos que se conecten a nuestra red normalmente no confiarán en un 
+   certificado digital 
+   firmado por una Autoridad de Certificación (CA) interna.
 
-• La seguridad y la responsabilidad de la infraestructura de clave pública (PKI) está 
-completamente sobre el hombro de la organización.
+\end{itemize}
 
-• Las partes / usuarios externos normalmente no confiarán en un certificado digital 
-firmado por una Autoridad de Certificación (CA) interna.
-
-• La sobrecarga de gestión de certificados de la Autoridad de certificación (CA) interna es 
-mayor que la de la Autoridad de certificación (CA) externa.
-
-La desventaja por la que decidí ir por una mejor opcion fue que, se debe establecer 
-individualmente en cada uno de los hosts pertenecientes a la red privada que nuestra entidad 
-certificante es de confianza, lo que puede llevar a cabo un gran trabajo de los administradores, 
-y, aun asi, pueden suceder que en nuestra red se conecten agentes externos a nuestra 
-organizacion, por lo que no podremos realizar la configuracion mencionada.
+Pese a que esta propuesta es de las más implementadas, decidimos buscar una opción que nos 
+permita desligarnos de ciertas responsabilidades, como así también no tener que realizar 
+configuraciones individuales a los hosts de nuestra organización. 
 
 \subsection{Caso de estudio: Creando nuestra Entidad Certificante privada}
 \input{dns}
 \input{ca}
 
-\section{Propuesta 3: Cerfification with let's encrypt}
-Esta estrategia consiste en generar un certificado wildrau, y utilizarlo en cada sitio de la organizacion
-Para esto se debe tener un dominio, en mi caso, salvadorcatalfamo.com, tener la propiedad del dominio
-implica poder manejar registros dns del mismo, que es lo que requiere letsencript para poder verificar el mismo
-La verificacion es la minima, que es la de que dice cque soy el dueño del dominio
-y la verificacion de que cada sitio es mio es la del dns, donde se hace la verificacion con el
-registro dns
-Entonces, formalmente los requisitos solución
-tener el dominio
-agregar el registro txt al dns
-solicitar la llave publica y privada 
-colocarla en cada sitio
+\section{Propuesta 3: Certificación con Let's Encrypt}
+Esta estrategia consiste en generar un certificado wildcard, y utilizarlo en cada sitio de la organización.
+Para esto se debe tener un dominio (en mi caso, salvadorcatalfamo.com) y demostrar la propiedad 
+del mismo. Como se vio anteriormente, hay dos maneras que utiliza Let's Encrypt para demostrar la propiedad 
+de un dominio, pero la que nos sirve en el caso de una red interna es la que intervienen los registros DNS. 
+La verificación que ofrecen con este tipo de certificado es la mínima (DV) y el proceso es explicado a 
+continuación.
+
 
 \subsection{Pasos a seguir}
-\subsubsection*{Get a Domain}
-The firs step is getting a Domain, in my case, I had one: salvadorcatalfamo.com.
-This domain points to mi public ip address. For that, I had to create some DNS records:
+\subsubsection*{Obtener un dominio}
+El primer paso es conseguir un dominio, en mi caso ya tenía uno:
+salvadorcatalfamo.com. Este dominio apunta a nuestra ip pública. La configuración DNS
+es la siguiente:  
 
 
 \begin{longtable}{|l|l|p{5cm}|l|l|} 
@@ -120,28 +127,31 @@ This domain points to mi public ip address. For that, I had to create some DNS r
 \\ \hline
 \end{longtable}
 
-\subsubsection*{Installing Let’s Encrypt on the server}
+\subsubsection*{Instalando Let’s Encrypt en el servidor}
 \begin{verbatim}
    sudo add-apt-repository ppa:certbot/certbotsudo 
    apt-get update
    sudo apt-get install python-certbot-nginx
 \end{verbatim}
 
-\subsubsection*{Installing Nginx}
+\subsubsection*{Instalando Nginx}
 \begin{verbatim}
 sudo apt-get update
 sudo apt-get install nginx
 \end{verbatim}
 
 
-\subsubsection*{Obtaining wildcard ssl certificate from Let’s Encrypt}
+\subsubsection*{Obteniendo un certificado SSL de tipo wildcard desde Let’s Encrypt}
 \begin{verbatim}
 sudo certbot --server https://acme-v02.api.letsencrypt.org/directory 
 -d *.salvadorcatalfamo.com --manual --preferred-challenges dns-01 certonly
 \end{verbatim}
 
-\subsubsection*{Deploy a DNS TXT record provided by Let’s Encrypt certbot after running the above command}
-Then I added an entry to my dns records
+\subsubsection*{Configuración DNS}
+Luego de ejecutar el comando anterior, Let's Encrypt nos da un contenido que 
+se debe agregar a un registro DNS. El tipo de registro es TXT y se muestra en
+la siguiente tabla.
+
 \begin{longtable}{|l|l|l|l|l|} 
    \hline
    \textbf{Tipo} & \textbf{Nombre} & \textbf{Contenido} & \textbf{Prioridad} & \textbf{TTL}
@@ -149,58 +159,80 @@ Then I added an entry to my dns records
 \\ \hline
 \end{longtable}
 
-\subsubsection*{Configuring Nginx to serve wildcard subdomains}
+\subsubsection*{Configuración de Nginx para servir a subdominios}
 
-Create a config file sudo touch /etc/nginx/sites-available/example.com
+Se debe modificar el siguiente archivo de 
+configuración 
 
-Open the file sudo vi /etc/nginx/sites-available/example.com
-
-Add the following code in the file
+/etc/nginx/sites-available/salvadorcatalfamo.com como se muestra a 
+continuación:
 
 \begin{verbatim}
-   server {
-      listen 80;
-      listen [::]:80;
-      server_name *.example.com;
-      return 301 https://$host$request_uri;
+server {
+   listen 80;
+   listen [::]:80;
+   server_name *.salvadorcatalfamo.com;
+   return 301 https://$host$request_uri;
+}
+server {
+   listen 443 ssl;
+   server_name *.example.com;  ssl_certificate /.../.../fullchain.pem;
+   ssl_certificate_key /.../privkey.pem;
+   include /etc/letsencrypt/options-ssl-nginx.conf;
+   ssl_dhparam /.../ssl-dhparams.pem;  root /.../salvadorcatalfamo.com;
+   index index.html;
+   location / {
+      try_files $uri $uri/ =404;
    }
-   server {
-      listen 443 ssl;
-      server_name *.example.com;  ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-      ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-      include /etc/letsencrypt/options-ssl-nginx.conf;
-      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;  root /var/www/example.com;
-      index index.html;
-      location / {
-        try_files $uri $uri/ =404;
-      }
-    } 
+} 
 \end{verbatim}
 
-The above server block is listening on port 80 and redirects the request to the server block below 
-it that is listening on port 443.
 
-\subsubsection*{Test and restart Nginx}
-EXTEDER
-Test Nginx configuration using 
-sudo nginx -t
-If it’s success reload Nginx using 
+\subsubsection*{Test la configuración y reinicio del servicio}
+
+La configuración se puede testear con el siguiente comando: 
 \begin{verbatim}
-sudo /etc/init.d/nginx reload
+      sudo nginx -t
 \end{verbatim}
-Nginx is now setup to handle wildcard subdomains.
 
-Ver una posible automatizacion, aunque creo que será con puppet
+Si tiene éxito, se debe volver a cargar Nginx usando
+\begin{verbatim}
+      sudo /etc/init.d/nginx reload
+\end{verbatim}
 
-ventajas
-No mas mensajes de errores
-Seguridad de encriptacion 
-privacidad, etc etc
+Ahora Nginx contiene un certificado de tipo wildcard, un certificado SSL con respaldo de una 
+entidad certificante como Let's Encrypt
 
-Desventajas
-Tal vez la cantidad de dominios gratis
-Tal vez la duracion de validez del certificado
-Tal vez la confiabilidad
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics[width=15cm,height=16cm]{lets.png}
+      \end{center}
+      \caption{Web interna con certificado de Let’s Encrypt}
+   \end{figure}
+\end{center}
+
+Le hemos visto un gran potencial a esta solución, aunque también es poco implementada. Tenemos la gran ventaja de no
+tener que instalar ningún requerimiento en las computadoras dentro de la organización. Con esto, no se 
+mostrarán mensajes de seguridad en los navegadores, no importa cual sea el programa, ya que Let's Encrypt es 
+una entidad de confianza para diversos navegadores y sistemas operativos. Todo esto y la seguridad extra al 
+saber que nuestros datos van por un canal seguro gracias al protocolo SSL. 
+
+Otra gran ventaja que vimos es la facilidad con la que se llevó a cabo, 
+en este proyecto se logró implementar antes esta solución que la entidad certificante, y 
+con mucha mayor facilidad. 
+
+Como desventajas podemos decir que no tenemos la posibilidad de obtener la validación extendida (EV), ya que no está
+disponible actualmente. Por otro lado, que las llaves privadas y el certificado (que es único para todo el dominio) 
+estén en diversos servidores a la vez, implica
+que se deben tener mayores recaudos a la hora de utilizarlos, ya que se debe asegurar el control de éstos. Aunque a 
+nosotros no nos sucedió, puede llegar a suceder que si se pierde conexión a Internet, el certificado no se pueda validar,
+producto de no tener toda la cadena de certificación hasta llegar a la raíz. 
+
+Aunque se puede llegar a pensar, administrar los certificados y las llaves puede llegar a ser 
+un gran desafío para los administradores de sistema, sin embargo, hay muchas herramientas que nos proveen
+automatización y monitoreo para realizar esta clase de tareas. 
+
 
 \section{Caso de estudio: Buscando credenciales en tráfico seguro}
 
@@ -212,19 +244,27 @@ el mismo formulario propuesto en la sección \ref{secCaseOfStudy}, lo
 
 Dado que el proceso de capturar el tráfico en una red interna fue
 explicado previamente, se van a mostrar únicamente los paquetes capturados
-desde la primera solicitud hasta el envío del formulario
+desde la primera solicitud hasta el envío del formulario.
 
-(IMAGEN)
+\begin{center}
+   \begin{figure}   
+      \begin{center}
+         \includegraphics[width=15cm,height=9cm]{verificacion-ssl-1-v2.png}
+      \end{center}
+      \caption{Tráfico capturado}
+   \end{figure}
+\end{center}
 
 En esta captura podemos observar que:
 \begin{itemize}
-   \item No es posible determinar, a diferencia de nuestro caso de 
-   estudio, a simple vista cual es el paquete 
+   \setlength\itemsep{-0.6em}
+   \item No es posible determinar a simple vista cual es el paquete 
    en el cual se envía la información critica.
-   \item Viendo el contenido de cada uno de los paquetes mostrados,
+   \item Abriendo e investigando el contenido de cada uno de los paquetes mostrados,
    tampoco es posible ver las credenciales completadas en el formulario, 
    que obviamente son de nuestro conocimiento.
-   \item Se establece una conexión segura a traves del protocolo TCP.
+   \item Se establece una conexión segura a través del protocolo TCP, algo que no 
+   vimos en el caso de estudio de HTTP.
 \end{itemize}
 
 

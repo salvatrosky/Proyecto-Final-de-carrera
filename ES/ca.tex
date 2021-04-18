@@ -1,12 +1,12 @@
 \subsubsection*{Creación de nuestra CA en Docker}
 
 La estrategia para crear nuestra CA será seguir los pasos que se deberían realizar en un servidor 
-habitual, pero partiendo desde una imagen de docker de Ubuntu (de stock), y luego realizando un 
+habitual, pero partiendo desde una imagen de Docker de Ubuntu (de stock), y luego realizando un 
 commit de estas configuraciones. Luego, archivos importantes como el el certificado root y la llave
-privada deberan resguardarse, o simplemente resguardar el contenedor creado. 
+privada deberán resguardarse, o simplemente resguardar el contenedor creado. 
 
-Se utilizó esta estrategia ya que no habia habia imágenes oficiales que nos sirva para tal fin, por el 
-simple hecho de que únicamente se requiere tener instalado openssl y configurado.
+Se utilizó esta estrategia ya que no había imágenes oficiales que nos sirva para tal fin, por el 
+simple hecho de que únicamente se requiere tener instalado OpenSSL y tenerlo configurado.
 
 \noindent Como primer paso, corremos una imagen del sistema operativo Ubuntu
 
@@ -14,15 +14,14 @@ simple hecho de que únicamente se requiere tener instalado openssl y configurad
     docker run -it -v $PWD/ca:/root/ca ubuntu
 \end{verbatim}
 
-\noindent Hay que ver las cosas que se hacen una vez, y las cosas que deben estar configuradas
-
+\noindent Dentro del contenedor, ejecutamos los siguientes comandos:
 \begin{verbatim}
     apt-get update
     apt-get install ntp
     apt-get install openssl
 \end{verbatim}
 
-\noindent Setear el hostname al contenedor, hay una linea con la ip del contenedor y el nombre del mismo, 
+\noindent Establecer el hostname al contenedor, hay una linea con la ip del contenedor y el nombre del mismo, 
 que es utilizado como hostname, en nuestro caso
 \begin{verbatim}
     172.17.0.2      080dec560726
@@ -33,22 +32,22 @@ que es utilizado como hostname, en nuestro caso
     172.17.0.2      ca.salvadorcatalfamo.intra
 \end{verbatim}
 
-\noindent Creamos las carpetas para mejor organizacion
+\noindent Creamos las carpetas para mejor organización
 \begin{verbatim}
-    mkdr newcerts
-    mkdir certs
-    mkdir crl
-    mkdir private
-    mkdir requests
+    mkdir /root/newcerts
+    mkdir /root/certs
+    mkdir /root/crl
+    mkdir /root/private
+    mkdir /root/requests
 \end{verbatim}
 
-\noindent Creamos un archivo vacio y un archivo que contiene el primer numero de serie para los certificados 
+\noindent Creamos un archivo vacío y un archivo que contiene el primer numero de serie para los certificados 
 \begin{verbatim}
     touch index.txt
     echo '1234' > serial
 \end{verbatim}
 
-\noindent Luego hay que crear la llave privada y el certificado root, en este caso nos pedira una contraseña, si este servidor 
+\noindent Luego hay que crear la llave privada y el certificado root, en este caso nos pedirá una contraseña, si este servidor 
 se usará en un ambiente de producción, deberá ser una contraseña compleja.
 
 \begin{verbatim}
@@ -69,16 +68,11 @@ organización
     chmod 600 -R /root/ca
 \end{verbatim}
 
-\noindent Realizamos unas modificaciones en el archivo de configuración
+\noindent Realizamos unas modificaciones en el archivo de configuración, donde indicaremos 
+la dirección de los certificados, y algunas opciones de configuración adicionales
 \begin{verbatim}
     vim /usr/lib/ssl/openssl.cnf
 \end{verbatim}
-
- 
-Lo único que se tiene que cambiar es la siguiente línea 
- 
-Por la direcciona de los certificados, en nuestro caso el directorio /root/ca
-Luego cambiamos algunas configuraciones opcionales de políticas.
 
 Una vez que realizamos estos pasos, estamos listos para realizar el commit de la imagen, con esto,
 todos los pasos que realizamos (instalar los paquetes, modificar los archivos de configuración, etc)
@@ -88,25 +82,17 @@ Para realizar un commit, y que nuestro contenedor sea fácilmente identificable,
 los siguientes pasos
 
 \begin{verbatim}
-    docker ps -a #identificamos el ultimo contenedor utilizado
-\end{verbatim}
- 
-(IMAGEN DOCKER-PS-A)
-
-\begin{verbatim}
+    docker ps -a        #identificamos el último contenedor utilizado
     docker commit {id_del_contenedor} 
-    docker image ls #Identificamos la imagen recien creada, no tendrá ni repositorio ni tag
+    docker image ls     #Identificamos la imagen recién creada
+                        #no tendrá ni repositorio ni tag
+    docker image tag {id_de_imagen} ca:1.0  #nombramos nuestra imagen
 \end{verbatim}
 
-(IMAGEN DOCKER IMAGE LS)
 
-\begin{verbatim}
-    docker image ls #Identificamos la imagen recien creada, con repositorio y tag
-\end{verbatim}
 
-(IMAGEN DOCKER IMAGE LS 2)
 
-Ahora cada vez que querramos correr nuestra ca, lo haremos de la siguiente manera
+Ahora cada vez que queramos correr nuestra CA, lo haremos de la siguiente manera:
 \begin{verbatim}
     docker run -it -v $PWD/ca:/root/ca ca:1.0
 \end{verbatim}
@@ -120,45 +106,61 @@ host.
 
 \subsubsection*{Creando nuestro certificado}
 
-Para firmar un certificado, el servidor donde se alojará la web debe realizar una solicitud, 
-donde nuestra CA retornará el certificado firmado. Desde el servidor web en cuestión, se debe 
+Para firmar un certificado, tenemos que seguir los pasos mostrados en la figura \ref{figSolCert}
+: el servidor donde se alojará la web debe realizar una solicitud, 
+luego nuestra CA retornará el certificado firmado. Desde el servidor web en cuestión, se debe 
 crear una llave privada privada:
 
 \begin{verbatim}
-    openssl genrsa -aes256 -out webserver.pem 2048
+    openssl genrsa -aes256 -out pagina1.pem 2048
 \end{verbatim}
 
 \noindent Luego, se deberá crear la solicitud de firma de certificado:
 \begin{verbatim}
-    openssl req -new -key webserver.pem -out webserver.csr
+    openssl req -new -key pagina1.pem -out pagina1.csr
 \end{verbatim}
 
 \noindent Luego enviamos esta solicitud y la firmamos en nuestra CA, esta solicitud la vamos a colocar 
 en el directorio /root/ca/requests
 \begin{verbatim}
-    openssl ca -in webserver.csr -out webserber.crt
+    openssl ca -in pagina1.csr -out pagina1.crt
 \end{verbatim}
 
 \subsubsection*{Configuración del certificado en el servidor web}
-\noindent Una vez que tenemos este certificado, lo colocamos en en el servidor web y 
-lo configuramos. Para el caso de ngixn, se debe editar el archivo de configuración 
-correspondiente a nuestra web, que en este caso es "pagina1.salvadorcatalfamo.intra"
+Una vez que tenemos este certificado, lo colocamos en en el servidor web y 
+lo configuramos. Para el caso de Nginx, se debe editar el archivo de configuración 
+correspondiente a nuestra web, que en este caso es “pagina1.salvadorcatalfamo.intra”
 con el fin de que el mismo pueda localizar correctamente los certificados firmados recientemente.
 Adicionalmente, se puede obligar a que cada requerimiento sea redirigido a una conexión
 segura mediante SSL.
 
+Como se puede ver en la figura \ref{figCAdesc}, aunque el certificado esté configurado, 
+el mismo no es confiable ya que nuestra entidad certificante no está importada a nuestro almacén 
+local.
 
-\noindent Ahora vamos a ver el navegador, podemos ver que aunque tenga el certificado instalado, no es confiable 
-ya que nuestra entidad certificante no esta configurada como confiable.
+\begin{center}
+    \begin{figure}   
+       \begin{center}
+          \includegraphics[width=15cm,height=6cm]{adv-2.png}
+       \end{center}
+       \caption{CA Desconocida}
+       \label{figCAdesc}
+    \end{figure}
+ \end{center}
 
- (HAY CAPTURAS)
-…
+Luego de establecer en nuestra computadora (particularmente en el navegador Mozilla) que la 
+entidad certificante creada es confiable, es posible ver que nuestra conexión es segura, como 
+se muestra en la captura.
 
-Luego de establecer en nuestra computadora, y, particulamente en nuestro navegador Mozilla, que la 
-entidad certificante creada es confiable, es posible ver que nuestra conexión es segura, como muestra 
-la siguiente captura.
+\begin{center}
+    \begin{figure}   
+       \begin{center}
+          \includegraphics[width=15cm,height=7.5cm]{ca-HTTPS.png}
+       \end{center}
+       \caption{Resultado de la solución}
+    \end{figure}
+ \end{center}
 
-\noindent Luego, ya podemos ver que nuestra página aparece como una web confiable.
 
 
 

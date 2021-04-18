@@ -1,16 +1,25 @@
-\subsubsection*{Servidor dns con Docker}
+\subsubsection*{Servidor DNS con Docker}
 
-Se eligio el servidor dns CoreDNS ya que es amigable con Docker, sucede que, por cada versión del 
-programa, se generan las imágenes de docker correspondientes. Estas imágenes son publicas y oficiales, 
-lo que da confiabilidad y seguridad extra a la hora de utilizarlas. La configuración esta formada por 
-los siguientes componentes: los archivos de configuración de CoreDNS son el corefile y los sitios que 
-nosotros deseemos, en nuestro caso salvadorcatalfamo.intra
+Para montar esta propuesta de solución, se debió crear un servidor DNS, que lo que hace
+es básicamente mapear direcciones IP a nombres de dominio. Por ejemplo: nuestra página que 
+se encuentra en la dirección 192.168.0.202 se pasará a llamar pagina1.salvadorcatalfamo.intra, 
+donde salvadorcatalfamo.intra abarca toda nuestra organización y las páginas que se encuentren
+dentro de ella. Otra razón por la cual se debe 
+crear un servidor DNS, es que los certificados no se pueden otorgar a direcciones IP, por lo 
+cual es un requisito obligatorio tener las paginas web direccionadas con nombres de dominio.
 
-El Corefile es el archivo de configuración de CoreDNS. Este define:
+Se eligió el servidor DNS CoreDNS ya que es amigable con Docker; sucede que, por cada versión del 
+programa, se generan las imágenes de Docker correspondientes. Estas imágenes son públicas y oficiales, 
+lo que da confiabilidad y seguridad extra a la hora de utilizarlas. La configuración está formada por 
+los siguientes componentes: los archivos de configuración de CoreDNS (corefile) y los sitios que 
+nosotros deseemos, en nuestro caso pagina1.salvadorcatalfamo.intra
+
+\noindent El Corefile es el archivo de configuración de CoreDNS. Este define:
 \begin{itemize}
+    \setlength\itemsep{-0.6em}
     \item Qué servidores escuchan en qué puertos y qué protocolo.
     \item Para qué zona tiene autoridad cada servidor.
-    \item Qué plugins (complementos) se cargan en un servidor.
+    \item Qué \emph{plugins} (complementos) se cargan en un servidor.
 \end{itemize}
 
 \noindent El formato es el siguiente
@@ -42,8 +51,9 @@ lo que también podrían tener argumentos de entrada.
 
 A grandes rasgos, lo que indica esta configuración es que va a existir una zona 
 “salvadorcatalfamo.intra”, que estará definida por el archivo que se encuentra en 
-“/etc/coredns/salvadorcatalfamo”. Por otro lado, el tráfico restante será fordwardeado a 
-servidores dns externos (8.8.8.8 y 9.9.9.9). Además se establecieron algunos plugins de logeo y 
+“/etc/coredns/salvadorcatalfamo”. Por otro lado, el tráfico restante (dominios externos a nuestra red)
+será fordwardeado a 
+servidores DNS externos (8.8.8.8 y 9.9.9.9). Además se establecieron algunos plugins de logeo y 
 de refresco de configuración.
 
 Nuestro archivo “/etc/coredns/salvadorcatalfamo” contiene la siguiente información.
@@ -52,33 +62,36 @@ salvadorcatalfamo.intra.          IN  SOA ns1.salvadorcatalfamo.intra. ...
 pagina1.salvadorcatalfamo.intra.  IN  A   192.168.0.124   
 \end{verbatim}
 
-Esto, en principio es suficiente para nuestro sitio interno, y contiene las direcciones ip de los 
-servidores webs y entidades certificantes.
+Esto en principio es suficiente para nuestro sitio interno, y contiene las direcciones ip de los 
+servidores web y entidades certificantes.
 
-Por el lado de Docker, se utilizó un archivo Docker.compose.yml, y un Dockerfile. El fichero 
-Docker-compose sirve para …. En nuestro caso, se definió de la siguiente manera
+Por el lado de Docker, se utilizó un archivo Docker.compose.yml, y un Dockerfile. 
+Docker-compose es una herramienta para definir y ejecutar aplicaciones Docker de 
+varios contenedores. Compose usa un archivo YAML para configurar los servicios de 
+la aplicación. Luego, con un solo comando, se crean e inician todos los servicios 
+desde este archivo de configuración. En nuestro caso, se definió de la siguiente 
+manera
 
 \begin{verbatim}
-version: '3.1'
+version: `3.1'
 services:
     coredns:
         build: .
         container_name: coredns
         restart: always
         expose:
-            - '53'
-            - '53/udp'
+            - `53'
+            - `53/udp'
         ports:
-            - '53:53'
-            - '53:53/udp'
+            - `53:53'
+            - `53:53/udp'
         volumes:
-            - './config:/etc/coredns'    
+            - `./config:/etc/coredns'    
 \end{verbatim}
 
-Por otro lado, el fichero dockerfile esta compuesto por las siguientes líneas
+\noindent Por otro lado, el fichero dockerfile esta compuesto por las siguientes líneas:
 \begin{verbatim}
 FROM coredns/coredns:1.7.0
-
 ENTRYPOINT ["/coredns"]
 CMD ["-conf", "/etc/coredns/Corefile"]    
 \end{verbatim}

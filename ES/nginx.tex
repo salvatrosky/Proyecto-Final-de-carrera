@@ -1,6 +1,7 @@
-\subsubsection*{Nginx con docker}
+\subsubsection*{Nginx con Docker}
 
-Para probar nuestro certificado, utilizaremos una imagen oficial de Nginx, los archivos de configuración
+Para probar nuestro certificado, utilizaremos una imagen oficial de Nginx, 
+los archivos de configuración
 son los siguientes:
 
 
@@ -18,8 +19,10 @@ web:
    - NGINX_PORT=80
 \end{verbatim}
 
-En el archivo mostrado, le decimos a docker que utilice la imagen "nginx", que nuestros archivos fuentes
-van a estar en el directorio ./pagina1 y que exponga el puerto 80, entre otras cosas.
+En el archivo mostrado, le decimos a Docker que utilice la imagen Nginx, 
+que nuestros archivos fuentes
+van a estar en el directorio ./pagina1 y que exponga el puerto 80, entre otras
+ cosas.
 
 \noindent Para ejecutar este contenedor, se debe ejecutar el siguiente comando:
 

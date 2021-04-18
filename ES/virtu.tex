@@ -1,7 +1,7 @@
 
-Luego de haber explicado las debilidades del protocolo http, vamos a explorar las 
+Luego de haber explicado las debilidades del protocolo HTTP, vamos a explorar las 
 distintas soluciones encontradas, empezando con un pequeño marco teórico, que es lo que 
-nos permetirá probar estas implementaciones y aplicarlas en un escenario de prueba.
+nos permitirá probar estas implementaciones y aplicarlas en un escenario de prueba.
 
 Una herramienta fundamental utilizada es Docker, ya que con ella es posible simular 
 escenarios sin necesidad de tener cada uno de los servidores de manera física. Para
@@ -10,29 +10,49 @@ en la virtualización basada en contenedores.
     
 \section{Máquinas virtuales}
 
-(AGREGAR GRAFICOS SI O SI, FALTA DEFINICION de maquinas virtuales)
+La virtualización brinda la capacidad de ejecutar aplicaciones, sistemas 
+operativos o servicios del sistema en un entorno lógicamente distinto, 
+que es independiente de un sistema informático físico específico. 
+Obviamente, los mismos tienen que estar ejecutándose en un determinado 
+sistema informático en un momento dado, pero la virtualización proporciona 
+un nivel de abstracción lógica que libera las aplicaciones, los servicios 
+del sistema e incluso el sistema operativo de estar vinculado a una 
+pieza específica de \emph{hardware}. El enfoque de la virtualización hace 
+que todo esto sea portátil a través de diferentes sistemas informáticos 
+físicos.
+
 El enfoque basado en VM virtualiza el sistema operativo completo. Con esto nos referimos 
 a la virtualización de discos, CPU y NIC. En otras palabras, podemos afirmar que se 
 trata de virtualizar la arquitectura de conjunto de instrucciones completa, como ejemplo, 
-la arquitectura x86. 
+la arquitectura \emph{x86}. 
+
+\begin{center}
+    \begin{figure}   
+       \begin{center}
+          \includegraphics[width=12cm,height=7cm]{vm.png}
+       \end{center}
+       \caption{Virtualización}
+    \end{figure}
+ \end{center}
 
 Para virtualizar un sistema operativo, se utiliza un software especial, este software 
-se denomina hipervisor, y es el encargado, entre otras cosas, de aislar el sistema 
-operativo y los recursos del hipervisor de las máquinas virtuales y permitir crearlas 
+se denomina \emph{hipervisor}, y es el encargado, entre otras cosas, de aislar el sistema 
+operativo y los recursos del \emph{hipervisor} de las máquinas virtuales y permitir crearlas 
 y gestionarlas.
 
-El VMM debe satisfacer tres propiedades:
+Una VM debe satisfacer tres propiedades:
 \begin{itemize}
+    \setlength\itemsep{-0.6em}
     \item Aislamiento: debe aislar a los invitados (VM) entre sí. 
     \item Equivalencia: debe comportarse igual, con o sin virtualización. Esto 
     significa que se deben ejecutar la mayoría de las instrucciones en el hardware 
     físico sin ninguna traducción hacia el hardware virtual.
     \item Rendimiento: Debería funcionar tan bien como lo hace sin ninguna 
     virtualización. Esto nuevamente significa que la sobrecarga de ejecutar 
-    una VM es mínima.
+    una VM debe ser mínima.
 \end{itemize}
 
-\section{Container-Based  Virtualization}
+\section{Virtualización basada en Contenedores}
 
 Esta forma de virtualización no abstrae el hardware, sino que utiliza técnicas 
 dentro del kernel de Linux para aislar las rutas de acceso para diferentes recursos. 
@@ -40,10 +60,20 @@ Establece un límite lógico dentro del mismo sistema operativo. Como resultado,
 un sistema de archivos raíz separado, un árbol de procesos separado, un subsistema 
 de red separado, etc.
 
+\begin{center}
+    \begin{figure}   
+       \begin{center}
+          \includegraphics[width=12cm,height=7cm]{contenedores.png}
+       \end{center}
+       \caption{Virtualización basada en Contenedores}
+    \end{figure}
+ \end{center}
+
 El kernel de Linux se compone de varios componentes y funcionalidades; los relacionados 
 con contenedores son los siguientes:
 \begin{itemize}
-    \item Grupos de control (cgroups)
+    \setlength\itemsep{-0.6em}
+    \item Grupos de control (Cgroups)
     \item Espacios de nombres (Namespaces)
     \item Linux con seguridad mejorada (SELinux)
 \end{itemize}
@@ -76,19 +106,26 @@ puede limitar el acceso de los programas a archivos y recursos de red. La idea e
 limitar los privilegios de los programas y demonios al mínimo, de modo que pueda 
 limitar el riesgo de que el sistema se detenga.
 
-La contenerización utiliza los recursos directamente y no necesita de un emulador en 
+Lo contenedores utilizan los recursos directamente y no necesitan de un emulador en 
 absoluto, cuantos menos recursos, mayor eficiencia. Se pueden ejecutar diferentes 
 aplicaciones en el mismo host: aisladas a nivel de kernel y aisladas por 
 espacios de nombres y cgroups. El kernel (es decir, el SO) lo comparten todos 
-los contenedores, como se muestra en el siguiente diagrama:
-(DIAGRAMA)
+los contenedores.
 
 \subsection*{Contenedores}
 Cuando hablamos de contenedores, nos referimos indirectamente a dos conceptos 
 principales: una imagen de contenedor y una imagen de contenedor en ejecución. 
 Una imagen de contenedor es la definición del contenedor, en donde el software 
-restante se instala como capas adicionales, como se muestra en el siguiente diagrama:
-(DIAGRAMA)
+restante se instala como capas adicionales, como se muestra en el diagrama.
+
+\begin{center}
+    \begin{figure}   
+       \begin{center}
+          \includegraphics[width=7.5cm,height=5cm]{contenedores-capas.png}
+       \end{center}
+       \caption{Capas de contenedores}
+    \end{figure}
+ \end{center}
 
 Una imagen de contenedor suele estar formada por varias capas.
 La primera capa está dada por la imagen base, que proporciona las funcionalidades 
@@ -96,7 +133,7 @@ centrales del sistema operativo, con todas las herramientas necesarias para come
 Los equipos de desarrolladores a menudo trabajan construyendo sus propias capas sobre 
 estas imágenes base. Los usuarios también pueden crear imágenes de aplicaciones más 
 avanzadas, que no solo tienen un sistema operativo, sino que también incluyen tiempos 
-de ejecución, herramientas de depuración y bibliotecas
+de ejecución, herramientas de depuración y bibliotecas.
 
 Los contenedores brindan aislamiento al aprovechar las tecnologías del kernel, como 
 cgroups, espacios de nombres del kernel y SELinux, que se han probado y utilizado 
@@ -129,15 +166,15 @@ Con Docker, los desarrolladores se preocupan por sus aplicaciones que se ejecuta
 dentro de los contenedores. Docker está diseñado para mejorar la coherencia al 
 garantizar que el entorno en el que los desarrolladores escriben el código coincida 
 con los entornos en los que se implementan sus aplicaciones. Esto reduce el riesgo 
-de funcionamiento distinto de una aplicación dependiendo de donde de ejecute
+de funcionamiento distinto de una aplicación dependiendo de donde de ejecute.
 
 
-\subsection{Imagenes}
+\subsection{Imágenes}
 Las imágenes son los componentes básicos del mundo de Docker. El uso común es 
 lanzando los contenedores a partir de imágenes. Tienen un formato en capas, que 
 se forman paso a paso utilizando una serie de instrucciones.
 
-Se puede considerar a las imágenes como el "código fuente" de los contenedores. 
+Se puede considerar a las imágenes como el “código fuente” de los contenedores. 
 Son muy portátiles y se pueden compartir, almacenar y actualizar. En este proyecto, 
 utilizaremos imágenes para crear nuestra propia entidad certificante.
 
@@ -155,8 +192,9 @@ Docker permite construir e implementar contenedores dentro de los cuales se pued
 empaquetar aplicaciones y servicios. Como acabamos de mencionar, los contenedores 
 se lanzan a partir de imágenes y estos pueden contener uno o más procesos en ejecución.
 
-Un contenedor Docker es:
+\noindent Un contenedor Docker es:
 \begin{itemize}
+    \setlength\itemsep{-0.6em}
     \item Un formato de imagen.
     \item Un conjunto de operaciones estándar.
     \item Un entorno de ejecución.
@@ -165,7 +203,7 @@ Un contenedor Docker es:
 Se puede hacer una analogía entre los contenedores de Docker y los contenedores 
 de envío estándar, utilizado para transportar mercancías a nivel mundial. 
 En lugar de enviar mercancías, los contenedores de Docker envían software. 
-Cada contenedor contiene una imagen de software, su "carga", y, al igual 
+Cada contenedor contiene una imagen de software, su “carga”, y, al igual 
 que su contraparte física, permite realizar un conjunto de operaciones. 
 Por ejemplo, se puede crear, iniciar, detener, reiniciar y destruir. Como 
 un contenedor de envío, Docker no se preocupa por el contenido del contenedor 
