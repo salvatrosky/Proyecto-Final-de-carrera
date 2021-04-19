@@ -6,7 +6,7 @@ se encuentra en la dirección 192.168.0.202 se pasará a llamar pagina1.salvador
 donde salvadorcatalfamo.intra abarca toda nuestra organización y las páginas que se encuentren
 dentro de ella. Otra razón por la cual se debe 
 crear un servidor DNS, es que los certificados no se pueden otorgar a direcciones IP, por lo 
-cual es un requisito obligatorio tener las paginas web direccionadas con nombres de dominio.
+cual es un requisito obligatorio tener las páginas web direccionadas con nombres de dominio.
 
 Se eligió el servidor DNS CoreDNS ya que es amigable con Docker; sucede que, por cada versión del 
 programa, se generan las imágenes de Docker correspondientes. Estas imágenes son públicas y oficiales, 
@@ -17,9 +17,9 @@ nosotros deseemos, en nuestro caso pagina1.salvadorcatalfamo.intra
 \noindent El Corefile es el archivo de configuración de CoreDNS. Este define:
 \begin{itemize}
     \setlength\itemsep{-0.6em}
-    \item Qué servidores escuchan en qué puertos y qué protocolo.
+    \item Que servidores escuchan en que puertos y que protocolo.
     \item Para qué zona tiene autoridad cada servidor.
-    \item Qué \emph{plugins} (complementos) se cargan en un servidor.
+    \item Que \emph{plugins} (complementos) se cargan en un servidor.
 \end{itemize}
 
 \noindent El formato es el siguiente
@@ -65,7 +65,7 @@ pagina1.salvadorcatalfamo.intra.  IN  A   192.168.0.124
 Esto en principio es suficiente para nuestro sitio interno, y contiene las direcciones ip de los 
 servidores web y entidades certificantes.
 
-Por el lado de Docker, se utilizó un archivo Docker.compose.yml, y un Dockerfile. 
+Por el lado de Docker, se utilizó un archivo Docker-compose.yml, y un Dockerfile. 
 Docker-compose es una herramienta para definir y ejecutar aplicaciones Docker de 
 varios contenedores. Compose usa un archivo YAML para configurar los servicios de 
 la aplicación. Luego, con un solo comando, se crean e inician todos los servicios 
@@ -89,7 +89,7 @@ services:
             - `./config:/etc/coredns'    
 \end{verbatim}
 
-\noindent Por otro lado, el fichero dockerfile esta compuesto por las siguientes líneas:
+\noindent Por otro lado, el fichero dockerfile está compuesto por las siguientes líneas:
 \begin{verbatim}
 FROM coredns/coredns:1.7.0
 ENTRYPOINT ["/coredns"]

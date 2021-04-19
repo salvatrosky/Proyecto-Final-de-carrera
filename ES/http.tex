@@ -103,10 +103,10 @@ para una solicitud GET a la dirección “http://www.example.com/hello.txt”:
 \end{verbatim}
 
 
-\subsection{Métodos mas importantes del del protocolo HTTP}
+\subsection{Métodos más importantes del del protocolo HTTP}
 
 El protocolo HTTP contiene varios métodos, como por ejemplo PUT, HEAD, DELETE, etc. Sin
-embargo, para nuestro trabajo explicaremos los dos mas utilizados GET y POST, lo que
+embargo, para nuestro trabajo explicaremos los dos más utilizados GET y POST, lo que
 nos permitirá tener una base a la hora de presentar el caso de estudio de la 
 sección \ref{secCaseOfStudy}.
 
@@ -166,7 +166,7 @@ resultado del intento de comprender y satisfacer la solicitud.
 
    \begin{itemize}
       \setlength\itemsep{-0.6em}
-      \item 1xx (Informativo): Se recibió la solicitud, se continua procesando.
+      \item 1xx (Informativo): Se recibió la solicitud, se continúa procesando.
       \item 2xx (Satisfactoria): La solicitud se recibió, comprendió y 
       aceptó correctamente.
       \item 3xx (Redireccionamiento): Se deben realizar más acciones para
@@ -191,14 +191,14 @@ observar cómo funciona el protocolo \emph{Secure Sockets Layer} (SSL). Aunque
 
 El protocolo SSL consiste en un conjunto de mensajes y reglas sobre
  cuándo enviar (y no enviar) cada mensaje. En esta sección, mostraremos 
- cuáles son esos mensajes, la información general que contienen y 
+ cuales son esos mensajes, la información general que contienen y 
  cómo los sistemas usan los diferentes mensajes en una sesión de
   comunicaciones.
 
 
 \subsubsection*{Roles SSL}
 El protocolo \emph{Secure Sockets Layer} define dos roles diferentes para las
-partes que se comunican. Por un lado tenemos un cliente, y por el otro
+partes que se comunican. Por un lado, tenemos un cliente, y por el otro
 un servidor. La distinción es muy importante, porque SSL requiere que 
 los dos sistemas se comporten de manera muy diferente. 
 
@@ -212,7 +212,7 @@ la negociación de los parámetros de seguridad.
 Dado que el cliente inicia una comunicación, tiene la responsabilidad 
 de proponer un conjunto de opciones SSL para usar en el intercambio. 
 El servidor selecciona entre las opciones propuestas por el cliente 
-y decide qué utilizarán realmente los dos sistemas. Aunque la decisión 
+y decide que utilizarán realmente los dos sistemas. Aunque la decisión 
 final recae en el servidor, el servidor solo puede elegir entre las 
 opciones que el cliente propuso originalmente.
 
@@ -221,7 +221,7 @@ opciones que el cliente propuso originalmente.
 Cuando los clientes y servidores SSL se comunican, lo hacen 
 intercambiando mensajes SSL. Esta sección mostrará cómo los 
 sistemas utilizan estos mensajes en sus comunicaciones. La función 
-más básica (y uno de los propósitos mas importantes) que realiza 
+más básica (y uno de los propósitos más importantes) que realiza 
 un cliente y un servidor SSL es establecer la seguridad a través
 de un canal para comunicaciones cifradas. Los primeros tres mensajes
 SYN, SYN ACK y SYN correspondientes al protocolo TCP, Luego, inician los 
@@ -382,7 +382,7 @@ autoridades de certificación conocidas.
 \paragraph*{ClientKeyExchange}
 El mensaje \emph{ClientKeyExchange} del cliente también difiere en la autenticación 
 del servidor, aunque la diferencia no es importante. Cuando solo se va a 
-utilizar cifrado, el cliente cifra la información en en mensaje 
+utilizar cifrado, el cliente cifra la información en el mensaje 
 \emph{ClientKeyExchange}
 utilizando la clave pública que el servidor proporciona en su mensaje 
 \emph{ServerKeyExchange}. En este caso, por supuesto, el servidor se está 
@@ -505,7 +505,7 @@ aspectos del control sobre un dominio. En los desafíos como HTTP y
 DNS, el cliente demuestra directamente su capacidad para hacer ciertas 
 acciones relacionadas con el dominio. Es de gran utilidad explicar los 
 diferentes tipos de desafíos que se puede ofrecer a un cliente, ya que uno 
-es el mas común, sin embargo, al hablar de redes internas, no lo podremos 
+es el más común, sin embargo, al hablar de redes internas, no lo podremos 
 utilizar, e iremos por la otra opción, un tanto menos conocida.
 
 

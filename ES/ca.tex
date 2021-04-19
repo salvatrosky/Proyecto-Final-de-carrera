@@ -2,7 +2,7 @@
 
 La estrategia para crear nuestra CA será seguir los pasos que se deberían realizar en un servidor 
 habitual, pero partiendo desde una imagen de Docker de Ubuntu (de stock), y luego realizando un 
-commit de estas configuraciones. Luego, archivos importantes como el el certificado root y la llave
+commit de estas configuraciones. Luego, archivos importantes como el certificado root y la llave
 privada deberán resguardarse, o simplemente resguardar el contenedor creado. 
 
 Se utilizó esta estrategia ya que no había imágenes oficiales que nos sirva para tal fin, por el 
@@ -21,7 +21,7 @@ simple hecho de que únicamente se requiere tener instalado OpenSSL y tenerlo co
     apt-get install openssl
 \end{verbatim}
 
-\noindent Establecer el hostname al contenedor, hay una linea con la ip del contenedor y el nombre del mismo, 
+\noindent Establecer el hostname al contenedor, hay una línea con la ip del contenedor y el nombre del mismo, 
 que es utilizado como hostname, en nuestro caso
 \begin{verbatim}
     172.17.0.2      080dec560726
@@ -41,7 +41,7 @@ que es utilizado como hostname, en nuestro caso
     mkdir /root/requests
 \end{verbatim}
 
-\noindent Creamos un archivo vacío y un archivo que contiene el primer numero de serie para los certificados 
+\noindent Creamos un archivo vacío y un archivo que contiene el primer número de serie para los certificados 
 \begin{verbatim}
     touch index.txt
     echo '1234' > serial
@@ -109,7 +109,7 @@ host.
 Para firmar un certificado, tenemos que seguir los pasos mostrados en la figura \ref{figSolCert}
 : el servidor donde se alojará la web debe realizar una solicitud, 
 luego nuestra CA retornará el certificado firmado. Desde el servidor web en cuestión, se debe 
-crear una llave privada privada:
+crear una llave privada:
 
 \begin{verbatim}
     openssl genrsa -aes256 -out pagina1.pem 2048
@@ -127,7 +127,7 @@ en el directorio /root/ca/requests
 \end{verbatim}
 
 \subsubsection*{Configuración del certificado en el servidor web}
-Una vez que tenemos este certificado, lo colocamos en en el servidor web y 
+Una vez que tenemos este certificado, lo colocamos en el servidor web y 
 lo configuramos. Para el caso de Nginx, se debe editar el archivo de configuración 
 correspondiente a nuestra web, que en este caso es “pagina1.salvadorcatalfamo.intra”
 con el fin de que el mismo pueda localizar correctamente los certificados firmados recientemente.
