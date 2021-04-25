@@ -1,46 +1,69 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{Bondarenko:Dung:Kowalski:Toni:1997}
-{\sc Bondarenko, A., Dung, P.~M., Kowalski, R., and Toni, F.}
-\newblock {A}n abstract argumentation--theoretic approach to default reasoning.
-\newblock {\em Artificial Intelligence 93}, 1--2 (1997), 63--101.
+\bibitem{Juned:2015}
+{\sc Ansari, J.~A.}
+\newblock {\em Web Penetration Testing with Kali Linux, Second Edition}.
+\newblock Packt Publishing, 2015.
 
-\bibitem{Capobianco:1999}
-{\sc Capobianco, M.}
-\newblock {E}l {R}ol de las {B}ases de {D}ial\'ectica en la {A}rgumentaci\'on
-  {R}ebatible. tesis de licenciatura, July 1999.
+\bibitem{Charles:2015}
+{\sc Charles P.~Pfleeger, Shari Lawrence~Pfleeger, J.~M.}
+\newblock {\em Security in Computing, Fifth Edition}.
+\newblock Pearson Education, 2015.
 
-\bibitem{Capobianco:Chesnevar:Simari:2001}
-{\sc Capobianco, M., Ches{\~n}evar, C.~I., and Simari, G.~R.}
-\newblock An argumentative formalism for implementing rational agents.
-\newblock In {\em Proceedings del 2do Workshop en Agentes y Sistemas
-  Inteligentes (WASI), 7mo Congreso Argentino de Ciencias de la Computaci\'on
-  (CACIC)\/} (El Calafate, Santa Cruz, Oct. 2001), Universidad Nacional de la
-  Patagonia Austral, pp.~1051--1062.
+\bibitem{Shashank:2020}
+{\sc Jain, S.~M.}
+\newblock {\em Linux Containers and Virtualization}.
+\newblock Apress Media, 2020.
 
-\bibitem{Chesnevar:2001}
-{\sc Ches{\~n}evar, C.~I.}
-\newblock {\em {F}ormalizaci\'on de los {P}rocesos de {A}rgumentaci\'on
-  {R}ebatible como {S}istemas {D}eductivos {E}tiquetados}.
-\newblock PhD thesis, Departamento de Ciencias de la Computaci{\'o}n,
-  Universidad Nacional del Sur, Bah{\'{\i}}a Blanca, Argentina, Jan. 2001.
+\bibitem{Allen:2014}
+{\sc Lee~Allen, Tedi~Heriyanto, S.~A.}
+\newblock {\em Kali Linux – Assuring Security by Penetration Testing}.
+\newblock Packt Publishing, 2014.
 
-\bibitem{Davis:1989}
-{\sc Davis, R.~E.}
-\newblock {\em Truth, Deduction, and Computation}.
-\newblock Computer Science Press, 1989.
+\bibitem{Mohuya:2021}
+{\sc Mukhopadhyay, M. C. M. S. V. E. B.~I.}
+\newblock {\em The Essence of Network Security: An End-to-End Panorama}.
+\newblock Springer Nature Singapore, 2021.
 
-\bibitem{Garcia:1997}
-{\sc Garc\'{\i}a, A.~J.}
-\newblock {L}a {P}rogramaci\'on en {L}{\'o}gica {R}ebatible: su definici{\'o}n
-  te{\'o}rica y computacional.
-\newblock Master's thesis, Departamento de Ciencias de la Computaci{\'o}n,
-  Universidad Nacional del Sur, Bah{\'{\i}}a Blanca, Argentina, July 1997.
+\bibitem{Barry:2019}
+{\sc Pollard, B.}
+\newblock {\em HTTP/2 in Action}.
+\newblock Manning Publications, 2019.
 
-\bibitem{Haenni:1998}
-{\sc Haenni, R.}
-\newblock Modeling uncertainty with propositional assumption-based systems.
-\newblock In {\em Applications of uncertainty formalisms}, A.~Hunter and
-  S.~Parsons, Eds. Springer-Verlag, 1998, pp.~446--470.
+\bibitem{RFC2660:1999}
+{\sc RFC}.
+\newblock {\em 2660 The Secure HyperText Transfer Protocol}.
+\newblock IETF, 1999.
+
+\bibitem{RFC7230:2014}
+{\sc RFC}.
+\newblock {\em 7230 Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and
+  Routing}.
+\newblock IETF, 2014.
+
+\bibitem{RFC8555:2019}
+{\sc RFC}.
+\newblock {\em 8555 Automatic Certificate Management Environment (ACME)}.
+\newblock IETF, 2019.
+
+\bibitem{Ivan:2014}
+{\sc Ristić, I.}
+\newblock {\em Bulletproof SSL and TLS}.
+\newblock Feisty Duck, 2014.
+
+\bibitem{Stephen:2000}
+{\sc Thomas, S.~A.}
+\newblock {\em SSL and TLS Essentials}.
+\newblock John Wiley and Sons, Inc., 2000.
+
+\bibitem{Luigi:2019}
+{\sc Vocale, L. F.~M.}
+\newblock {\em Hands-On Cloud-Native Microservices with Jakarta EE}.
+\newblock Packt Publishing, 2019.
+
+\bibitem{William:2008}
+{\sc von Hagen, W.}
+\newblock {\em Professional Xen Virtualization}.
+\newblock Wiley Publishing, Inc, 2008.
 
 \end{thebibliography}
