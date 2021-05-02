@@ -31,19 +31,19 @@
 \newblock Manning Publications, 2019.
 
 \bibitem{RFC2660:1999}
-{\sc RFC}.
-\newblock {\em 2660 The Secure HyperText Transfer Protocol}.
+{\sc RFC-2660}.
+\newblock {\em The Secure HyperText Transfer Protocol}.
 \newblock IETF, 1999.
 
 \bibitem{RFC7230:2014}
-{\sc RFC}.
-\newblock {\em 7230 Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and
+{\sc RFC-7230}.
+\newblock {\em Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and
   Routing}.
 \newblock IETF, 2014.
 
 \bibitem{RFC8555:2019}
-{\sc RFC}.
-\newblock {\em 8555 Automatic Certificate Management Environment (ACME)}.
+{\sc RFC-8555}.
+\newblock {\em Automatic Certificate Management Environment (ACME)}.
 \newblock IETF, 2019.
 
 \bibitem{Ivan:2014}

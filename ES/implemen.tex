@@ -12,6 +12,12 @@ una entidad certificante interna, y la utilización de un certificado emitido po
 certificante conocida.
 
 \section{Propuesta 1: Self-signed Certificates}
+
+Un certificado autofirmado es un certificado digital que no está firmado por una 
+autoridad de certificación (CA) de confianza pública (o privada). 
+La razón por la que se consideran diferentes de los certificados tradicionales es que 
+quien los crea, emite y firma es la empresa o el desarrollador responsable del sitio. 
+
 Los certificados autofirmados son los menos útiles de los tres. Firefox facilita su uso 
 de forma segura; crea una excepción en la primera visita, después de lo cual el 
 certificado autofirmado se considera válido en las conexiones posteriores. Otros 
@@ -23,7 +29,7 @@ difícil utilizar estos certificados de forma segura.
 \begin{center}
    \begin{figure}   
       \begin{center}
-         \includegraphics[width=13cm,height=9cm]{self-signed.png}
+         \includegraphics[width=13cm,height=8.2cm]{self-signed.png}
       \end{center}
       \caption{Advertencia Certificado Autofirmado}
    \end{figure}
@@ -36,10 +42,9 @@ los navegadores tienen una copia (o acceden a una copia desde el sistema operati
 del certificado raíz, por lo que el navegador puede verificar que su certificado 
 fue firmado por una CA confiable.
 
-Cuando generamos un certificado autofirmado, generamos nuestro propio certificado 
-raíz y clave privada. Debido a que genera un certificado autofirmado, el navegador 
-no confía en él. Está autofirmado. No ha sido firmado por una CA. Todos los 
-certificados que generamos y firmamos serán de confianza inherente.
+En la infraestructura de clave pública (PKI), ambas partes deben confiar en la autoridad 
+de certificación. es decir, navegadores y servidores. En este caso, no existe tal confianza, 
+con lo cual, los certificados tendrán la confianza inherente a la manera en la que se generaron.
 
 La principal dificultad es que los usuarios siempre encontrarán una advertencia 
 donde el navegador diga que se encuentra en un sitio con un certificado autofirmado. 
@@ -64,37 +69,32 @@ a la red privada, y por consiguiente hacer que los equipos que se encuentran
 dentro de la misma confíen el ella. Esto se hace 
 mediante un servidor dedicado que firme los certificados que se le solicitan.
 
-Ventajas de la autoridad de certificación interna (CA)
-\begin{itemize}
-   \setlength\itemsep{-0.6em}
-   \item No es necesario depender de una entidad externa para los certificados.
-   \item En un entorno de Microsoft Windows, la Autoridad de certificación (CA) interna se puede 
-   integrar en Active Directory. Esto simplifica aún más la gestión de la estructura de la CA.
-   \item No hay ningún costo por certificado cuando utiliza una Autoridad de certificación (CA) 
-   interna.
-\end{itemize}
 
-Desventajas de la autoridad certificadora (CA) interna
 
-\begin{itemize}
-   \setlength\itemsep{-0.6em}
-   \item Implementar una autoridad certificadora (CA) interna es más complicado que utilizar una 
-   autoridad certificadora (CA) externa.
-   \item La seguridad y la responsabilidad de la infraestructura de clave pública (PKI) está 
-   completamente a cargo de la organización.
-   \item Los usuarios externos que se conecten a nuestra red normalmente no confiarán en un 
-   certificado digital 
-   firmado por una Autoridad de Certificación (CA) interna.
-
-\end{itemize}
-
-Pese a que esta propuesta es de las más implementadas, decidimos buscar una opción que nos 
-permita desligarnos de ciertas responsabilidades, como así también no tener que realizar 
-configuraciones individuales a los hosts de nuestra organización. 
 
 \subsection{Caso de estudio: Creando nuestra Entidad Certificante privada}
 \input{dns}
 \input{ca}
+
+Como ventajas de esta propuesta tenemos que no es necesario depender de un 
+agente externo para la obtención de certificados, ya que en muchos casos 
+no es necesario, y en otros, los certificados provistos por estos no son 
+gratuitos. 
+
+Por otro lado, al implementar esta solución, se vio una mayor complejidad 
+en la implementación: se requiere un alto entendimiento técnico de todo el 
+ciclo de certificación, y un conocimiento sobre las particularidades que 
+pueden llegar a existir en la generación de certificados y de llaves privadas. 
+Además, hay organizaciones en las que no se tiene el control de todos 
+los equipos que se conectan a la red; por ejemplo, empleados externos, 
+o bien proveedores de servicios, con lo cual, existe la posibilidad de no 
+poder configurar como confiable la entidad certificante en los 
+mismos.
+
+Pese a que esta propuesta es de las más implementadas, decidimos buscar 
+una opción que nos permita desligarnos de ciertas responsabilidades, 
+como así también no tener que realizar configuraciones individuales 
+a los hosts de nuestra organización.
 
 \section{Propuesta 3: Certificación con Let's Encrypt}
 Esta estrategia consiste en generar un certificado wildcard, y utilizarlo en cada sitio de la organización.
@@ -112,20 +112,22 @@ salvadorcatalfamo.com. Este dominio apunta a nuestra ip pública. La configuraci
 es la siguiente:  
 
 
-\begin{longtable}{|l|l|p{5cm}|l|l|} 
-   \hline
-   \textbf{Tipo} & \textbf{Nombre} & \textbf{Contenido} & \textbf{Prioridad} & \textbf{TTL}
-\\ \hline A  & salvadorcatalfamo.com & 181.228.121.12 & 0 & 14400
-\\ \hline NS  & salvadorcatalfamo.com & ns1.donweb.com & 0 & 14400
-\\ \hline SOA & salvadorcatalfamo.com & ns2.donweb.com & 0 & 14400
-\\ \hline SOA & salvadorcatalfamo.com & ns3.hostmar.com \newline root.hostmar.com 
-                                       \newline 2021010700 28800 7200 
-                                       \newline 2000000 86400
-                                       \newline ns2.donweb.com & 0 & 14400                  
+\noindent\begin{minipage}{\textwidth}
+   \begin{longtable}{|l|l|p{5cm}|l|l|}
+      \hline
+      \textbf{Tipo} & \textbf{Nombre} & \textbf{Contenido} & \textbf{Prioridad} & \textbf{TTL}
+   \\ \hline A  & salvadorcatalfamo.com & 181.228.121.12 & 0 & 14400
+   \\ \hline NS  & salvadorcatalfamo.com & ns1.donweb.com & 0 & 14400
+   \\ \hline SOA & salvadorcatalfamo.com & ns2.donweb.com & 0 & 14400
+   \\ \hline SOA & salvadorcatalfamo.com & ns3.hostmar.com \newline root.hostmar.com 
+                                          \newline 2021010700 28800 7200 
+                                          \newline 2000000 86400
+                                          \newline ns2.donweb.com & 0 & 14400
 
-
-\\ \hline
-\end{longtable}
+                                 
+                                          \\ \hline
+   \end{longtable}
+\end{minipage}
 
 \subsubsection*{Instalando Let’s Encrypt en el servidor}
 \begin{verbatim}
@@ -164,7 +166,7 @@ la siguiente tabla.
 Se debe modificar el siguiente archivo de 
 configuración 
 
-/etc/nginx/sites-available/salvadorcatalfamo.com como se muestra a 
+\textit{/etc/nginx/sites-available/salvadorcatalfamo.com} como se muestra a 
 continuación:
 
 \begin{verbatim}

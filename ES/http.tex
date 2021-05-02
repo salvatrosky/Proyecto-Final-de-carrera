@@ -76,15 +76,15 @@ Un cliente envía una solicitud HTTP a un servidor en forma de mensaje
 
 \subsubsection*{Ejemplo}
 El siguiente ejemplo ilustra un intercambio de mensajes típico 
-para una solicitud GET a la dirección “http://www.example.com/hello.txt”:
+para una solicitud GET a la dirección \textit{cs.uns.edu.ar/index.php}:
 
 \bigskip
 \noindent
 \underline{Client request:}
 \begin{verbatim}
-   GET /hello.txt HTTP/1.1
+   GET /index.php HTTP/1.1
    User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
-   Host: www.example.com
+   Host: www.cs.uns.edu.ar
    Accept-Language: en, mi
   \end{verbatim}
 \underline{Server response:}
@@ -99,11 +99,12 @@ para una solicitud GET a la dirección “http://www.example.com/hello.txt”:
    Vary: Accept-Encoding
    Content-Type: text/plain
 
-   Hello World! My payload includes a trailing CRLF.
+   Departamento de Ciencias e Ingeniería de la Computación -
+               Universidad Nacional del Sur
 \end{verbatim}
 
 
-\subsection{Métodos más importantes del del protocolo HTTP}
+\subsection{Métodos más importantes del protocolo HTTP}
 
 El protocolo HTTP contiene varios métodos, como por ejemplo PUT, HEAD, DELETE, etc. Sin
 embargo, para nuestro trabajo explicaremos los dos más utilizados GET y POST, lo que
@@ -155,9 +156,9 @@ resultado del intento de comprender y satisfacer la solicitud.
      estado registrados, aunque se espera una mínima comprensión.
 
    Por ejemplo, si un cliente recibe un código de estado no reconocido
-    de 471, el cliente puede asumir que hubo algo mal con su solicitud
+    de \textsf{471}, el cliente puede asumir que hubo algo mal con su solicitud
      y tratar la respuesta como si hubiera recibido un código de estado
-      400 (Solicitud incorrecta). El mensaje de respuesta generalmente 
+     \textsf{400} (Solicitud incorrecta). El mensaje de respuesta generalmente 
       contendrá una representación que explica el estado.
 
    El primer dígito del código de estado define la clase de respuesta.
@@ -165,16 +166,16 @@ resultado del intento de comprender y satisfacer la solicitud.
      Hay cinco valores para el primer dígito:
 
    \begin{itemize}
-      \setlength\itemsep{-0.6em}
-      \item 1xx (Informativo): Se recibió la solicitud, se continúa procesando.
-      \item 2xx (Satisfactoria): La solicitud se recibió, comprendió y 
+   \setlength\itemsep{-0.6em}
+      \item Informativo (\textsf{1xx}): Se recibió la solicitud, se continúa procesando.
+      \item Satisfactoria (\textsf{2xx}): La solicitud se recibió, comprendió y 
       aceptó correctamente.
-      \item 3xx (Redireccionamiento): Se deben realizar más acciones para
-    completar la solicitud.
-    \item 4xx (Error del cliente): La solicitud contiene una sintaxis
-    incorrecta o no se puede cumplir.
-    \item 5xx (Error del servidor): El servidor no cumplió con una
-       solicitud aparentemente válida.
+      \item Redireccionamiento (\textsf{3xx}): Se deben realizar más acciones para
+      completar la solicitud.
+      \item Error del cliente (\textsf{4xx}): La solicitud contiene una sintaxis
+      incorrecta o no se puede cumplir.
+      \item Error del servidor (\textsf{5xx}): El servidor no cumplió con una
+      solicitud aparentemente válida.
    \end{itemize}
 
 \subsection{Infraestructura de clave pública: una Introducción a la navegación segura}   
@@ -515,14 +516,15 @@ demostrar que puede guardar recursos HTTP en un servidor accesible bajo ese nomb
 de dominio. El servidor ACME desafía al cliente solicitándole un archivo en una ruta 
 específica, con una cadena específica como contenido.
 
-Este es el tipo de desafío más común en la actualidad. El servidor le da un token 
-a su cliente ACME y su cliente ACME coloca un archivo en su servidor web 
-en {http://\<SU\_DOMINIO\>/.well-known/acme-challenge/\<TOKEN\>}. Ese archivo contiene 
-el token, más una huella digital de la clave de su cuenta.
+Este es el tipo de desafío más común en la actualidad. El servidor le da un \emph{token} 
+al cliente ACME y éste coloca un archivo en su servidor web. Por 
+ejemplo, para el servidor de la Universidad la ubicación sería:
+\textit{http://cs.uns.edu.ar/.well-known/acme-challenge/\emph{TOKEN}}. Ese archivo contiene 
+el \emph{token}, más una huella digital de la clave de su cuenta.
 
-Una vez que el cliente le dice al servidor que el archivo está listo, el servidor 
+Una vez que el cliente le informa al servidor que el archivo está listo, el servidor 
 intenta recuperarlo. Al recibir una respuesta, el servidor construye y almacena la 
-autorización de la clave a partir del valor del “token” de desafío y la clave de 
+autorización de la clave a partir del valor del \emph{token} de desafío y la clave de 
 la cuenta del cliente actual.
 
 Dado un par de desafío/respuesta, el servidor verifica el control del dominio por 
@@ -555,7 +557,7 @@ puede demostrar el control de ese dominio proporcionando un registro DNS de tipo
 TXT que contenga un valor designado.
 
 Un cliente cumple este desafío construyendo una clave de autorización a partir del 
-valor de un token proporcionado y la clave de la cuenta del cliente. A continuación, el 
+valor de un \emph{token} proporcionado y la clave de la cuenta del cliente. A continuación, el 
 cliente calcula un hash SHA-256 de la clave de 
 autorización.
 El registro proporcionado al DNS contiene la codificación de URL base64 de este 
@@ -563,15 +565,15 @@ hash.
 
 \noindent Ejemplo:
 
-Si se desea validar el nombre de dominio “www.ejemplo.org”, el cliente 
+Si se desea validar el nombre de dominio \textit{www.cs.uns.edu.ar}, el cliente 
 proporcionaría el siguiente registro DNS:
 
 \begin{verbatim}
-   _acme-challenge.www.ejemplo.org: "gfj9Xq...Rg85nM"
+   _acme-challenge.www.cs.uns.edu.ar: "gfj9Xq...Rg85nM"
 \end{verbatim}
 
 Al recibir una respuesta, el servidor construye y almacena la llave de autorización
-clave a partir del valor del “token” del desafío y la clave de la cuenta del cliente actual.
+clave a partir del valor del \emph{token} del desafío y la clave de la cuenta del cliente actual.
 
 \noindent Para validar un desafío de DNS, el servidor realiza los siguientes pasos:
 

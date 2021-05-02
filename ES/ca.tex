@@ -60,7 +60,8 @@ nuestro certificado root. Nos pedirá algunos datos de localización y relaciona
 organización
 
 \begin{verbatim}
-    openssl req -new -x509 -key /root/ca/private/cakey.pem -out cacert.pem -days 3650
+    openssl req -new -x509 -key /root/ca/private/cakey.pem 
+            -out cacert.pem -days 3650
 \end{verbatim}
 
 \noindent Cambiamos los permisos de los archivos que creamos
@@ -121,7 +122,7 @@ crear una llave privada:
 \end{verbatim}
 
 \noindent Luego enviamos esta solicitud y la firmamos en nuestra CA, esta solicitud la vamos a colocar 
-en el directorio /root/ca/requests
+en el directorio \textit{/root/ca/requests}
 \begin{verbatim}
     openssl ca -in pagina1.csr -out pagina1.crt
 \end{verbatim}
@@ -129,7 +130,7 @@ en el directorio /root/ca/requests
 \subsubsection*{Configuración del certificado en el servidor web}
 Una vez que tenemos este certificado, lo colocamos en el servidor web y 
 lo configuramos. Para el caso de Nginx, se debe editar el archivo de configuración 
-correspondiente a nuestra web, que en este caso es “pagina1.salvadorcatalfamo.intra”
+correspondiente a nuestra web, que en este caso es \textit{pagina1.salvadorcatalfamo.intra}
 con el fin de que el mismo pueda localizar correctamente los certificados firmados recientemente.
 Adicionalmente, se puede obligar a que cada requerimiento sea redirigido a una conexión
 segura mediante SSL.

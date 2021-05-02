@@ -1,0 +1,37 @@
+\BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Objetivos}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Metodolog\355a de trabajo}{chapter.1}% 3
+\BOOKMARK [0][-]{chapter.2}{Navegaci\363n web en redes internas}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Protocolo HTTP}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.1.1}{Arquitectura}{section.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.1.2}{M\351todos m\341s importantes del protocolo HTTP}{section.2.1}% 7
+\BOOKMARK [2][-]{subsection.2.1.3}{C\363digos de respuesta}{section.2.1}% 8
+\BOOKMARK [2][-]{subsection.2.1.4}{Infraestructura de clave p\372blica: una Introducci\363n a la navegaci\363n segura}{section.2.1}% 9
+\BOOKMARK [2][-]{subsection.2.1.5}{HTTP con Seguridad SSL \(HTTPS\)}{section.2.1}% 10
+\BOOKMARK [0][-]{chapter.3}{Debilidades del protocolo HTTP}{}% 11
+\BOOKMARK [1][-]{section.3.1}{Riesgos de intermediarios}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Confidencialidad del mensaje}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Integridad de los mensajes}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{Tipos de ataques}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.4.1}{Ataques Pasivos}{section.3.4}% 16
+\BOOKMARK [2][-]{subsection.3.4.2}{Ataques Activos}{section.3.4}% 17
+\BOOKMARK [1][-]{section.3.5}{Caso de estudio con Kali Linux}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.5.1}{Herramienta Utilizadas}{section.3.5}% 19
+\BOOKMARK [2][-]{subsection.3.5.2}{Realizaci\363n del ataque}{section.3.5}% 20
+\BOOKMARK [2][-]{subsection.3.5.3}{Preparando Ettercap para el ataque ARP Poisoning}{section.3.5}% 21
+\BOOKMARK [2][-]{subsection.3.5.4}{Nuestro Ettercap ya est\341 listo. Ya podemos empezar con el ataque ARP Poisoning}{section.3.5}% 22
+\BOOKMARK [0][-]{chapter.4}{Soluciones estudiadas}{}% 23
+\BOOKMARK [1][-]{section.4.1}{M\341quinas virtuales}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.2}{Virtualizaci\363n basada en Contenedores}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.3}{Docker: nuestro aliado en las pruebas}{chapter.4}% 26
+\BOOKMARK [2][-]{subsection.4.3.1}{Im\341genes}{section.4.3}% 27
+\BOOKMARK [2][-]{subsection.4.3.2}{Registros}{section.4.3}% 28
+\BOOKMARK [2][-]{subsection.4.3.3}{Contenedores}{section.4.3}% 29
+\BOOKMARK [1][-]{section.4.4}{Propuestas: Introducci\363n}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.5}{Propuesta 1: Self-signed Certificates}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.6}{Propuesta 2: Internal CA}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.6.1}{Caso de estudio: Creando nuestra Entidad Certificante privada}{section.4.6}% 33
+\BOOKMARK [1][-]{section.4.7}{Propuesta 3: Certificaci\363n con Let's Encrypt}{chapter.4}% 34
+\BOOKMARK [2][-]{subsection.4.7.1}{Pasos a seguir}{section.4.7}% 35
+\BOOKMARK [1][-]{section.4.8}{Caso de estudio: Buscando credenciales en tr\341fico seguro}{chapter.4}% 36
+\BOOKMARK [0][-]{chapter.5}{Conclusiones y Trabajos a Futuro}{}% 37

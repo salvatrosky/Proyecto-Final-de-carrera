@@ -20,7 +20,7 @@ sin necesidad de conocer a fondo la implementación de la misma ni de tener mayo
 privilegios.
 
 El escenario consiste en crear una página web con un 
-simple formulario donde se debe completar con usuario y contraseña, y un 
+formulario donde se debe completar con usuario y contraseña, y un 
 submit el cual envía esta información desde el cliente hasta el 
 servidor web. El envío de este formulario contiene la información confidencial,
  por lo que en un escenario seguro ningún
@@ -31,7 +31,7 @@ ingresadas por el usuario.
 \begin{center}
    \begin{figure}   
       \begin{center}
-         \includegraphics[width=10cm,height=6cm]{form.png}
+         \includegraphics[width=10.5cm,height=6cm]{form.png}
       \end{center}
       \caption{Formulario montado}
    \end{figure}
@@ -49,25 +49,25 @@ Lo primero que debemos hacer, en la lista de aplicaciones, es buscar el apartado
 \begin{center}
     \begin{figure}   
        \begin{center}
-          \includegraphics[width=9 cm,height=6cm]{ataque-2.png}
+          \includegraphics[width=10 cm,height=7cm]{ataque-2.png}
        \end{center}
        \caption{Ettercap}
     \end{figure}
  \end{center}
 
 El siguiente paso es seleccionar la tarjeta de red con la que vamos a trabajar. Para 
-ello, en el menú superior de Ettercap seleccionaremos Sniff $>$ Unified Sniffing y, 
+ello, en el menú superior de Ettercap seleccionaremos \textsc{Sniff} $>$ \textsc{Unified Sniffing} y, 
 cuando nos lo pregunte, seleccionaremos nuestra tarjeta de red (por ejemplo, en 
-nuestro caso, eth0).
+nuestro caso, \textsc{eth0}).
 
 Luego se debe buscar todos los hosts conectados a nuestra red local. Para ello, 
-seleccionaremos Hosts del menú de la parte superior y seleccionaremos la primera 
+seleccionaremos \textsc{Hosts} del menú de la parte superior y seleccionaremos la primera 
 opción, Hosts List.
 
 Allí deberían salirnos todos los hosts o dispositivos conectados a nuestra red. 
 Sin embargo, en caso de que no salgan todos, podemos realizar una exploración 
-completa de la red simplemente abriendo el menú Hosts y seleccionando la opción 
-Scan for hosts. Tras unos segundos, la lista de antes se debería actualizar 
+completa de la red simplemente abriendo el menú \textsc{Hosts} y seleccionando la opción 
+\textsc{Scan for hosts}. Tras unos segundos, la lista de antes se debería actualizar 
 mostrando todos los dispositivos, con sus respectivas IPs y MACs, conectados 
 a nuestra red.
 
@@ -98,11 +98,11 @@ prestaremos atención a los dos últimos:
         \end{figure}
      \end{center}
 
-Todo listo. Ahora solo debemos elegir el menú MITM de la parte superior y, en él, 
-escoger la opción ARP Poisoning. Nos aparecerá una pequeña ventana de configuración, 
-en la cual debemos asegurarnos de marcar Sniff Remote Connections.
-Pulsamos sobre Ok y el ataque dará lugar. Ahora ya podemos tener el control 
-sobre el host que hayamos establecido como Target 1. Lo siguiente que debemos 
+Todo listo. Ahora solo debemos elegir el menú \textsc{MITM} de la parte superior y, en él, 
+escoger la opción \textsc{ARP Poisoning}. Nos aparecerá una pequeña ventana de configuración, 
+en la cual debemos asegurarnos de marcar \textsc{Sniff Remote Connections}.
+Pulsamos sobre \textsc{ok} y el ataque dará lugar. Ahora ya podemos tener el control 
+sobre el host que hayamos establecido como \emph{Target 1}. Lo siguiente que debemos 
 hacer es, ejecutar Wireshark para capturar todos los paquetes de 
 red y analizarlos en busca de información interesante.
 
@@ -118,4 +118,4 @@ red y analizarlos en busca de información interesante.
 Como se puede ver, Wireshark nos permite filtrar el tráfico, y con el 
 simple hecho de decirle que queremos mostrar los requerimientos GET
 pudimos dar con el paquete que queríamos, en el request podemos ver
-el usuario “salvador@proyectofinal.test” y la contraseña “PASSWORD SEGURO”
+el usuario \texttt{salvador@proyectofinal.test} y la contraseña \texttt{PASSWORD SEGURO}

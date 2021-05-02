@@ -2,7 +2,7 @@
 
 Para montar esta propuesta de solución, se debió crear un servidor DNS, que lo que hace
 es básicamente mapear direcciones IP a nombres de dominio. Por ejemplo: nuestra página que 
-se encuentra en la dirección 192.168.0.202 se pasará a llamar pagina1.salvadorcatalfamo.intra, 
+se encuentra en la dirección \textit{192.168.0.202} se pasará a llamar pagina1.salvadorcatalfamo.intra, 
 donde salvadorcatalfamo.intra abarca toda nuestra organización y las páginas que se encuentren
 dentro de ella. Otra razón por la cual se debe 
 crear un servidor DNS, es que los certificados no se pueden otorgar a direcciones IP, por lo 
@@ -12,14 +12,14 @@ Se eligió el servidor DNS CoreDNS ya que es amigable con Docker; sucede que, po
 programa, se generan las imágenes de Docker correspondientes. Estas imágenes son públicas y oficiales, 
 lo que da confiabilidad y seguridad extra a la hora de utilizarlas. La configuración está formada por 
 los siguientes componentes: los archivos de configuración de CoreDNS (corefile) y los sitios que 
-nosotros deseemos, en nuestro caso pagina1.salvadorcatalfamo.intra
+nosotros deseemos, en nuestro caso \textit{pagina1.salvadorcatalfamo.intra}
 
 \noindent El Corefile es el archivo de configuración de CoreDNS. Este define:
 \begin{itemize}
     \setlength\itemsep{-0.6em}
-    \item Que servidores escuchan en que puertos y que protocolo.
+    \item Qué servidores escuchan en que puertos y que protocolo.
     \item Para qué zona tiene autoridad cada servidor.
-    \item Que \emph{plugins} (complementos) se cargan en un servidor.
+    \item Qué \emph{plugins} (complementos) se cargan en un servidor.
 \end{itemize}
 
 \noindent El formato es el siguiente
@@ -29,8 +29,8 @@ nosotros deseemos, en nuestro caso pagina1.salvadorcatalfamo.intra
     }
 \end{verbatim}
 
-\noindent ZONE: define la zona de este servidor. El puerto por defecto es el 53, o bien el valor que se le indique 
-con el flag -dns.port.
+\noindent ZONE: define la zona de este servidor. El puerto por defecto es el \textsf{53}, o bien el valor que se le indique 
+con el flag \textsf{-dns.port}.
 
 \noindent PLUGIN: define los complementos que queremos cargar. Cada plugin puede tener varias propiedades, por 
 lo que también podrían tener argumentos de entrada.
@@ -51,12 +51,12 @@ lo que también podrían tener argumentos de entrada.
 
 A grandes rasgos, lo que indica esta configuración es que va a existir una zona 
 “salvadorcatalfamo.intra”, que estará definida por el archivo que se encuentra en 
-“/etc/coredns/salvadorcatalfamo”. Por otro lado, el tráfico restante (dominios externos a nuestra red)
-será fordwardeado a 
-servidores DNS externos (8.8.8.8 y 9.9.9.9). Además se establecieron algunos plugins de logeo y 
+\textit{/etc/coredns/salvadorcatalfamo}. Por otro lado, el tráfico restante (dominios 
+externos a nuestra red) será fordwardeado a 
+servidores DNS externos (\textit{8.8.8.8} y \textit{9.9.9.9}). Además se establecieron algunos plugins de logeo y 
 de refresco de configuración.
 
-Nuestro archivo “/etc/coredns/salvadorcatalfamo” contiene la siguiente información.
+Nuestro archivo \textit{/etc/coredns/salvadorcatalfamo} contiene la siguiente información.
 \begin{verbatim}
 salvadorcatalfamo.intra.          IN  SOA ns1.salvadorcatalfamo.intra. ...
 pagina1.salvadorcatalfamo.intra.  IN  A   192.168.0.124   
