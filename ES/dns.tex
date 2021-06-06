@@ -1,15 +1,15 @@
 \subsubsection*{Servidor DNS con Docker}
 
-Para montar esta propuesta de solución, se debió crear un servidor DNS, que lo que hace
+Para montar esta propuesta de solución, se debió crear un servidor \emph{DNS}, que lo que hace
 es básicamente mapear direcciones IP a nombres de dominio. Por ejemplo: nuestra página que 
 se encuentra en la dirección \textit{192.168.0.202} se pasará a llamar pagina1.salvadorcatalfamo.intra, 
 donde salvadorcatalfamo.intra abarca toda nuestra organización y las páginas que se encuentren
 dentro de ella. Otra razón por la cual se debe 
-crear un servidor DNS, es que los certificados no se pueden otorgar a direcciones IP, por lo 
-cual es un requisito obligatorio tener las páginas web direccionadas con nombres de dominio.
+crear un servidor \emph{DNS}, es que los certificados no se pueden otorgar a direcciones IP, por lo 
+cual es un requisito obligatorio tener las páginas \emph{web} direccionadas con nombres de dominio.
 
-Se eligió el servidor DNS CoreDNS ya que es amigable con Docker; sucede que, por cada versión del 
-programa, se generan las imágenes de Docker correspondientes. Estas imágenes son públicas y oficiales, 
+Se eligió el servidor \emph{DNS} CoreDNS ya que es amigable con \emph{Docker}; sucede que, por cada versión del 
+programa, se generan las imágenes de \emph{Docker} correspondientes. Estas imágenes son públicas y oficiales, 
 lo que da confiabilidad y seguridad extra a la hora de utilizarlas. La configuración está formada por 
 los siguientes componentes: los archivos de configuración de CoreDNS (corefile) y los sitios que 
 nosotros deseemos, en nuestro caso \textit{pagina1.salvadorcatalfamo.intra}
@@ -53,7 +53,7 @@ A grandes rasgos, lo que indica esta configuración es que va a existir una zona
 “salvadorcatalfamo.intra”, que estará definida por el archivo que se encuentra en 
 \textit{/etc/coredns/salvadorcatalfamo}. Por otro lado, el tráfico restante (dominios 
 externos a nuestra red) será fordwardeado a 
-servidores DNS externos (\textit{8.8.8.8} y \textit{9.9.9.9}). Además se establecieron algunos plugins de logeo y 
+servidores \emph{DNS} externos (\textit{8.8.8.8} y \textit{9.9.9.9}). Además se establecieron algunos plugins de logeo y 
 de refresco de configuración.
 
 Nuestro archivo \textit{/etc/coredns/salvadorcatalfamo} contiene la siguiente información.
@@ -63,10 +63,10 @@ pagina1.salvadorcatalfamo.intra.  IN  A   192.168.0.124
 \end{verbatim}
 
 Esto en principio es suficiente para nuestro sitio interno, y contiene las direcciones ip de los 
-servidores web y entidades certificantes.
+servidores \emph{web} y entidades certificantes.
 
-Por el lado de Docker, se utilizó un archivo Docker-compose.yml, y un Dockerfile. 
-Docker-compose es una herramienta para definir y ejecutar aplicaciones Docker de 
+Por el lado de \emph{Docker}, se utilizó un archivo Docker-compose.yml, y un Dockerfile. 
+Docker-compose es una herramienta para definir y ejecutar aplicaciones \emph{Docker} de 
 varios contenedores. Compose usa un archivo YAML para configurar los servicios de 
 la aplicación. Luego, con un solo comando, se crean e inician todos los servicios 
 desde este archivo de configuración. En nuestro caso, se definió de la siguiente 

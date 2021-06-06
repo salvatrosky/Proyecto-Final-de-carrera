@@ -1,6 +1,6 @@
-\subsubsection*{Creación de nuestra CA en Docker}
+\subsubsection*{Creación de nuestra CA en \emph{Docker}}
 
-La estrategia para crear nuestra CA será seguir los pasos que se deberían realizar en un servidor 
+La estrategia para crear nuestra \emph{CA} será seguir los pasos que se deberían realizar en un servidor 
 habitual, pero partiendo desde una imagen de Docker de Ubuntu (de stock), y luego realizando un 
 commit de estas configuraciones. Luego, archivos importantes como el certificado root y la llave
 privada deberán resguardarse, o simplemente resguardar el contenedor creado. 
@@ -93,13 +93,13 @@ los siguientes pasos
 
 
 
-Ahora cada vez que queramos correr nuestra CA, lo haremos de la siguiente manera:
+Ahora cada vez que queramos correr nuestra \emph{CA}, lo haremos de la siguiente manera:
 \begin{verbatim}
     docker run -it -v $PWD/ca:/root/ca ca:1.0
 \end{verbatim}
 
-Em el comando anterior, estamos asumiendo que queremos compartir los archivos de la CA con el servidor 
-host.
+Em el comando anterior, estamos asumiendo que queremos compartir los archivos de la \emph{CA} con el servidor 
+\emph{host}.
 
  
 
@@ -109,7 +109,7 @@ host.
 
 Para firmar un certificado, tenemos que seguir los pasos mostrados en la figura \ref{figSolCert}
 : el servidor donde se alojará la web debe realizar una solicitud, 
-luego nuestra CA retornará el certificado firmado. Desde el servidor web en cuestión, se debe 
+luego nuestra \emph{CA} retornará el certificado firmado. Desde el servidor web en cuestión, se debe 
 crear una llave privada:
 
 \begin{verbatim}
@@ -121,7 +121,7 @@ crear una llave privada:
     openssl req -new -key pagina1.pem -out pagina1.csr
 \end{verbatim}
 
-\noindent Luego enviamos esta solicitud y la firmamos en nuestra CA, esta solicitud la vamos a colocar 
+\noindent Luego enviamos esta solicitud y la firmamos en nuestra \emph{CA}, esta solicitud la vamos a colocar 
 en el directorio \textit{/root/ca/requests}
 \begin{verbatim}
     openssl ca -in pagina1.csr -out pagina1.crt
@@ -133,7 +133,7 @@ lo configuramos. Para el caso de Nginx, se debe editar el archivo de configuraci
 correspondiente a nuestra web, que en este caso es \textit{pagina1.salvadorcatalfamo.intra}
 con el fin de que el mismo pueda localizar correctamente los certificados firmados recientemente.
 Adicionalmente, se puede obligar a que cada requerimiento sea redirigido a una conexión
-segura mediante SSL.
+segura mediante \emph{SSL}.
 
 Como se puede ver en la figura \ref{figCAdesc}, aunque el certificado esté configurado, 
 el mismo no es confiable ya que nuestra entidad certificante no está importada a nuestro almacén 
@@ -151,7 +151,7 @@ local.
 
 Luego de establecer en nuestra computadora (particularmente en el navegador Mozilla) que la 
 entidad certificante creada es confiable, es posible ver que nuestra conexión es segura, como 
-se muestra en la captura.
+se muestra en la figura \ref{resulCA}.
 
 \begin{center}
     \begin{figure}   
@@ -159,6 +159,7 @@ se muestra en la captura.
           \includegraphics[width=15cm,height=7.5cm]{ca-HTTPS.png}
        \end{center}
        \caption{Resultado de la solución}
+       \label{resulCA}
     \end{figure}
  \end{center}
 

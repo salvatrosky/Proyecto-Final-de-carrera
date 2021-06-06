@@ -5,18 +5,18 @@
 
 %----------------------------------------------------------------------
 
-HTTP fue originalmente un protocolo donde la transmisión de datos era en texto 
-plano. Los mensajes HTTP se envían a través de Internet sin cifrar y, por 
+\emph{HTTP} originalmente no fue un protocolo pensado en la seguridad. Los mensajes 
+\emph{HTTP} se envían a través de \emph{Internet} sin cifrar y, por 
 lo tanto, cualquiera puede leer el mismo cuando se dirige a su destino. 
-Internet, como su nombre indica, es una red de computadoras 
+\emph{Internet}, como su nombre indica, es una red de computadoras 
 (\emph{interconnected computer networks}), no un sistema 
 punto a punto. Hablando específicamente de una red interna, no sabemos cómo 
 se enrutan los 
-mensajes y nosotros, como usuarios, no tenemos idea de cuantas otras partes 
-pueden ver lo mismos. Debido a que HTTP va a través de texto plano, 
+mensajes y nosotros, como usuarios, no tenemos idea de que otras partes 
+podrían captarlos. Debido a que \emph{HTTP} va a través de texto plano, 
 los mensajes se pueden interceptar, leer, e incluso alterar en el camino.
 
-En este capítulo veremos por qué el protocolo HTTP es inseguro, adicionando
+En este capítulo veremos por qué el protocolo \emph{HTTP} es inseguro, adicionando
 luego un 
 caso de estudio donde se demuestra un pequeño ataque.
 
@@ -30,7 +30,7 @@ fabricar datos. Desde este punto de vista, la confidencialidad puede verse
 afectada si alguien intercepta datos, y la integridad puede fallar si 
 alguien o un programa modifica o fabrica datos falsos. 
 
-Como mencionamos anteriormente, HTTP no fue pensado para ser seguro, por lo que 
+Como mencionamos anteriormente, \emph{HTTP} no fue pensado para ser seguro, por lo que 
 el protocolo en sí mismo no puede resolver este problema.
 En este proyecto, explotaremos esta vulnerabilidad para demostrar la facilidad
  con la que un agente puede hacerse de nuestro tráfico.
@@ -43,10 +43,8 @@ La definición de confidencialidad es sencilla: solo las personas o los
 sistemas autorizados pueden acceder a los datos protegidos.
 Sin embargo, como veremos en capítulos posteriores, garantizar la confidencialidad 
 puede resultar difícil.
- HTTP se basa en 
-protocolos de transporte subyacentes para brindar confidencialidad a los 
-mensajes cuando se desee. Por sí solo, el protocolo no cifra los mensajes, 
-sin embargo, dado que HTTP se ha diseñado para ser independiente del protocolo de 
+ Por sí solo, el protocolo no cifra los mensajes, 
+sin embargo, dado que \emph{HTTP} se ha diseñado para ser independiente del protocolo de 
 transporte, de modo que se puede utilizar en muchas formas diferentes de 
 conexión cifrada.
 
@@ -55,22 +53,20 @@ Integridad refiere a distintos significados en diferentes contextos. Cuando exam
 la forma en la que usamos este término, encontramos varios significados diferentes. 
 Por ejemplo, si decimos que hemos conservado la integridad de un elemento, podemos 
 querer decir que el elemento está sin modificar, modificado solo de formas aceptables, 
-modificado solo por personas autorizadas, modificado solo por procesos autorizados, 
+solo por personas autorizadas, solo por procesos autorizados, 
 etc.
 
 Hablando de datos, se reconocen tres aspectos particulares de la integridad: 
 acciones autorizadas, protección de recursos y detección y corrección de errores. 
-La integridad se puede hacer cumplir de la misma manera que la confidencialidad: 
-mediante un control riguroso de quién o qué puede acceder a que recursos y de qué 
-manera.
+
 
 De la misma manera que en la integridad del mensaje,
-HTTP no define un mecanismo específico para garantizar la integridad de los 
+\emph{HTTP} no define un mecanismo específico para garantizar la integridad de los 
 mensajes, sino que se basa en la capacidad de detección de errores de los 
 protocolos de transporte subyacentes y en el uso de tramas delimitadas por 
 longitud. Históricamente, la falta de un mecanismo de integridad único se 
 ha justificado por la naturaleza informal de la mayoría de las comunicaciones 
-HTTP. Sin embargo, el predominio de HTTP como mecanismo de acceso a la 
+\emph{HTTP}. Sin embargo, el predominio de \emph{HTTP} como mecanismo de acceso a la 
 información ha dado como resultado la necesidad de verificar la integridad
 en ciertos entornos.
 
@@ -80,7 +76,7 @@ Existen principalmente dos tipos de ataques a la red: ataques pasivos y
 ataques activos. La motivación detrás de los atacantes pasivos y los atacantes 
 activos son totalmente diferentes. Mientras que la motivación de los atacantes 
 pasivos es simplemente robar información sensible y analizar el tráfico para 
-robar mensajes futuros, la motivación de los atacantes activos es detener la 
+robar mensajes futuros, la motivación de los atacantes activos es impedir la 
 comunicación normal entre dos entidades legítimas.
 
 \subsection{Ataques Pasivos}
@@ -88,18 +84,18 @@ Los ataques pasivos ocurren cuando se monitorea y analiza
 información sensible, posiblemente comprometiendo la seguridad de las 
 empresas y sus clientes. 
 
-Los atacantes pasivos están principalmente interesados en robar información 
+Estos ataques están principalmente interesados en robar información 
 confidencial. Esto sucede sin el conocimiento de la víctima. Como tales, 
-los ataques pasivos son difíciles de detectar y, por lo tanto, es difícil de
+son difíciles de detectar y, por lo tanto, es difícil de
 proteger la red de los mismos. Entre los ataques más comunes están los 
-ataques de análisis y monitoreo de tráfico, como así también las 
+ de análisis y monitoreo de tráfico, como así también las 
 escuchas de comunicaciones telefónicas.
 
 \subsection{Ataques Activos}
 Los ataques activos ocurren cuando la información se modifica, se altera o 
 se destruye por completo. Aquí el intruso inicia instrucciones para 
-perturbar la comunicación regular de la red. Algunos de los ataques 
-activos son los  siguientes:
+perturbar la comunicación regular de la red. Algunos de estos se muestran
+a continuación:
 \begin{itemize}
     \setlength\itemsep{-0.6em}
     \item Modificación: el nodo malicioso realiza algunas alteraciones en el
@@ -109,13 +105,13 @@ activos son los  siguientes:
     \item Fabricación: un nodo malicioso genera un mensaje de enrutamiento 
     falso que provoca la generación de información incorrecta sobre la ruta 
     entre dispositivos. Este es un ataque a la autenticidad.
-    \item Spoofing: un nodo malicioso presenta incorrectamente su identidad 
+    \item \emph{Spoofing}: un nodo malicioso presenta incorrectamente su identidad 
     para que el remitente cambie su topología, y por consiguiente el 
     destino de sus mensajes.
     \item Denegación de servicios: un nodo malicioso envía un mensaje al 
     nodo y consume el ancho de banda de la red en cómputo desperdiciado.
-    \item Ataque \emph{Man-in-the-middle}: también llamado ataque de secuestro, 
-    es un ataque en el que el atacante altera y transmite en secreto 
+    \item \emph{Man-in-the-middle}: también llamado ataque de secuestro, 
+    es un ataque en el que se altera y transmite en secreto 
     las comunicaciones entre dos partes legítimas sin su conocimiento. 
     Estas partes, a su vez, desconocen lo que sucede, pues no perciben 
     un cambio en la comunicación.

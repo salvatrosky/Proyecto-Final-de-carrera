@@ -10,7 +10,7 @@ se creó la infraestructura de clave pública (PKI).
 
 El objetivo de PKI es permitir una comunicación segura entre partes que nunca se 
 han conocido antes. El modelo que usamos hoy se basa en “trusted third parties” 
-llamados autoridades de certificación (CA, a veces también llamadas autoridades 
+llamados autoridades de certificación (\emph{CA}, a veces también llamadas autoridades 
 de certificación) para emitir certificados en los que confiamos siempre. Una 
 infraestructura PKI está formado por los siguientes agentes.
 
@@ -26,13 +26,13 @@ publicar su sitio web.
 
 La autoridad de registro (RA) lleva a cabo determinadas funciones de gestión 
 relacionadas con la emisión de certificados. Por ejemplo, una RA puede realizar 
-la validación de identidad necesaria antes de solicitar a una CA que emita un 
+la validación de identidad necesaria antes de solicitar a una \emph{CA} que emita un 
 certificado. En algunos casos, las RA también se denominan autoridades de 
-registro local (LRA). En la práctica, muchas CA también realizan tareas de RA.
+registro local (LRA). En la práctica, muchas \emph{CA} también realizan tareas de RA.
 
 \subsubsection*{Autoridad de certificación}
 
-Una autoridad de certificación (CA) es un agente en el que confiamos para emitir 
+Una autoridad de certificación (\emph{CA}) es un agente en el que confiamos para emitir 
 certificados que confirman las identidades de los suscriptores. También están 
 obligados a proporcionar información de revocación actualizada en línea para 
 que las partes que confían puedan verificar que los certificados siguen siendo válidos.
@@ -41,7 +41,7 @@ que las partes que confían puedan verificar que los certificados siguen siendo 
 
 Técnicamente, se trata de los navegadores web, de programas y de sistemas 
 operativos que realizan la validación de certificados. Para ello, contienen 
-almacenes que contienen los certificados de confianza de algunas CA. En un 
+almacenes que contienen los certificados de confianza de algunas \emph{CA}. En un 
 sentido más amplio, los agentes que confían son los usuarios finales que 
 dependen de certificados para una comunicación segura en Internet.
 
@@ -63,7 +63,7 @@ administrativos.
 
 \subsubsection*{Autoridades de certificación}
 
-Las autoridades de certificación (CA) son la parte más importante del modelo 
+Las autoridades de certificación (\emph{CA}) son la parte más importante del modelo 
 actual de confianza en Internet. Pueden emitir un certificado para cualquier 
 nombre de dominio, lo que significa que todo lo que digan es válido. 
 Durante mucho tiempo, el costo de los certificados era bastante elevado. 
@@ -74,8 +74,8 @@ estos servicios de manera gratuita.
 \subsubsection*{Ciclo de vida del certificado}
 
 El ciclo de vida del certificado comienza cuando un suscriptor prepara una 
-Solicitud de firma de certificado (CSR) y la envía a la CA de su elección. 
-El propósito principal del CSR es poner a disposición de la CA la clave 
+Solicitud de firma de certificado (CSR) y la envía a la \emph{CA} de su elección. 
+El propósito principal del CSR es poner a disposición de la \emph{CA} la clave 
 pública, así como demostrar la propiedad de la clave privada correspondiente 
 (mediante una firma). 
 

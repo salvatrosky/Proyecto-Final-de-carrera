@@ -23,7 +23,7 @@
 \BOOKMARK [0][-]{chapter.4}{Soluciones estudiadas}{}% 23
 \BOOKMARK [1][-]{section.4.1}{M\341quinas virtuales}{chapter.4}% 24
 \BOOKMARK [1][-]{section.4.2}{Virtualizaci\363n basada en Contenedores}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.3}{Docker: nuestro aliado en las pruebas}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.3}{Docker}{chapter.4}% 26
 \BOOKMARK [2][-]{subsection.4.3.1}{Im\341genes}{section.4.3}% 27
 \BOOKMARK [2][-]{subsection.4.3.2}{Registros}{section.4.3}% 28
 \BOOKMARK [2][-]{subsection.4.3.3}{Contenedores}{section.4.3}% 29

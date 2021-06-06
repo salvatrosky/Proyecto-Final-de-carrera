@@ -1,14 +1,39 @@
-\select@language {spanish}
-\select@language {spanish}
-\contentsline {chapter}{\numberline {1}Introducci\'on}{1}
-\contentsline {section}{\numberline {1.1}Objetivos}{1}
-\contentsline {subsection}{\numberline {1.1.1}objetivos principales}{1}
-\contentsline {subsubsection}{\numberline {1.1.1.1}particulares}{1}
-\contentsline {section}{\numberline {1.2}Plan de tesis y principales contribuciones}{2}
-\contentsline {section}{\numberline {1.3}Trabajos previos relacionados}{2}
-\contentsline {chapter}{\numberline {2}Descripci\'on del problema}{1}
-\contentsline {chapter}{\numberline {3}Implementaci\'on de la soluci\'on propuesta}{1}
-\contentsline {chapter}{\numberline {4}Conclusiones y Resultados Obtenidos}{3}
-\contentsline {chapter}{\numberline {A}Glosario}{5}
-\contentsline {section}{\numberline {A.1}Terminolog\'{\i }a}{5}
-\contentsline {section}{\numberline {A.2}Simbolog\'{\i }a}{5}
+\babel@toc {spanish}{}
+\babel@toc {spanish}{}
+\contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Objetivos}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Metodología de trabajo}{2}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Navegación web en redes internas}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Protocolo HTTP}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Arquitectura}{4}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Métodos más importantes del protocolo HTTP}{6}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Códigos de respuesta}{7}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Infraestructura de clave pública: una Introducción a la navegación segura}{7}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}HTTP con Seguridad SSL (HTTPS)}{10}{subsection.2.1.5}%
+\contentsline {chapter}{\numberline {3}Debilidades del protocolo HTTP}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Riesgos de intermediarios}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Confidencialidad del mensaje}{22}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Integridad de los mensajes}{22}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Tipos de ataques}{23}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Ataques Pasivos}{23}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Ataques Activos}{23}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Caso de estudio con Kali Linux}{24}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Herramienta Utilizadas}{24}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Realización del ataque}{26}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Preparando Ettercap para el ataque ARP Poisoning}{27}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Nuestro Ettercap ya está listo. Ya podemos empezar con el ataque ARP Poisoning}{28}{subsection.3.5.4}%
+\contentsline {chapter}{\numberline {4}Soluciones estudiadas}{31}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Máquinas virtuales}{31}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Virtualización basada en Contenedores}{32}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Docker: nuestro aliado en las pruebas}{35}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Imágenes}{36}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Registros}{36}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Contenedores}{36}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Propuestas: Introducción}{37}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Propuesta 1: Self-signed Certificates}{37}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Propuesta 2: Internal CA}{39}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Caso de estudio: Creando nuestra Entidad Certificante privada}{39}{subsection.4.6.1}%
+\contentsline {section}{\numberline {4.7}Propuesta 3: Certificación con Let's Encrypt}{47}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Pasos a seguir}{47}{subsection.4.7.1}%
+\contentsline {section}{\numberline {4.8}Caso de estudio: Buscando credenciales en tráfico seguro}{51}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Conclusiones y Trabajos a Futuro}{53}{chapter.5}%

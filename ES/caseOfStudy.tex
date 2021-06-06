@@ -8,24 +8,26 @@
 \begin{center}
     \begin{figure}   
        \begin{center}
+         
           \includegraphics[width=9cm,height=9cm]{red.png}
        \end{center}
        \caption{Escenario montado}
+       \label{escMontado}
     \end{figure}
  \end{center}
 
 La idea principal de esta sección es demostrar que, encontrándose en una red interna
-y con herramientas ya desarrolladas y libres, es posible realizar un ataque 
+y con ciertas herramientas, es posible realizar un ataque 
 sin necesidad de conocer a fondo la implementación de la misma ni de tener mayores
 privilegios.
 
-El escenario consiste en crear una página web con un 
+El escenario montado (figuras \ref{escMontado} y \ref{formMontado}) consiste en crear una página \emph{web} con un 
 formulario donde se debe completar con usuario y contraseña, y un 
 submit el cual envía esta información desde el cliente hasta el 
-servidor web. El envío de este formulario contiene la información confidencial,
+servidor \emph{web}. El envío de este formulario contiene la información confidencial,
  por lo que en un escenario seguro ningún
-intermediario podría obtener estos datos. Dado que este tráfico va a 
-circular por HTTP, demostraremos como nos podemos hacer de las credenciales
+intermediario podría obtener estos datos. Dado que este tráfico
+circula utilizando el protocolo \emph{HTTP}, mostraremos como nos podemos hacer de las credenciales
 ingresadas por el usuario.
 
 \begin{center}
@@ -34,11 +36,9 @@ ingresadas por el usuario.
          \includegraphics[width=10.5cm,height=6cm]{form.png}
       \end{center}
       \caption{Formulario montado}
+      \label{formMontado}
    \end{figure}
 \end{center}
-
-Recordar que esto fue realizado en una red interna donde son todos equipos de nuestra propiedad.
-
 
 \subsection{Preparando Ettercap para el ataque ARP Poisoning}
 
@@ -46,29 +46,22 @@ Lo primero que debemos hacer, en la lista de aplicaciones, es buscar el apartado
 \emph{Sniffing} y \emph{Spoofing}, ya que es allí donde encontraremos las herramientas necesarias
  para llevar a cabo este ataque. A continuación, abriremos Ettercap.
 
-\begin{center}
-    \begin{figure}   
-       \begin{center}
-          \includegraphics[width=10 cm,height=7cm]{ataque-2.png}
-       \end{center}
-       \caption{Ettercap}
-    \end{figure}
- \end{center}
+
 
 El siguiente paso es seleccionar la tarjeta de red con la que vamos a trabajar. Para 
 ello, en el menú superior de Ettercap seleccionaremos \textsc{Sniff} $>$ \textsc{Unified Sniffing} y, 
 cuando nos lo pregunte, seleccionaremos nuestra tarjeta de red (por ejemplo, en 
 nuestro caso, \textsc{eth0}).
 
-Luego se debe buscar todos los hosts conectados a nuestra red local. Para ello, 
+Luego buscaremos todos los hosts conectados a nuestra red local. Para ello, 
 seleccionaremos \textsc{Hosts} del menú de la parte superior y seleccionaremos la primera 
-opción, Hosts List.
+opción, Hosts List (Figura \ref{ettercap}).
 
-Allí deberían salirnos todos los hosts o dispositivos conectados a nuestra red. 
-Sin embargo, en caso de que no salgan todos, podemos realizar una exploración 
+Allí veremos todos los hosts o dispositivos conectados a nuestra red. 
+Sin embargo, en caso de que no estén todos, podemos realizar una exploración 
 completa de la red simplemente abriendo el menú \textsc{Hosts} y seleccionando la opción 
 \textsc{Scan for hosts}. Tras unos segundos, la lista de antes se debería actualizar 
-mostrando todos los dispositivos, con sus respectivas IPs y MACs, conectados 
+mostrando todos los dispositivos, con sus respectivas \emph{IPs} y \emph{MACs}, conectados 
 a nuestra red.
 
 
@@ -83,11 +76,11 @@ ataque debemos establecer los dos objetivos.
 Para ello, debajo de la lista de hosts podemos ver tres botones, aunque nosotros 
 prestaremos atención a los dos últimos:
 
-    Target 1 – Seleccionamos la IP del dispositivo a monitorear, en este caso, 
+    Target 1 – Seleccionamos la \emph{IP} del dispositivo a monitorear, en este caso, 
     la computadora de la víctima, y pulsamos sobre dicho botón.
 
-    Target 2 – Pulsamos la IP que queremos suplantar, en este caso, la de la 
-    puerta de enlace y la del servidor web.
+    Target 2 – Pulsamos la \emph{IP} que queremos suplantar, en este caso, la de la 
+    puerta de enlace y la del servidor \emph{web}.
 
     \begin{center}
         \begin{figure}   
@@ -95,10 +88,11 @@ prestaremos atención a los dos últimos:
               \includegraphics[width=17cm,height=9.5cm]{ataque-7-deta.png}
            \end{center}
            \caption{Ettercap}
+           \label{ettercap}
         \end{figure}
      \end{center}
 
-Todo listo. Ahora solo debemos elegir el menú \textsc{MITM} de la parte superior y, en él, 
+Debemos elegir el menú \textsc{MITM} de la parte superior y, en él, 
 escoger la opción \textsc{ARP Poisoning}. Nos aparecerá una pequeña ventana de configuración, 
 en la cual debemos asegurarnos de marcar \textsc{Sniff Remote Connections}.
 Pulsamos sobre \textsc{ok} y el ataque dará lugar. Ahora ya podemos tener el control 
@@ -112,10 +106,11 @@ red y analizarlos en busca de información interesante.
          \includegraphics[width=17cm,height=7cm]{paquetes.png}
       \end{center}
       \caption{Paquetes capturados}
+      \label{pacCap}
    \end{figure}
 \end{center}
 
-Como se puede ver, Wireshark nos permite filtrar el tráfico, y con el 
+Como se puede ver en la figura \ref{pacCap}, Wireshark nos permite filtrar el tráfico, y con el 
 simple hecho de decirle que queremos mostrar los requerimientos GET
 pudimos dar con el paquete que queríamos, en el request podemos ver
 el usuario \texttt{salvador@proyectofinal.test} y la contraseña \texttt{PASSWORD SEGURO}

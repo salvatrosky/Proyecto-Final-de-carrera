@@ -1,16 +1,16 @@
 \section{Protocolo HTTP}
 
-El Protocolo de transferencia de hipertexto (HTTP) es un protocolo de 
+El Protocolo de transferencia de hipertexto (\emph{HTTP}) es un protocolo de 
 solicitud/respuesta \emph{stateless} (sin estado) que utiliza semántica 
 extensible y cargas útiles de mensajes autodescriptivos para una 
 interacción flexible con sistemas basados en red.
 
-   HTTP es un protocolo genérico para sistemas de información. Está 
+   \emph{HTTP} es un protocolo genérico para sistemas de información. Está 
    diseñado para ocultar los detalles de cómo se implementa un servicio 
    mostrando una interfaz a los clientes que es independiente de los 
    tipos de recursos proporcionados. Del mismo modo, los servidores 
    no necesitan conocer el propósito de cada cliente: una solicitud 
-   HTTP puede aislada en vez de estar asociada con un tipo específico
+   \emph{HTTP} puede aislada en vez de estar asociada con un tipo específico
     de cliente o una secuencia predeterminada de pasos de la aplicación.
      
     El resultado es un protocolo que se puede utilizar de forma eficaz 
@@ -27,23 +27,23 @@ interacción flexible con sistemas basados en red.
     observables más allá del alcance de una única respuesta.
    
 \subsection{Arquitectura}
-HTTP fue creado para la arquitectura World Wide Web (WWW) y ha 
+\emph{HTTP} fue creado para la arquitectura World Wide Web (WWW) y ha 
 evolucionado con el tiempo para soportar las necesidades de
  escalabilidad de un sistema mundial. Gran parte de esa arquitectura 
  se refleja en la terminología y  definiciones de sintaxis utilizadas 
- para definir HTTP.
+ para definir \emph{HTTP}.
 
 \subsubsection*{Mensajes Cliente/Servidor}
 
 
-HTTP es un protocolo de solicitud/respuesta que opera intercambiando 
+\emph{HTTP} es un protocolo de solicitud/respuesta que opera intercambiando 
 mensajes a través de una ``conexión'' en la capa de sesión o transporte.
- Un “cliente” HTTP es un programa que establece una conexión a un 
- servidor con el propósito de enviar una o más solicitudes HTTP. 
- Un “servidor” HTTP es un programa que acepta conexiones para
-  atender solicitudes HTTP mediante el envío de respuestas HTTP. 
-  La mayoría de las comunicaciones HTTP consisten en una solicitud
-   (GET) de algún recurso identificado por un URI. En el caso más 
+En el contecto de este protocolo, un “cliente” es un programa que establece una conexión a un 
+ servidor con el propósito de enviar una o más solicitudes. 
+ Un “servidor” es un programa que acepta conexiones para
+  atender solicitudes mediante el envío de respuestas. 
+  La mayoría de las comunicaciones \emph{HTTP} consisten en una solicitud
+   (GET) de algún recurso identificado por un \emph{URI}. En el caso más 
    simple, esto podría lograrse mediante una única conexión entre un
     usuario y el servidor.
 
@@ -56,8 +56,8 @@ mensajes a través de una ``conexión'' en la capa de sesión o transporte.
    \end{figure}
 \end{center}
 
-Un cliente envía una solicitud HTTP a un servidor en forma de mensaje
- de solicitud, comenzando con una línea que incluye un método, URI y 
+Un cliente envía una solicitud \emph{HTTP} a un servidor en forma de mensaje
+ de solicitud, comenzando con una línea que incluye un método, \emph{URI} y 
  versión del protocolo, seguida de campos de encabezado que contienen
   modificadores de solicitud, información del cliente y metadatos de
    representación, una línea vacía para indicar el final de la sección
@@ -66,7 +66,7 @@ Un cliente envía una solicitud HTTP a un servidor en forma de mensaje
     
     Un servidor responde a la 
     solicitud de un cliente enviando uno o más mensajes de respuesta 
-    HTTP, cada uno de los cuales comienza con una línea de estado que 
+    \emph{HTTP}, cada uno de los cuales comienza con una línea de estado que 
     incluye la versión del protocolo, un código de estado (éxito o error)
      y una descripción en forma de texto asociada al mismo, posiblemente 
      seguida de campos de encabezado con información del servidor y
@@ -80,14 +80,14 @@ para una solicitud GET a la dirección \textit{cs.uns.edu.ar/index.php}:
 
 \bigskip
 \noindent
-\underline{Client request:}
+\underline{Requerimiento del Cliente:}
 \begin{verbatim}
    GET /index.php HTTP/1.1
    User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
    Host: www.cs.uns.edu.ar
    Accept-Language: en, mi
   \end{verbatim}
-\underline{Server response:}
+\underline{Respuesta del Servidor:}
 \begin{verbatim}
    HTTP/1.1 200 OK
    Date: Mon, 27 Jul 2009 12:28:53 GMT
@@ -106,7 +106,7 @@ para una solicitud GET a la dirección \textit{cs.uns.edu.ar/index.php}:
 
 \subsection{Métodos más importantes del protocolo HTTP}
 
-El protocolo HTTP contiene varios métodos, como por ejemplo PUT, HEAD, DELETE, etc. Sin
+El protocolo \emph{HTTP} contiene varios métodos, como por ejemplo PUT, HEAD, DELETE, etc. Sin
 embargo, para nuestro trabajo explicaremos los dos más utilizados GET y POST, lo que
 nos permitirá tener una base a la hora de presentar el caso de estudio de la 
 sección \ref{secCaseOfStudy}.
@@ -119,13 +119,13 @@ El método GET solicita al servidor la transferencia de un recurso.
 GET es el mecanismo principal de recuperación de información y el 
 foco de casi todas las optimizaciones de rendimiento. Por lo tanto,
 cuando las personas hablan de recuperar información identificable
-a través de HTTP, generalmente se refieren a realizar una solicitud
+a través de \emph{HTTP}, generalmente se refieren a realizar una solicitud
 GET.
 
-Se puede pensar que a la hora de solicitar un recuro, este sea un archivo 
+Se puede pensar que a la hora de solicitar un recurso, este sea un archivo 
 dentro de un directorio, y la respuesta sea el mismo archivo. Sin embargo, 
 no existen tales limitaciones en la práctica. De hecho, se puede 
-configurar un servidor para ejecutar los archivos de la solicitud y 
+configurar un servidor para ejecutar o interpretar el contenido de esos archivos y 
 enviar la salida en lugar de transferir los archivos directamente. 
 Independientemente de la solicitud, el servidor solo necesita saber 
 cómo tratar a cada uno de sus recursos.
@@ -141,7 +141,7 @@ las siguientes funciones (entre otras):
    \item Proporcionar un bloque de datos, como los campos ingresados 
    en un formulario HTML, a un proceso de manejo de datos.
    \item Publicar un mensaje grupo de 
-   noticias, lista de correo, blog o grupo similar de artículos.
+   noticias, lista de correo, \emph{blog} o grupo similar de artículos.
    \item Crear un nuevo recurso que aún no ha sido identificado por 
    el servidor.
    \item Agregar datos a las representaciones existentes de un recurso.
@@ -151,8 +151,8 @@ las siguientes funciones (entre otras):
 \subsection{Códigos de respuesta} 
 El código de estado es un número entero de tres dígitos que da el 
 resultado del intento de comprender y satisfacer la solicitud.
-   Los códigos de estado HTTP son extensibles. No se requiere que los
-    clientes HTTP comprendan el significado de todos los códigos de
+   Los códigos de estado \emph{HTTP} son extensibles. No se requiere que los
+    clientes \emph{HTTP} comprendan el significado de todos los códigos de
      estado registrados, aunque se espera una mínima comprensión.
 
    Por ejemplo, si un cliente recibe un código de estado no reconocido
@@ -185,11 +185,11 @@ resultado del intento de comprender y satisfacer la solicitud.
 \subsection{HTTP con Seguridad SSL (HTTPS)} 
 
 Con una comprensión mínima de los conceptos la criptografía, podemos 
-observar cómo funciona el protocolo \emph{Secure Sockets Layer} (SSL). Aunque
- SSL no es un protocolo extremadamente complicado, ofrece varias 
+observar cómo funciona el protocolo \emph{Secure Sockets Layer} (\emph{SSL}). Aunque
+ \emph{SSL} no es un protocolo extremadamente complicado, ofrece varias 
  opciones y variaciones.
 
-El protocolo SSL consiste en un conjunto de mensajes y reglas sobre
+El protocolo \emph{SSL} consiste en un conjunto de mensajes y reglas sobre
  cuándo enviar (y no enviar) cada mensaje. En esta sección, mostraremos 
  cuales son esos mensajes, la información general que contienen y 
  cómo los sistemas usan los diferentes mensajes en una sesión de
@@ -199,18 +199,18 @@ El protocolo SSL consiste en un conjunto de mensajes y reglas sobre
 \subsubsection*{Roles SSL}
 El protocolo \emph{Secure Sockets Layer} define dos roles diferentes para las
 partes que se comunican. Por un lado, tenemos un cliente, y por el otro
-un servidor. La distinción es muy importante, porque SSL requiere que 
+un servidor. La distinción es muy importante, porque \emph{SSL} requiere que 
 los dos sistemas se comporten de manera muy diferente. 
 
 El cliente es el sistema que inicia las comunicaciones seguras; el 
 servidor responde a la solicitud del cliente. En el uso más común 
-de SSL, la navegación web segura, el navegador web es el cliente SSL 
-y el sitio web es el servidor SSL. Para SSL en sí, las distinciones 
+de \emph{SSL}, la navegación \emph{web} segura, el navegador \emph{web} es el cliente \emph{SSL} 
+y el sitio \emph{web} es el servidor \emph{SSL}. Para \emph{SSL} en sí, las distinciones 
 más importantes entre clientes y servidores son sus acciones durante 
 la negociación de los parámetros de seguridad.
 
 Dado que el cliente inicia una comunicación, tiene la responsabilidad 
-de proponer un conjunto de opciones SSL para usar en el intercambio. 
+de proponer un conjunto de opciones \emph{SSL} para usar en el intercambio. 
 El servidor selecciona entre las opciones propuestas por el cliente 
 y decide que utilizarán realmente los dos sistemas. Aunque la decisión 
 final recae en el servidor, el servidor solo puede elegir entre las 
@@ -218,14 +218,14 @@ opciones que el cliente propuso originalmente.
 
 
 \subsubsection*{Mensajes SSL}
-Cuando los clientes y servidores SSL se comunican, lo hacen 
-intercambiando mensajes SSL. Esta sección mostrará cómo los 
+Cuando los clientes y servidores \emph{SSL} se comunican, lo hacen 
+intercambiando mensajes \emph{SSL}. Esta sección mostrará cómo los 
 sistemas utilizan estos mensajes en sus comunicaciones. La función 
 más básica (y uno de los propósitos más importantes) que realiza 
-un cliente y un servidor SSL es establecer la seguridad a través
+un cliente y un servidor \emph{SSL} es establecer la seguridad a través
 de un canal para comunicaciones cifradas. Los primeros tres mensajes
 SYN, SYN ACK y SYN correspondientes al protocolo TCP, Luego, inician los 
-mensajes pertenecientes a la comunicación SSL.
+mensajes pertenecientes a la comunicación \emph{SSL}.
 
 
 \begin{center}
@@ -239,14 +239,14 @@ mensajes pertenecientes a la comunicación SSL.
 
 
 \paragraph*{ClientHello}
-El mensaje \emph{ClientHello} inicia la comunicación SSL entre las dos partes. 
+El mensaje \emph{ClientHello} inicia la comunicación \emph{SSL} entre las dos partes. 
 El cliente usa este mensaje para pedirle al servidor que comience a 
-negociar los servicios de seguridad usando SSL.
+negociar los servicios de seguridad usando \emph{SSL}.
 
 El mensaje este compuesto por ciertos campos: 
 \begin{itemize}
    \setlength\itemsep{-0.6em}
-   \item Versión: refiere a la versión más alta de SSL que el cliente 
+   \item Versión: refiere a la versión más alta de \emph{SSL} que el cliente 
    puede admitir. 
    \item RandomNumber: proporciona la semilla para cálculos criptográficos
    críticos. 
@@ -255,7 +255,7 @@ El mensaje este compuesto por ciertos campos:
    servicios criptográficos que el cliente puede admitir
    \item CompressionMethods: es utilizado por el cliente para enumerar 
    todos los diversos métodos de compresión de datos que puede admitir.
-    Los métodos de compresión son una parte importante de SSL porque el 
+    Los métodos de compresión son una parte importante de \emph{SSL} porque el 
     cifrado tiene una secuencia significativa en la efectividad de 
     cualquier técnica de compresión de datos. 
 \end{itemize}
@@ -268,19 +268,14 @@ de clave, este mensaje contiene la información de la clave pública en sí.
 Tenga en cuenta que el mensaje \emph{ServerKeyExchange} se transmite sin cifrado, 
 por lo que solo se puede incluir de forma segura información de clave 
 pública. El cliente utilizará la clave pública del servidor para cifrar 
-una clave de sesión, que las partes utilizarán para cifrar los datos de 
-la aplicación para la sesión.
+una clave de sesión.
 
 \paragraph*{ServerKeyExchange}
 
 Este mensaje complementa el campo \emph{CipherSuite} del \emph{ServerHello}. 
 Si bien el campo \emph{CipherSuite} indica los algoritmos criptográficos y 
 los tamaños de clave, este mensaje contiene la información de la clave 
-pública en sí. Tenga en cuenta que el mensaje \emph{ServerKeyExchange} se 
-transmite sin cifrado, por lo que solo se puede incluir de forma 
-segura información de clave pública. El cliente utilizará la clave 
-pública del servidor para cifrar una clave de sesión, que las partes 
-utilizarán para cifrar los datos de la aplicación para la sesión.
+pública en sí. 
 
 \paragraph*{ServerHelloDone}
 El mensaje \emph{ServerHelloDone} le dice al cliente que el servidor ha 
@@ -290,7 +285,7 @@ porque una vez que el cliente recibe un \emph{ServerHelloDone}, puede pasar a
 la siguiente fase para establecer las comunicaciones seguras.
 
 \paragraph*{ClientKeyExchange}
-Cuando el servidor ha terminado su parte de la negociación SSL inicial, 
+Cuando el servidor ha terminado su parte de la negociación \emph{SSL} inicial, 
 el cliente responde con un mensaje \emph{ClientKeyExchange}. Así como 
 \emph{ServerKeyExchange} proporciona la información clave para el servidor, 
 \emph{ClientKeyExchange} le dice al servidor la información clave del cliente. 
@@ -309,16 +304,14 @@ la clave privada del servidor real, no podrá descifrar el mensaje
 entre las dos partes no puede tener éxito.
 \paragraph*{ChangeCipherSpec}
 Una vez que el cliente envía información clave en un mensaje 
-\emph{ClientKeyExchange}, se completa la negociación SSL preliminar. En ese 
+\emph{ClientKeyExchange}, se completa la negociación \emph{SSL} preliminar. En ese 
 momento, las partes están listas para comenzar a utilizar los servicios 
 de seguridad que han negociado.
 
-El protocolo SSL define un mensaje especial, \emph{ChangeCipherSpec}, para 
+El protocolo \emph{SSL} define un mensaje especial, \emph{ChangeCipherSpec}, para 
 indicar explícitamente que ahora se deben invocar los servicios de 
-seguridad. Un conjunto de claves protegerá los datos que el cliente 
-envía al servidor, y un conjunto diferente de claves protegerá los 
-datos que el servidor envía al cliente. Para cualquier sistema dado, 
-ya sea un cliente o un servidor, SSL define un estado de escritura y 
+seguridad. Para cualquier sistema dado, 
+ya sea un cliente o un servidor, \emph{SSL} define un estado de escritura y 
 un estado de lectura. El estado de escritura define la información de 
 seguridad de los datos que envía el sistema y el estado de lectura 
 define la información de seguridad de los datos que recibe el sistema.
@@ -329,25 +322,23 @@ sistema también envía un mensaje \emph{Finished}. Los mensajes \emph{Finished}
 permiten que ambos sistemas verifiquen que la negociación se ha realizado 
 correctamente y que la seguridad no se ha visto comprometida.
 
-Cada mensaje \emph{Finished} contiene un hash criptográfico de información 
+Cada mensaje \emph{Finished} contiene un \emph{hash} criptográfico de información 
 importante sobre la negociación recién finalizada. Esto protege contra 
 un atacante que logra insertar mensajes ficticios o eliminar mensajes 
 legítimos de la comunicación. Si un atacante pudiera hacerlo, los 
-cálculos de hash del cliente y del servidor no coincidirían y detectarían 
+cálculos de \emph{hash} del cliente y del servidor no coincidirían y detectarían 
 el compromiso.
 
 \paragraph*{Finalización de las comunicaciones seguras}
 
 Aunque, en la práctica, rara vez se utiliza (principalmente debido a la 
-naturaleza de las sesiones web), SSL tiene un procedimiento definido para 
+naturaleza de las sesiones \emph{web}), \emph{SSL} tiene un procedimiento definido para 
 finalizar una comunicación segura entre dos partes. En este procedimiento, 
 los dos sistemas envían cada uno una alerta de cierre especial al otro. 
-El cierre explícito de una sesión protege contra un ataque de truncamiento,
-en el que un atacante puede comprometer la seguridad al terminar 
-prematuramente una comunicación.
+
 
 \subsubsection*{Autenticar la identidad del servidor}
-Anteriormente se explicó cómo SSL puede establecer comunicaciones 
+Anteriormente se explicó cómo \emph{SSL} puede establecer comunicaciones 
 cifradas entre dos partes, lo que puede no agregar mucha seguridad a 
 la comunicación. Con el cifrado solo, ninguna de las partes puede 
 estar realmente segura de la identidad de la otra. La razón típica 
@@ -356,10 +347,10 @@ secreto de algún tercero. Pero si ese tercero pudiera hacerse pasar
 con éxito como el destinatario previsto de la información, entonces el 
 cifrado no serviría de nada. Los datos estarían encriptados, pero el 
 atacante tendría todos los datos necesarios para desencriptarlos. Para 
-evitar este tipo de ataques, SSL incluye mecanismos que permiten a cada 
+evitar este tipo de ataques, \emph{SSL} incluye mecanismos que permiten a cada 
 parte autenticar la identidad de la otra. Con estos mecanismos, cada 
 parte puede estar segura de que la otra es genuina y no un atacante 
-enmascarado. En esta sección, veremos cómo SSL permite que un servidor 
+enmascarado. En esta sección, veremos cómo \emph{SSL} permite que un servidor 
 se autentique.
 
 \paragraph*{Certificate}
@@ -376,8 +367,9 @@ de revocación. También significa asegurarse de que la autoridad de
 certificación sea una en la que el cliente confíe. Normalmente, los clientes 
 toman esta determinación conociendo la clave pública de las autoridades de 
 certificación confiables de antemano, a través de algunos medios confiables. 
-Microsoft, por ejemplo, carga su software con claves públicas para 
-autoridades de certificación conocidas.
+Microsoft, por ejemplo, carga las claves públicas en el repositorio de claves 
+del Sistema Operativo para autoridades de certificación conocidas. Por otro 
+lado, Firefox tiene su propio repositorio, incluido en el Software
 
 \paragraph*{ClientKeyExchange}
 El mensaje \emph{ClientKeyExchange} del cliente también difiere en la autenticación 
@@ -398,19 +390,11 @@ la comunicación.
  
 
 \subsubsection*{Niveles de validación}  
-Hay tres tipos de certificados SSL disponibles en la actualidad: validación por 
+Hay tres tipos de certificados \emph{SSL} disponibles en la actualidad: validación por 
 dominio (DV),
 validación por organización (OV) y validación extendida (EV).
 Los niveles de cifrado son los mismos para cada certificado, lo que difiere son los 
 procesos de investigación y verificación necesarios para obtener el certificado.
-
-\paragraph*{Validación de dominio (DV)}
-Validación de dominio SSL o DV SSL representa el nivel base para los tipos de SSL. 
-Estos son perfectos para sitios web que solo necesitan cifrado y nada más. Los 
-certificados DV SSL suelen ser económicos y se pueden emitir en cuestión de minutos. 
-Eso es porque el proceso de validación está completamente automatizado. Simplemente 
-es necesario demostrar que es propietario de su dominio y que el certificado DV 
-es suyo. 
 
 \begin{center}
    \begin{figure}   
@@ -421,18 +405,28 @@ es suyo.
    \end{figure}
 \end{center}
 
+\paragraph*{Validación de dominio (DV)}
+Validación de dominio \emph{SSL} o DV \emph{SSL} representa el nivel base para los tipos de \emph{SSL}. 
+Estos son perfectos para sitios \emph{web} que solo necesitan cifrado y nada más. Los 
+certificados DV \emph{SSL} suelen ser económicos y se pueden emitir en cuestión de minutos. 
+Eso es porque el proceso de validación está completamente automatizado. Simplemente 
+es necesario demostrar que es propietario de su dominio y que el certificado DV 
+es suyo. 
+
+
+
 \paragraph*{Validación de la organización (OV)}
-Validación de organización u OV SSL representa el término medio para los tipos de 
-certificados SSL. Para obtener OV SSL, su empresa u organización debe someterse a 
+Validación de organización u OV \emph{SSL} representa el término medio para los tipos de 
+certificados \emph{SSL}. Para obtener OV \emph{SSL}, su empresa u organización debe someterse a 
 un examen comercial ligero. Esto puede demorar hasta tres días hábiles porque alguien 
-tiene que verificar la información de su empresa. OV SSL muestra los mismos indicadores 
-visuales que DV SSL, pero proporciona una forma de ver la 
+tiene que verificar la información de su empresa. OV \emph{SSL} muestra los mismos indicadores 
+visuales que DV \emph{SSL}, pero proporciona una forma de ver la 
 información comercial verificada en la sección de detalles del certificado. 
 
 \paragraph*{Extended Validation (EV)}
-SSL de validación extendida o SSL con EV requiere un exhaustivo examen comercial. 
+\emph{SSL} de validación extendida o \emph{SSL} con EV requiere un exhaustivo examen comercial. 
 Esto puede parecer mucho, pero en realidad no lo es si su empresa tiene 
-registros disponibles públicamente. EV SSL activaba un indicador visual único: el 
+registros disponibles públicamente. EV \emph{SSL} activaba un indicador visual único: el 
 nombre de su organización verificado que se muestra en el navegador. Esto en la 
 actualidad ya no sucede, por lo que no es posible a simple vista identificarlo.
 
@@ -448,39 +442,39 @@ actualidad ya no sucede, por lo que no es posible a simple vista identificarlo.
   \subsubsection*{Tipos de certificados}
 
   \paragraph*{Dominio Simple}
-  Como sugiere el nombre, un certificado SSL de un solo dominio solo 
+  Como sugiere el nombre, un certificado \emph{SSL} de un solo dominio solo 
   se puede usar en un solo dominio o IP. Este se considera el tipo de 
-  certificado SSL predeterminado. 
+  certificado \emph{SSL} predeterminado. 
   
   \paragraph*{Multi-Dominio}
-  Este tipo de SSL es un certificado para todos los usos. Permiten cifrar 
+  Este tipo de \emph{SSL} es un certificado para todos los usos. Permiten cifrar 
   hasta 250 dominios diferentes y subdominios 
-  ilimitados. Desafortunadamente, no está disponible en EV.
+  ilimitados. 
   
   \paragraph*{Wildcard}
   
   Los \emph{wildcard} están diseñados específicamente para cifrar un dominio y 
   todos los subdominios que lo acompañan (también representado como *.dominio.com). 
-  Desafortunadamente, los \emph{wildcard} solo están disponibles en los 
+  Los \emph{wildcard} solo están disponibles en los 
   niveles DV y OV.
   
   \paragraph*{Multi-Dominio Wildcard}
   Los \emph{wildcard} multidominio pueden cifrar hasta 250 dominios diferentes 
-  y subdominios ilimitados. Desafortunadamente, no está disponible en EV.
+  y subdominios ilimitados. 
 
   
 \subsubsection*{Validación de propiedad de dominio}
 
 Los certificados se utilizan con mayor frecuencia para autenticar 
 nombres de dominio. Por lo tanto, se confía en las autoridades de 
-certificación (CA) para verificar que un solicitante de un certificado 
+certificación (\emph{CA}) para verificar que un solicitante de un certificado 
 represente legítimamente el nombre de dominio en el certificado.
 
 Los diferentes tipos de certificados reflejan diferentes tipos de 
-verificación de CA. Los certificados de “Validación de dominio” (DV) son 
-el tipo más común. La única validación que debe realizar la CA en el 
+verificación de \emph{CA}. Los certificados de “Validación de dominio” (DV) son 
+el tipo más común. La única validación que debe realizar la \emph{CA} en el 
 proceso de emisión de un certificado DV es verificar que el solicitante 
-tiene un control efectivo del dominio. La CA no está obligada a intentar 
+tiene un control efectivo del dominio. La \emph{CA} no está obligada a intentar 
 verificar la identidad real del solicitante. Esto difiere en los certificados 
 de “Validación de la organización” y “Validación extendida”, 
 donde el proceso está destinado a verificar también la identidad real del 
@@ -490,19 +484,19 @@ ACME (\emph{Automatic Certificate Management Environment})
 permite a un cliente 
 la automatización de gestión de certificados 
 mediante un conjunto de mensajes transmitidos a través de HTTPS. La 
-emisión de certificados mediante el protocolo ACME se asemeja al proceso 
-de emisión de una CA tradicional, en el que un usuario crea una cuenta, 
+emisión de certificados mediante el protocolo \emph{ACME} se asemeja al proceso 
+de emisión de una \emph{CA} tradicional, en el que un usuario crea una cuenta, 
 solicita un certificado y demuestra el control de los dominios con el 
-certificado para que la CA emita el certificado solicitado.
+certificado para que la \emph{CA} emita el certificado solicitado.
 
 
-ACME utiliza un \emph{framework} de desafío/respuesta extensible para la validación 
+\emph{ACME} utiliza un \emph{framework} de desafío/respuesta extensible para la validación 
 de dominios. El servidor envía al cliente un conjunto de desafíos, y el cliente 
-responde enviando la respuesta al mismo en una solicitud POST a una URL de desafío.
+responde enviando la respuesta al mismo en una solicitud POST a una \emph{URL} de desafío.
 
 Los diferentes desafíos permiten al servidor obtener pruebas de diferentes 
-aspectos del control sobre un dominio. En los desafíos como HTTP y 
-DNS, el cliente demuestra directamente su capacidad para hacer ciertas 
+aspectos del control sobre un dominio. En los desafíos como \emph{HTTP} y 
+\emph{DNS}, el cliente demuestra directamente su capacidad para hacer ciertas 
 acciones relacionadas con el dominio. Es de gran utilidad explicar los 
 diferentes tipos de desafíos que se puede ofrecer a un cliente, ya que uno 
 es el más común, sin embargo, al hablar de redes internas, no lo podremos 
@@ -511,16 +505,16 @@ utilizar, e iremos por la otra opción, un tanto menos conocida.
 
 \paragraph*{Desafío HTTP}
 
-Con la validación HTTP, el cliente prueba su control sobre un nombre de dominio al 
-demostrar que puede guardar recursos HTTP en un servidor accesible bajo ese nombre 
-de dominio. El servidor ACME desafía al cliente solicitándole un archivo en una ruta 
+Con la validación \emph{HTTP}, el cliente prueba su control sobre un nombre de dominio al 
+demostrar que puede guardar recursos \emph{HTTP} en un servidor accesible bajo ese nombre 
+de dominio. El servidor \emph{ACME} desafía al cliente solicitándole un archivo en una ruta 
 específica, con una cadena específica como contenido.
 
 Este es el tipo de desafío más común en la actualidad. El servidor le da un \emph{token} 
-al cliente ACME y éste coloca un archivo en su servidor web. Por 
+al cliente \emph{ACME} y éste coloca un archivo en su servidor \emph{web}. Por 
 ejemplo, para el servidor de la Universidad la ubicación sería:
 \textit{http://cs.uns.edu.ar/.well-known/acme-challenge/\emph{TOKEN}}. Ese archivo contiene 
-el \emph{token}, más una huella digital de la clave de su cuenta.
+el \emph{token} más una huella digital de la clave de su cuenta.
 
 Una vez que el cliente le informa al servidor que el archivo está listo, el servidor 
 intenta recuperarlo. Al recibir una respuesta, el servidor construye y almacena la 
@@ -534,7 +528,7 @@ Ventajas:
 \begin{itemize}
    \setlength\itemsep{-0.6em}
    \item Es fácil de automatizar sin conocimientos adicionales sobre la configuración de un dominio.
-   \item Funciona con servidores web estándar.
+   \item Funciona con servidores \emph{web} estándar.
 \end{itemize}
 
 Desventajas:
@@ -546,27 +540,27 @@ Desventajas:
 \end{itemize}
    
 Este desafío está fuera de nuestro alcance, ya que partimos de la premisa de que 
-el tráfico que queremos proteger nunca saldrá a Internet, lo que implica que no 
+el tráfico que queremos proteger nunca saldrá a \emph{Internet}, lo que implica que no 
 tendremos ni puertos ni direcciones expuestas para que un servidor externo pueda 
 verificar el recurso mencionado anteriormente. 
 
 
 \paragraph*{Desafío DNS}
 Cuando el identificador que se está validando es un nombre de dominio, el cliente 
-puede demostrar el control de ese dominio proporcionando un registro DNS de tipo 
+puede demostrar el control de ese dominio proporcionando un registro \emph{DNS} de tipo 
 TXT que contenga un valor designado.
 
 Un cliente cumple este desafío construyendo una clave de autorización a partir del 
 valor de un \emph{token} proporcionado y la clave de la cuenta del cliente. A continuación, el 
-cliente calcula un hash SHA-256 de la clave de 
+cliente calcula un \emph{hash} SHA-256 de la clave de 
 autorización.
-El registro proporcionado al DNS contiene la codificación de URL base64 de este 
-hash. 
+El registro proporcionado al \emph{DNS} contiene la codificación de \emph{URL} base64 de este 
+\emph{hash}. 
 
 \noindent Ejemplo:
 
 Si se desea validar el nombre de dominio \textit{www.cs.uns.edu.ar}, el cliente 
-proporcionaría el siguiente registro DNS:
+proporcionaría el siguiente registro \emph{DNS}:
 
 \begin{verbatim}
    _acme-challenge.www.cs.uns.edu.ar: "gfj9Xq...Rg85nM"
@@ -575,16 +569,16 @@ proporcionaría el siguiente registro DNS:
 Al recibir una respuesta, el servidor construye y almacena la llave de autorización
 clave a partir del valor del \emph{token} del desafío y la clave de la cuenta del cliente actual.
 
-\noindent Para validar un desafío de DNS, el servidor realiza los siguientes pasos:
+\noindent Para validar un desafío de \emph{DNS}, el servidor realiza los siguientes pasos:
 
 \begin{enumerate}
    \setlength\itemsep{-0.6em}
-   \item Calcula el hash SHA-256 de la clave de autorización almacenada.
+   \item Calcula el \emph{hash} SHA-256 de la clave de autorización almacenada.
    \item Consulta los registros TXT para el nombre de dominio de validación.
-   \item Verifica que el contenido de uno de los registros TXT coincida con el valor de hash.
+   \item Verifica que el contenido de uno de los registros TXT coincida con el valor de \emph{hash}.
 \end{enumerate}
 
    
 Si todas las verificaciones anteriores tienen éxito, entonces la validación es exitosa. 
-Si no se encuentra ningún registro DNS, o si el registro DNS y el contenido del mismo 
+Si no se encuentra ningún registro \emph{DNS}, o si el registro \emph{DNS} y el contenido del mismo 
 no pasan estas comprobaciones, la validación falla.
